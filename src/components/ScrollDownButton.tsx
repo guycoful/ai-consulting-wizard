@@ -19,7 +19,7 @@ const ScrollDownButton = () => {
       
       // Calculate position to show button and image optimally
       // We want to scroll to about where the button and image are positioned
-      const targetPosition = heroSection.offsetTop + (heroHeight * 0.45); // Adjusted to show button at top and image at bottom
+      const targetPosition = heroSection.offsetTop + (heroHeight * 0.35); // Moved up from 0.45 to 0.35 to show blue button
       
       const startPosition = window.scrollY;
       const distance = targetPosition - startPosition;
