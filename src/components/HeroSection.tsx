@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import ScrollDownButton from "./ScrollDownButton";
 
@@ -9,7 +8,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="bg-navy-dark py-8 md:py-16 lg:py-24 animate-fade-in">
+    <section id="hero" className="bg-navy-dark py-8 md:py-16 lg:py-24 animate-fade-in">
       <div className="container mx-auto px-4 text-center max-w-6xl">
         <div className="relative mb-6 md:mb-8">
           <h1 className="text-2xl md:text-4xl lg:text-6xl xl:text-7xl font-bold font-heebo text-white mb-4 md:mb-6 leading-tight px-2">
