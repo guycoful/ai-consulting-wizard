@@ -1,7 +1,6 @@
-
 const AboutSection = () => {
   return (
-    <section className="bg-navy-light py-16 md:py-20">
+    <section id="about" className="bg-navy-light py-16 md:py-20">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="flex flex-col items-center">
           <div className="text-center">

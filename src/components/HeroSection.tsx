@@ -1,4 +1,6 @@
+
 import { Button } from "@/components/ui/button";
+import ScrollDownButton from "./ScrollDownButton";
 
 const HeroSection = () => {
   const scrollToContact = () => {
@@ -42,6 +44,7 @@ const HeroSection = () => {
           />
         </div>
       </div>
+      <ScrollDownButton />
     </section>
   );
 };
