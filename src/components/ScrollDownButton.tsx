@@ -9,6 +9,37 @@ const ScrollDownButton = () => {
     // Get current scroll position
     const currentScrollY = window.scrollY;
     
+    // Check if we're at the very top of the hero section
+    const heroSection = document.getElementById('hero');
+    if (heroSection && currentScrollY < 200) {
+      // First click: scroll to the button and image area in hero section
+      const targetPosition = heroSection.offsetTop + (heroSection.offsetHeight * 0.6); // Scroll to about 60% down the hero section
+      
+      const startPosition = window.scrollY;
+      const distance = targetPosition - startPosition;
+      const duration = 1200;
+      let start: number | null = null;
+      
+      const smoothScroll = (timestamp: number) => {
+        if (!start) start = timestamp;
+        const progress = timestamp - start;
+        const percentage = Math.min(progress / duration, 1);
+        
+        // Easing function for smoother animation
+        const easeInOutCubic = (t: number) => t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+        const easedPercentage = easeInOutCubic(percentage);
+        
+        window.scrollTo(0, startPosition + distance * easedPercentage);
+        
+        if (progress < duration) {
+          requestAnimationFrame(smoothScroll);
+        }
+      };
+      
+      requestAnimationFrame(smoothScroll);
+      return;
+    }
+    
     // Find which section we're currently in or closest to
     let currentSectionIndex = 0;
     
