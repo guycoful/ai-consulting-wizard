@@ -12,8 +12,14 @@ const ScrollDownButton = () => {
     // Check if we're at the very top of the hero section
     const heroSection = document.getElementById('hero');
     if (heroSection && currentScrollY < 200) {
-      // First click: scroll to the button and image area in hero section
-      const targetPosition = heroSection.offsetTop + (heroSection.offsetHeight * 0.6); // Scroll to about 60% down the hero section
+      // First click: scroll to show the button at top and image at bottom
+      // This should position the blue button at the top of the viewport and the person image at the bottom
+      const heroHeight = heroSection.offsetHeight;
+      const viewportHeight = window.innerHeight;
+      
+      // Calculate position to show button and image optimally
+      // We want to scroll to about where the button and image are positioned
+      const targetPosition = heroSection.offsetTop + (heroHeight * 0.45); // Adjusted to show button at top and image at bottom
       
       const startPosition = window.scrollY;
       const distance = targetPosition - startPosition;
