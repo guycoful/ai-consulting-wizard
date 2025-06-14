@@ -17,9 +17,14 @@ const AboutSection = () => {
               בעל תואר ראשון במנהל עסקים מאוניברסיטת בן גוריון, ובוגר מאסטר קלאס AI של הייקיו דיגיטל. מלווה עסקים בהטמעת פתרונות AI מותאמים, עם תהליך פשוט שמביא תוצאות אמיתיות.
             </p>
             
-            <p className="text-lg font-heebo text-gray-300 max-w-4xl">
-              לאחרונה ליוויתי מורה פרטי למדעי המחשב שרצה להגדיל הכנסה, ויצא מהתהליך עם תכנית פעולה ברורה, רעיונות חדשים, והבנה איך לעבוד חכם יותר עם AI.
-            </p>
+            <div className="relative">
+              <div className="absolute right-0 top-0 w-1 h-full bg-gold"></div>
+              <blockquote className="bg-navy-dark p-6 pr-8 rounded-lg shadow-md border border-gold/20">
+                <p className="text-lg font-heebo text-gray-300 italic">
+                  לאחרונה ליוויתי מורה פרטי למדעי המחשב שרצה להגדיל הכנסה, ויצא מהתהליך עם תכנית פעולה ברורה, רעיונות חדשים, והבנה איך לעבוד חכם יותר עם AI.
+                </p>
+              </blockquote>
+            </div>
           </div>
         </div>
       </div>
