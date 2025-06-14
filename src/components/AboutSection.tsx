@@ -9,7 +9,7 @@ const AboutSection = () => {
               גיא כהן
             </h2>
             
-            <h3 className="text-xl md:text-2xl font-medium font-heebo text-gold mb-6">
+            <h3 className="text-xl md:text-2xl font-medium font-heebo text-purple-500 mb-6">
               יועץ בינה מלאכותית לעסקים קטנים ובינוניים
             </h3>
             
@@ -18,8 +18,8 @@ const AboutSection = () => {
             </p>
             
             <div className="relative">
-              <div className="absolute right-0 top-0 w-1 h-full bg-gold"></div>
-              <blockquote className="bg-navy-dark p-6 pr-8 rounded-lg shadow-md border border-gold/20">
+              <div className="absolute right-0 top-0 w-1 h-full bg-purple-500"></div>
+              <blockquote className="bg-navy-dark p-6 pr-8 rounded-lg shadow-md border border-purple-500/20">
                 <p className="text-lg font-heebo text-gray-300 italic">
                   לאחרונה ליוויתי מורה פרטי למדעי המחשב שרצה להגדיל הכנסה, ויצא מהתהליך עם תכנית פעולה ברורה, רעיונות חדשים, והבנה איך לעבוד חכם יותר עם AI.
                 </p>

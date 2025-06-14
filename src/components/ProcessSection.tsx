@@ -4,27 +4,27 @@ import { Users, Target, Search, Lightbulb, Cog, ArrowLeft } from "lucide-react";
 const ProcessSection = () => {
   const steps = [
     {
-      icon: <Users className="w-8 h-8 text-gold" />,
+      icon: <Users className="w-8 h-8 text-purple-500" />,
       title: "שיחת היכרות ראשונית",
       description: "נכיר, נבין את העסק ואת המטרות"
     },
     {
-      icon: <Target className="w-8 h-8 text-gold" />,
+      icon: <Target className="w-8 h-8 text-purple-500" />,
       title: "מיפוי אתגרים ומטרות",
       description: "נזהה בדיוק מה צריך לשפר ומה המטרות"
     },
     {
-      icon: <Search className="w-8 h-8 text-gold" />,
+      icon: <Search className="w-8 h-8 text-purple-500" />,
       title: "בדיקת ניסיון קודם עם AI",
       description: "נבדוק מה כבר נוסה ומה עבד או לא עבד"
     },
     {
-      icon: <Lightbulb className="w-8 h-8 text-gold" />,
+      icon: <Lightbulb className="w-8 h-8 text-purple-500" />,
       title: "המלצה לפתרונות מותאמים",
       description: "נציע פתרונות ספציפיים לעסק שלך"
     },
     {
-      icon: <Cog className="w-8 h-8 text-gold" />,
+      icon: <Cog className="w-8 h-8 text-purple-500" />,
       title: "יישום ובקרה עם ליווי מלא",
       description: "נלווה אותך בכל השלבים עד לתוצאות"
     }
@@ -37,18 +37,18 @@ const ProcessSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold font-heebo text-white mb-4">
             איך זה עובד?
           </h2>
-          <div className="w-24 h-1 bg-gold mx-auto"></div>
+          <div className="w-24 h-1 bg-purple-500 mx-auto"></div>
         </div>
         
         <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-6 overflow-x-auto">
           {steps.map((step, index) => (
             <div key={index} className="flex items-center">
               <div className="text-center group flex-shrink-0 min-w-[200px]">
-                <div className="bg-navy-light w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-gold group-hover:text-navy-dark transition-all duration-300 border-2 border-gold">
+                <div className="bg-navy-light w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-500 group-hover:text-navy-dark transition-all duration-300 border-2 border-purple-500">
                   {step.icon}
                 </div>
                 
-                <div className="bg-gold text-navy-dark w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-4 text-sm font-bold">
+                <div className="bg-purple-500 text-navy-dark w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-4 text-sm font-bold">
                   {index + 1}
                 </div>
                 
@@ -63,7 +63,7 @@ const ProcessSection = () => {
               
               {index < steps.length - 1 && (
                 <div className="hidden lg:flex items-center mx-4">
-                  <ArrowLeft className="w-8 h-8 text-gold animate-pulse" />
+                  <ArrowLeft className="w-8 h-8 text-purple-500 animate-pulse" />
                 </div>
               )}
             </div>
