@@ -12,17 +12,14 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 text-center max-w-6xl">
         <div className="relative mb-8">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-heebo text-white mb-6 leading-tight">
-            תוך 60 ימים תוכל להרוויח 5 ספרות בחודש
+            ייעוץ AI לעסקים קטנים ובינוניים: פותרים את הבעיות הכי כואבות בעסק שלך בעזרת פתרונות AI מותאמים אישית
           </h1>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold font-heebo text-purple-400 mb-8 leading-tight">
-            כיועץ AI לעסקים - גם בלי ידע ונסיון קודם
-          </h2>
           <div className="w-32 h-1 bg-gold mx-auto mb-6"></div>
         </div>
         
         <div className="space-y-6 max-w-4xl mx-auto mb-12">
           <p className="text-xl md:text-2xl text-gray-300 font-heebo leading-relaxed">
-            הצטרף לתכנית המעשית היחידה שלוקחת אותך מאפס לעסק רווחי בתחום ה-AI - עם שיטה מוכחת,
+            נבין בדיוק מה העסק שלך צריך, נמפה את האתגרים, ונציע פתרונות חכמים שיגדילו הכנסות, ישפרו שירות ויחסכו זמן.
           </p>
         </div>
         
@@ -41,12 +38,6 @@ const HeroSection = () => {
             alt="יועץ AI לעסקים" 
             className="mx-auto max-w-md w-auto h-auto"
           />
-        </div>
-
-        <div className="max-w-4xl mx-auto">
-          <p className="text-xl md:text-2xl text-gray-300 font-heebo leading-relaxed">
-            ליווי אישי צמוד, וכלים מדויקים להשגת הלקוח הראשון שלך כבר במהלך התכנית
-          </p>
         </div>
       </div>
     </section>
