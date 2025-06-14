@@ -22,11 +22,35 @@ const ScrollDownButton = () => {
       }
     }
     
-    // Move to next section
+    // Move to next section with custom smooth scrolling
     const nextSectionIndex = currentSectionIndex + 1;
     if (nextSectionIndex < sections.length) {
       const nextSection = document.getElementById(sections[nextSectionIndex]);
-      nextSection?.scrollIntoView({ behavior: 'smooth' });
+      if (nextSection) {
+        const targetPosition = nextSection.offsetTop;
+        const startPosition = window.scrollY;
+        const distance = targetPosition - startPosition;
+        const duration = 1200; // Increased duration for smoother effect
+        let start: number | null = null;
+        
+        const smoothScroll = (timestamp: number) => {
+          if (!start) start = timestamp;
+          const progress = timestamp - start;
+          const percentage = Math.min(progress / duration, 1);
+          
+          // Easing function for smoother animation
+          const easeInOutCubic = (t: number) => t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+          const easedPercentage = easeInOutCubic(percentage);
+          
+          window.scrollTo(0, startPosition + distance * easedPercentage);
+          
+          if (progress < duration) {
+            requestAnimationFrame(smoothScroll);
+          }
+        };
+        
+        requestAnimationFrame(smoothScroll);
+      }
     }
   };
 
