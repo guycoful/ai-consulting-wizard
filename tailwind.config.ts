@@ -23,8 +23,9 @@ export default {
 				'heebo': ['Heebo', 'sans-serif'],
 			},
 			colors: {
-				// Custom color palette from Benny Farber's site
+				// Custom color palette for dark navy theme
 				'navy-dark': '#0A1F44',
+				'navy-light': '#102B5B',
 				'gold': '#F2C94C',
 				'blue-primary': '#0052CC',
 				'gray-light': '#F7F8FA',

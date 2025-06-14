@@ -8,7 +8,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-white font-heebo" dir="rtl">
+    <div className="min-h-screen bg-navy-dark font-heebo text-white" dir="rtl">
       <HeroSection />
       <AboutSection />
       <ProcessSection />

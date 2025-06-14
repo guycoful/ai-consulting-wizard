@@ -31,10 +31,10 @@ const ProcessSection = () => {
   ];
 
   return (
-    <section className="bg-white py-16 md:py-20">
+    <section className="bg-navy-dark py-16 md:py-20">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold font-heebo text-navy-dark mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold font-heebo text-white mb-4">
             איך זה עובד?
           </h2>
           <div className="w-24 h-1 bg-gold mx-auto"></div>
@@ -43,19 +43,19 @@ const ProcessSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {steps.map((step, index) => (
             <div key={index} className="text-center group">
-              <div className="bg-gray-light w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-gold group-hover:text-navy-dark transition-all duration-300 border-2 border-gold">
+              <div className="bg-navy-light w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-gold group-hover:text-navy-dark transition-all duration-300 border-2 border-gold">
                 {step.icon}
               </div>
               
-              <div className="bg-navy-dark text-white w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-4 text-sm font-bold">
+              <div className="bg-gold text-navy-dark w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-4 text-sm font-bold">
                 {index + 1}
               </div>
               
-              <h3 className="text-lg font-semibold font-heebo text-navy-dark mb-3">
+              <h3 className="text-lg font-semibold font-heebo text-white mb-3">
                 {step.title}
               </h3>
               
-              <p className="text-gray-text font-heebo text-sm leading-relaxed">
+              <p className="text-gray-300 font-heebo text-sm leading-relaxed">
                 {step.description}
               </p>
             </div>

@@ -31,22 +31,22 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="bg-gray-light py-16 md:py-20">
+    <section id="contact" className="bg-navy-dark py-16 md:py-20">
       <div className="container mx-auto px-4 max-w-3xl">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold font-heebo text-navy-dark mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold font-heebo text-white mb-4">
             רוצה לבדוק איך AI יכול להקפיץ את העסק שלך?
           </h2>
           <div className="w-24 h-1 bg-gold mx-auto mb-6"></div>
-          <p className="text-lg text-gray-text font-heebo leading-relaxed">
+          <p className="text-lg text-gray-300 font-heebo leading-relaxed">
             השאר פרטים ונחזור אליך לשיחת ייעוץ ראשונית ללא עלות. נבין את הצרכים של העסק שלך ונראה איך AI יכול לעזור לך להגיע למטרות.
           </p>
         </div>
         
-        <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl shadow-lg space-y-6 border border-gray-300">
+        <form onSubmit={handleSubmit} className="bg-navy-light p-8 rounded-xl shadow-lg space-y-6 border border-gold/20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium font-heebo text-navy-dark mb-2">
+              <label htmlFor="name" className="block text-sm font-medium font-heebo text-white mb-2">
                 שם מלא *
               </label>
               <Input
@@ -56,13 +56,13 @@ const ContactSection = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full font-heebo border-0 border-b-2 border-gray-300 rounded-none focus:border-gold focus:ring-0 bg-transparent"
+                className="w-full font-heebo border-0 border-b-2 border-gray-500 rounded-none focus:border-gold focus:ring-0 bg-transparent text-white placeholder:text-gray-400"
                 placeholder="השם המלא שלך"
               />
             </div>
             
             <div>
-              <label htmlFor="email" className="block text-sm font-medium font-heebo text-navy-dark mb-2">
+              <label htmlFor="email" className="block text-sm font-medium font-heebo text-white mb-2">
                 אימייל *
               </label>
               <Input
@@ -72,14 +72,14 @@ const ContactSection = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full font-heebo border-0 border-b-2 border-gray-300 rounded-none focus:border-gold focus:ring-0 bg-transparent"
+                className="w-full font-heebo border-0 border-b-2 border-gray-500 rounded-none focus:border-gold focus:ring-0 bg-transparent text-white placeholder:text-gray-400"
                 placeholder="האימייל שלך"
               />
             </div>
           </div>
           
           <div>
-            <label htmlFor="phone" className="block text-sm font-medium font-heebo text-navy-dark mb-2">
+            <label htmlFor="phone" className="block text-sm font-medium font-heebo text-white mb-2">
               טלפון
             </label>
             <Input
@@ -88,13 +88,13 @@ const ContactSection = () => {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="w-full font-heebo border-0 border-b-2 border-gray-300 rounded-none focus:border-gold focus:ring-0 bg-transparent"
+              className="w-full font-heebo border-0 border-b-2 border-gray-500 rounded-none focus:border-gold focus:ring-0 bg-transparent text-white placeholder:text-gray-400"
               placeholder="מספר הטלפון שלך"
             />
           </div>
           
           <div>
-            <label htmlFor="message" className="block text-sm font-medium font-heebo text-navy-dark mb-2">
+            <label htmlFor="message" className="block text-sm font-medium font-heebo text-white mb-2">
               מה היית רוצה לשפר או לפתור בעסק שלך? *
             </label>
             <Textarea
@@ -104,7 +104,7 @@ const ContactSection = () => {
               onChange={handleChange}
               required
               rows={5}
-              className="w-full font-heebo border-0 border-b-2 border-gray-300 rounded-none focus:border-gold focus:ring-0 bg-transparent resize-none"
+              className="w-full font-heebo border-0 border-b-2 border-gray-500 rounded-none focus:border-gold focus:ring-0 bg-transparent resize-none text-white placeholder:text-gray-400"
               placeholder="ספר לנו על האתגרים והמטרות של העסק שלך..."
             />
           </div>
@@ -116,7 +116,7 @@ const ContactSection = () => {
             שלחו לי ייעוץ ראשוני
           </Button>
           
-          <p className="text-sm text-gray-text font-heebo text-center mt-6">
+          <p className="text-sm text-gray-400 font-heebo text-center mt-6">
             הפרטים שלך מוגנים ולא יועברו לצד שלישי. נשתמש בהם רק ליצירת קשר איתך בנוגע לשירותי הייעוץ.
           </p>
         </form>
