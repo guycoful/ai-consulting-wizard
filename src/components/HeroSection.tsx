@@ -12,8 +12,11 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 text-center max-w-6xl">
         <div className="relative mb-8">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-heebo text-white mb-6 leading-tight">
-            ייעוץ AI לעסקים קטנים ובינוניים: פותרים את הבעיות הכי כואבות בעסק שלך בעזרת פתרונות AI מותאמים אישית
+            ייעוץ AI לעסקים קטנים ובינוניים:
           </h1>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold font-heebo text-white mb-6 leading-tight">
+            פותרים את הבעיות הכי כואבות בעסק שלך בעזרת פתרונות AI מותאמים אישית
+          </h2>
           <div className="w-32 h-1 bg-gold mx-auto mb-6"></div>
         </div>
         
