@@ -1,5 +1,3 @@
-
-
 const AboutSection = () => {
   return (
     <section id="about" className="bg-navy-light py-16 md:py-20">
@@ -7,17 +5,12 @@ const AboutSection = () => {
         <div className="flex flex-col lg:flex-row items-center gap-12">
           {/* Image Section - More prominent */}
           <div className="lg:w-1/3 flex justify-center">
-            <div className="relative">
-              <div className="w-64 h-80 md:w-80 md:h-96 overflow-hidden border-4 border-gold shadow-2xl rounded-lg">
-                <img 
-                  src="/lovable-uploads/c6adca96-5d55-40b2-9125-f5961c7275d8.png" 
-                  alt="גיא כהן - יועץ בינה מלאכותית"
-                  className="w-full h-full object-cover filter brightness-125 contrast-125 saturate-110 sharpen"
-                />
-              </div>
-              {/* Decorative elements around image */}
-              <div className="absolute -top-4 -right-4 w-8 h-8 bg-gold rounded-full opacity-70"></div>
-              <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-purple-700 rounded-full opacity-80"></div>
+            <div className="w-64 h-80 md:w-80 md:h-96 overflow-hidden border-4 border-gold shadow-2xl rounded-lg">
+              <img 
+                src="/lovable-uploads/c6adca96-5d55-40b2-9125-f5961c7275d8.png" 
+                alt="גיא כהן - יועץ בינה מלאכותית"
+                className="w-full h-full object-cover filter brightness-125 contrast-125 saturate-110 sharpen"
+              />
             </div>
           </div>
 
@@ -63,4 +56,3 @@ const AboutSection = () => {
 };
 
 export default AboutSection;
-
