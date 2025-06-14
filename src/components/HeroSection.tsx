@@ -20,22 +20,33 @@ const HeroSection = () => {
           <div className="w-32 h-1 bg-gold mx-auto mb-6"></div>
         </div>
         
-        <div className="space-y-6 max-w-4xl mx-auto">
-          <p className="text-xl md:text-2xl text-gray-300 mb-6 font-heebo leading-relaxed">
+        <div className="space-y-6 max-w-4xl mx-auto mb-12">
+          <p className="text-xl md:text-2xl text-gray-300 font-heebo leading-relaxed">
             הצטרף לתכנית המעשית היחידה שלוקחת אותך מאפס לעסק רווחי בתחום ה-AI - עם שיטה מוכחת,
-          </p>
-          <p className="text-xl md:text-2xl text-gray-300 mb-6 font-heebo leading-relaxed">
-            ליווי אישי צמוד, וכלים מדויקים להשגת הלקוח הראשון שלך כבר במהלך התכנית
           </p>
         </div>
         
-        <div className="mt-12">
+        <div className="mb-12">
           <Button 
             onClick={scrollToContact}
             className="bg-blue-primary hover:bg-blue-primary/90 text-white px-12 py-6 text-xl font-heebo font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
             לקביעת שיחת ייעוץ ראשונית ללא עלות
           </Button>
+        </div>
+
+        <div className="mb-12">
+          <img 
+            src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158" 
+            alt="יועץ AI לעסקים" 
+            className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-cover rounded-full mx-auto shadow-2xl border-4 border-gold"
+          />
+        </div>
+
+        <div className="max-w-4xl mx-auto">
+          <p className="text-xl md:text-2xl text-gray-300 font-heebo leading-relaxed">
+            ליווי אישי צמוד, וכלים מדויקים להשגת הלקוח הראשון שלך כבר במהלך התכנית
+          </p>
         </div>
       </div>
     </section>
