@@ -31,21 +31,22 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="bg-white py-16 md:py-20">
+    <section id="contact" className="bg-gray-light py-16 md:py-20">
       <div className="container mx-auto px-4 max-w-3xl">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold font-heebo text-gray-900 mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold font-heebo text-navy-dark mb-4">
             רוצה לבדוק איך AI יכול להקפיץ את העסק שלך?
           </h2>
-          <p className="text-lg text-gray-600 font-heebo leading-relaxed">
+          <div className="w-24 h-1 bg-gold mx-auto mb-6"></div>
+          <p className="text-lg text-gray-text font-heebo leading-relaxed">
             השאר פרטים ונחזור אליך לשיחת ייעוץ ראשונית ללא עלות. נבין את הצרכים של העסק שלך ונראה איך AI יכול לעזור לך להגיע למטרות.
           </p>
         </div>
         
-        <form onSubmit={handleSubmit} className="bg-gray-50 p-8 rounded-xl shadow-lg space-y-6">
+        <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl shadow-lg space-y-6 border border-gray-300">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium font-heebo text-gray-700 mb-2">
+              <label htmlFor="name" className="block text-sm font-medium font-heebo text-navy-dark mb-2">
                 שם מלא *
               </label>
               <Input
@@ -55,13 +56,13 @@ const ContactSection = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full font-heebo"
+                className="w-full font-heebo border-0 border-b-2 border-gray-300 rounded-none focus:border-gold focus:ring-0 bg-transparent"
                 placeholder="השם המלא שלך"
               />
             </div>
             
             <div>
-              <label htmlFor="email" className="block text-sm font-medium font-heebo text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium font-heebo text-navy-dark mb-2">
                 אימייל *
               </label>
               <Input
@@ -71,14 +72,14 @@ const ContactSection = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full font-heebo"
+                className="w-full font-heebo border-0 border-b-2 border-gray-300 rounded-none focus:border-gold focus:ring-0 bg-transparent"
                 placeholder="האימייל שלך"
               />
             </div>
           </div>
           
           <div>
-            <label htmlFor="phone" className="block text-sm font-medium font-heebo text-gray-700 mb-2">
+            <label htmlFor="phone" className="block text-sm font-medium font-heebo text-navy-dark mb-2">
               טלפון
             </label>
             <Input
@@ -87,13 +88,13 @@ const ContactSection = () => {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="w-full font-heebo"
+              className="w-full font-heebo border-0 border-b-2 border-gray-300 rounded-none focus:border-gold focus:ring-0 bg-transparent"
               placeholder="מספר הטלפון שלך"
             />
           </div>
           
           <div>
-            <label htmlFor="message" className="block text-sm font-medium font-heebo text-gray-700 mb-2">
+            <label htmlFor="message" className="block text-sm font-medium font-heebo text-navy-dark mb-2">
               מה היית רוצה לשפר או לפתור בעסק שלך? *
             </label>
             <Textarea
@@ -103,19 +104,19 @@ const ContactSection = () => {
               onChange={handleChange}
               required
               rows={5}
-              className="w-full font-heebo resize-none"
+              className="w-full font-heebo border-0 border-b-2 border-gray-300 rounded-none focus:border-gold focus:ring-0 bg-transparent resize-none"
               placeholder="ספר לנו על האתגרים והמטרות של העסק שלך..."
             />
           </div>
           
           <Button
             type="submit"
-            className="w-full bg-primary hover:bg-primary/90 text-white py-4 text-lg font-heebo font-medium rounded-lg transition-all duration-300 transform hover:scale-105"
+            className="w-full bg-blue-primary hover:bg-blue-primary/90 text-white py-4 text-lg font-heebo font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
             שלחו לי ייעוץ ראשוני
           </Button>
           
-          <p className="text-sm text-gray-500 font-heebo text-center mt-4">
+          <p className="text-sm text-gray-text font-heebo text-center mt-6">
             הפרטים שלך מוגנים ולא יועברו לצד שלישי. נשתמש בהם רק ליצירת קשר איתך בנוגע לשירותי הייעוץ.
           </p>
         </form>

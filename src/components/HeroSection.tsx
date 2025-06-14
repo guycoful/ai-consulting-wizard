@@ -10,17 +10,20 @@ const HeroSection = () => {
   return (
     <section className="bg-white py-16 md:py-24 animate-fade-in">
       <div className="container mx-auto px-4 text-center max-w-4xl">
-        <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold font-heebo text-gray-900 mb-6 leading-tight">
-          ייעוץ AI לעסקים קטנים ובינוניים: פותרים את הבעיות הכי כואבות בעסק שלך בעזרת פתרונות AI מותאמים אישית
-        </h1>
+        <div className="relative mb-6">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold font-heebo text-navy-dark mb-4 leading-tight">
+            ייעוץ AI לעסקים קטנים ובינוניים: פותרים את הבעיות הכי כואבות בעסק שלך בעזרת פתרונות AI מותאמים אישית
+          </h1>
+          <div className="w-24 h-1 bg-gold mx-auto"></div>
+        </div>
         
-        <p className="text-lg md:text-xl text-gray-600 mb-8 font-heebo leading-relaxed max-w-3xl mx-auto">
+        <p className="text-lg md:text-xl text-gray-text mb-12 font-heebo leading-relaxed max-w-3xl mx-auto">
           נבין בדיוק מה העסק שלך צריך, נמפה את האתגרים, ונציע פתרונות חכמים שיגדילו הכנסות, ישפרו שירות ויחסכו זמן.
         </p>
         
         <Button 
           onClick={scrollToContact}
-          className="bg-primary hover:bg-primary/90 text-white px-8 py-4 text-lg font-heebo font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+          className="bg-blue-primary hover:bg-blue-primary/90 text-white px-8 py-4 text-lg font-heebo font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
         >
           לקביעת שיחת ייעוץ ראשונית ללא עלות
         </Button>
