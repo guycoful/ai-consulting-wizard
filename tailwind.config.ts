@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -22,10 +23,10 @@ export default {
 				'heebo': ['Heebo', 'sans-serif'],
 			},
 			colors: {
-				// Custom color palette for dark navy theme - updated gold to purple
+				// Custom color palette for dark navy theme - updated gold to darker purple
 				'navy-dark': '#0A1F44',
 				'navy-light': '#102B5B',
-				'gold': '#8B5CF6', // Changed from gold to purple
+				'gold': '#6D28D9', // Changed from #8B5CF6 to darker purple
 				'blue-primary': '#0052CC',
 				'gray-light': '#F7F8FA',
 				'gray-text': '#333333',

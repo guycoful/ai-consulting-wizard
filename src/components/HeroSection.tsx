@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 
 const HeroSection = () => {
@@ -17,7 +16,7 @@ const HeroSection = () => {
           <h2 className="text-xl md:text-3xl lg:text-5xl xl:text-6xl font-bold font-heebo text-white mb-4 md:mb-6 leading-tight px-2">
             פותרים את הבעיות הכי כואבות בעסק שלך בעזרת פתרונות AI מותאמים אישית
           </h2>
-          <div className="w-24 md:w-32 h-1 bg-purple-500 mx-auto mb-4 md:mb-6"></div>
+          <div className="w-24 md:w-32 h-1 bg-purple-700 mx-auto mb-4 md:mb-6"></div>
         </div>
         
         <div className="space-y-4 md:space-y-6 max-w-4xl mx-auto mb-8 md:mb-12">
