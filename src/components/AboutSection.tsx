@@ -1,3 +1,4 @@
+
 const AboutSection = () => {
   return (
     <section id="about" className="bg-navy-light py-16 md:py-20">
