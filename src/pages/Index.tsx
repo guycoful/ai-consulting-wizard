@@ -5,7 +5,6 @@ import ProcessSection from "@/components/ProcessSection";
 import TargetAudienceSection from "@/components/TargetAudienceSection";
 import ContactSection from "@/components/ContactSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
-import WhatsAppButton from "@/components/WhatsAppButton";
 
 const Index = () => {
   return (
@@ -16,7 +15,6 @@ const Index = () => {
       <TargetAudienceSection />
       <TestimonialsSection />
       <ContactSection />
-      <WhatsAppButton />
     </div>
   );
 };
