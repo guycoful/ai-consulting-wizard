@@ -49,7 +49,7 @@ const PhoneNumberInput = ({ value, onChange, className }: PhoneNumberInputProps)
         <p className="text-red-400 text-sm font-heebo">{error}</p>
       )}
       
-      <style jsx global>{`
+      <style>{`
         .phone-input .PhoneInputInput {
           border: 1px solid rgba(109, 40, 217, 0.3);
           background-color: #0A1F44;

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -59,10 +58,11 @@ const OrganizationForm = () => {
     }));
   };
 
-  const handleCheckboxChange = (field: string, value: string, checked: boolean) => {
+  const handleCheckboxChange = (field: string, value: string, checked: boolean | string) => {
+    const isChecked = checked === true;
     setFormData(prev => ({
       ...prev,
-      [field]: checked 
+      [field]: isChecked 
         ? [...prev[field], value]
         : prev[field].filter(item => item !== value)
     }));
