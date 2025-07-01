@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
@@ -26,23 +28,23 @@ const OrganizationForm = () => {
     employeeCount: '',
     industry: '',
     
-    // Current Technology Status
-    currentTech: [],
-    techChallenges: '',
-    budgetRange: '',
-    implementationTimeline: '',
+    // Organization Activity and Current Challenges
+    organizationActivity: '',
+    targetAudience: [],
+    mainChallenges: '',
     
     // AI Implementation Goals
     aiGoals: [],
     specificNeeds: '',
-    expectedROI: '',
-    keyMetrics: '',
+    timelineExpectation: '',
+    budgetRange: '',
+    successMetrics: '',
     
-    // Technical Requirements
-    integrationNeeds: [],
+    // Current Infrastructure and Technical Requirements
+    currentSystems: [],
     dataTypes: '',
     securityRequirements: '',
-    complianceNeeds: '',
+    integrationNeeds: '',
     
     // Additional Information
     additionalInfo: '',
@@ -81,8 +83,28 @@ const OrganizationForm = () => {
       return;
     }
 
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast({
+        title: "שגיאה",
+        description: "נא להזין כתובת מייל תקינה",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Phone validation
+    if (formData.phone && formData.phone.length < 10) {
+      toast({
+        title: "שגיאה",
+        description: "נא להזין מספר טלפון תקין",
+        variant: "destructive",
+      });
+      return;
+    }
+
     try {
-      // Here you would integrate with Google Sheets API
       console.log('Form Data:', formData);
       
       toast({
@@ -99,18 +121,18 @@ const OrganizationForm = () => {
         phone: '',
         employeeCount: '',
         industry: '',
-        currentTech: [],
-        techChallenges: '',
-        budgetRange: '',
-        implementationTimeline: '',
+        organizationActivity: '',
+        targetAudience: [],
+        mainChallenges: '',
         aiGoals: [],
         specificNeeds: '',
-        expectedROI: '',
-        keyMetrics: '',
-        integrationNeeds: [],
+        timelineExpectation: '',
+        budgetRange: '',
+        successMetrics: '',
+        currentSystems: [],
         dataTypes: '',
         securityRequirements: '',
-        complianceNeeds: '',
+        integrationNeeds: '',
         additionalInfo: '',
         consultationDate: null,
         signature: '',
@@ -135,8 +157,7 @@ const OrganizationForm = () => {
             </CardTitle>
             <p className="text-gray-300 font-heebo leading-relaxed">
               שאלון זה נועד לעזור לנו להבין את הצרכים הייחודיים של הארגון שלך ולהתאמת פתרונות הטמעת AI
-              באופן מדויק. אמצעותו נוכל לקבוע את המסגרת התקנית של הארגון שלך ולהציע מומחיות טכנולוגית מותאמת.
-              מילוי השאלון צפוי לקחת 10-7 דקות בלבד.
+              באופן מדויק. מילוי השאלון צפוי לקחת 7-10 דקות בלבד.
             </p>
           </CardHeader>
           
@@ -150,7 +171,7 @@ const OrganizationForm = () => {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <Label className="text-white font-heebo mb-2 block">שם הארגון:</Label>
+                    <Label className="text-white font-heebo mb-2 block">שם הארגון: *</Label>
                     <Input
                       value={formData.organizationName}
                       onChange={(e) => handleInputChange('organizationName', e.target.value)}
@@ -160,7 +181,7 @@ const OrganizationForm = () => {
                   </div>
                   
                   <div>
-                    <Label className="text-white font-heebo mb-2 block">איש הקשר:</Label>
+                    <Label className="text-white font-heebo mb-2 block">איש הקשר: *</Label>
                     <Input
                       value={formData.contactPerson}
                       onChange={(e) => handleInputChange('contactPerson', e.target.value)}
@@ -179,7 +200,7 @@ const OrganizationForm = () => {
                   </div>
                   
                   <div>
-                    <Label className="text-white font-heebo mb-2 block">כתובת מייל:</Label>
+                    <Label className="text-white font-heebo mb-2 block">כתובת מייל: *</Label>
                     <Input
                       type="email"
                       value={formData.email}
@@ -200,6 +221,8 @@ const OrganizationForm = () => {
                   <div>
                     <Label className="text-white font-heebo mb-2 block">מספר עובדים (משוער):</Label>
                     <Input
+                      type="number"
+                      min="1"
                       value={formData.employeeCount}
                       onChange={(e) => handleInputChange('employeeCount', e.target.value)}
                       className="bg-navy-dark text-white border-gold/30"
@@ -225,11 +248,11 @@ const OrganizationForm = () => {
                 
                 <div>
                   <Label className="text-white font-heebo mb-3 block">
-                    1. מה הגדרת את הפעילות של הארגון?
+                    איך הייתם מגדירים את הפעילות של הארגון שלכם?
                   </Label>
                   <Textarea
-                    value={formData.techChallenges}
-                    onChange={(e) => handleInputChange('techChallenges', e.target.value)}
+                    value={formData.organizationActivity}
+                    onChange={(e) => handleInputChange('organizationActivity', e.target.value)}
                     className="bg-navy-dark text-white border-gold/30"
                     rows={3}
                   />
@@ -237,37 +260,49 @@ const OrganizationForm = () => {
                 
                 <div>
                   <Label className="text-white font-heebo mb-3 block">
-                    2. מתי קולית הגדולים של הארגון שלכם?
+                    מי הקהל הגדול של הארגון שלכם?
                   </Label>
                   <div className="space-y-2">
                     {['סטארט-אפים', 'חברות בינוניות', 'תאגידים גדולים', 'מוסדות ציבור', 'ארגונים ללא כוונת רווח', 'עצמאיים', 'אחר'].map((option) => (
                       <div key={option} className="flex items-center space-x-2 space-x-reverse">
                         <Checkbox
-                          id={`budget-${option}`}
-                          checked={formData.currentTech.includes(option)}
-                          onCheckedChange={(checked) => handleCheckboxChange('currentTech', option, checked)}
+                          id={`audience-${option}`}
+                          checked={formData.targetAudience.includes(option)}
+                          onCheckedChange={(checked) => handleCheckboxChange('targetAudience', option, checked)}
                         />
-                        <Label htmlFor={`budget-${option}`} className="text-white font-heebo">
+                        <Label htmlFor={`audience-${option}`} className="text-white font-heebo">
                           {option}
                         </Label>
                       </div>
                     ))}
                   </div>
                 </div>
+                
+                <div>
+                  <Label className="text-white font-heebo mb-3 block">
+                    מהם האתגרים הגדולים שהארגון שלכם מתמודד איתם כיום?
+                  </Label>
+                  <Textarea
+                    value={formData.mainChallenges}
+                    onChange={(e) => handleInputChange('mainChallenges', e.target.value)}
+                    className="bg-navy-dark text-white border-gold/30"
+                    rows={3}
+                  />
+                </div>
               </div>
 
-              {/* מטרת יציאת AI בארגון */}
+              {/* מטרות הטמעת AI בארגון */}
               <div className="space-y-6">
                 <h3 className="text-2xl font-bold text-gold font-heebo mb-4">
-                  🔹 מטרת יציאת AI בארגון
+                  🔹 מטרות הטמעת AI בארגון
                 </h3>
                 
                 <div>
                   <Label className="text-white font-heebo mb-3 block">
-                    12. מה הזמן לוקח לכם לבצע דוח מכירות בדרך כלל חזרה הראשון? צליזה הגיע זמן לאחד:
+                    מה המטרה העיקרית שלכם מהטמעת AI? (ניתן לבחור כמה תשובות)
                   </Label>
                   <div className="space-y-2">
-                    {['הסצמן הגדרות', 'חזרה נוכחיים', 'יבוא נוכחיים', 'צרוות לוקעים', 'יבוא סצקעים', 'צרכת הפקיעים', 'צרכת החטקיעים'].map((option) => (
+                    {['חיסכון בעלויות', 'שיפור היעילות', 'שיפור שירות הלקוחות', 'אוטומציה של תהליכים', 'יצירת תובנות עסקיות', 'שיפור קבלת החלטות', 'המצאת שירותים חדשים'].map((option) => (
                       <div key={option} className="flex items-center space-x-2 space-x-reverse">
                         <Checkbox
                           id={`goals-${option}`}
@@ -284,7 +319,7 @@ const OrganizationForm = () => {
                 
                 <div>
                   <Label className="text-white font-heebo mb-3 block">
-                    13. אך תיש בהגדרת? איזה הדל המדוע לאחקעים לכל תחקצעיק?
+                    האם יש לכם צרכים ספציפיים או תחומים מסוימים שתרצו לשפר?
                   </Label>
                   <Textarea
                     value={formData.specificNeeds}
@@ -296,47 +331,76 @@ const OrganizationForm = () => {
                 
                 <div>
                   <Label className="text-white font-heebo mb-3 block">
-                    14. הצע הדבר התיצית הפעילית יחסת?
+                    מה לוח הזמנים הרצוי להטמעה?
                   </Label>
-                  <Input
-                    value={formData.expectedROI}
-                    onChange={(e) => handleInputChange('expectedROI', e.target.value)}
-                    className="bg-navy-dark text-white border-gold/30"
-                  />
+                  <RadioGroup
+                    value={formData.timelineExpectation}
+                    onValueChange={(value) => handleInputChange('timelineExpectation', value)}
+                    className="space-y-2"
+                  >
+                    {['עד חודש', '1-3 חודשים', '3-6 חודשים', '6-12 חודשים', 'מעל שנה'].map((option) => (
+                      <div key={option} className="flex items-center space-x-2 space-x-reverse">
+                        <RadioGroupItem value={option} id={`timeline-${option}`} />
+                        <Label htmlFor={`timeline-${option}`} className="text-white font-heebo">
+                          {option}
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
                 </div>
                 
                 <div>
                   <Label className="text-white font-heebo mb-3 block">
-                    15. מה יבטיח הצלתו הארגון עם לוקרט לצרך חוצע טיסר כעסווח?
+                    מה התקציב המשוער להטמעה?
+                  </Label>
+                  <RadioGroup
+                    value={formData.budgetRange}
+                    onValueChange={(value) => handleInputChange('budgetRange', value)}
+                    className="space-y-2"
+                  >
+                    {['עד 10,000 ₪', '10,000-50,000 ₪', '50,000-100,000 ₪', '100,000-500,000 ₪', 'מעל 500,000 ₪'].map((option) => (
+                      <div key={option} className="flex items-center space-x-2 space-x-reverse">
+                        <RadioGroupItem value={option} id={`budget-${option}`} />
+                        <Label htmlFor={`budget-${option}`} className="text-white font-heebo">
+                          {option}
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                </div>
+                
+                <div>
+                  <Label className="text-white font-heebo mb-3 block">
+                    איך תמדדו הצלחה? אילו מדדים חשובים לכם?
                   </Label>
                   <Textarea
-                    value={formData.keyMetrics}
-                    onChange={(e) => handleInputChange('keyMetrics', e.target.value)}
+                    value={formData.successMetrics}
+                    onChange={(e) => handleInputChange('successMetrics', e.target.value)}
                     className="bg-navy-dark text-white border-gold/30"
                     rows={3}
                   />
                 </div>
               </div>
 
-              {/* תשתית וחתיעתיים קיימיים */}
+              {/* תשתית וחוקרים קיימים */}
               <div className="space-y-6">
                 <h3 className="text-2xl font-bold text-gold font-heebo mb-4">
-                  🔹 תשתית וחתיעתיים קיימיים
+                  🔹 תשתית וחוקרים קיימים
                 </h3>
                 
                 <div>
                   <Label className="text-white font-heebo mb-3 block">
-                    16. האם אתם מפטרתם סנתביעיל על הגרמל פסק הבאירגן והבם יער אחר עם סצייויות הרים לפגרכם אטלטיום:
+                    באילו מערכות אתם משתמשים כיום? (ניתן לבחור כמה תשובות)
                   </Label>
                   <div className="space-y-2">
-                    {['ERP', 'CRM', 'הוכרבת Helpdesk', 'לוח בל', 'וכח הדביר', 'גכים / נכירי / סטטר / לוטם', 'דטר', 'אחדים'].map((option) => (
+                    {['ERP', 'CRM', 'מערכת Helpdesk', 'לוח בקרה', 'מערכת הנהלת חשבונות', 'גוגל / אופיס / מיקרוסופט / אחר', 'מערכת אחרת'].map((option) => (
                       <div key={option} className="flex items-center space-x-2 space-x-reverse">
                         <Checkbox
-                          id={`integration-${option}`}
-                          checked={formData.integrationNeeds.includes(option)}
-                          onCheckedChange={(checked) => handleCheckboxChange('integrationNeeds', option, checked)}
+                          id={`systems-${option}`}
+                          checked={formData.currentSystems.includes(option)}
+                          onCheckedChange={(checked) => handleCheckboxChange('currentSystems', option, checked)}
                         />
-                        <Label htmlFor={`integration-${option}`} className="text-white font-heebo">
+                        <Label htmlFor={`systems-${option}`} className="text-white font-heebo">
                           {option}
                         </Label>
                       </div>
@@ -346,7 +410,7 @@ const OrganizationForm = () => {
                 
                 <div>
                   <Label className="text-white font-heebo mb-3 block">
-                    17. באירק החתונים בארכת עם נצרך אלים אדרכת הטרכנות פיסטרות:
+                    באיזה סוג מידע הארגון עובד עם? (למשל: נתונים פיננסיים, מידע לקוחות, מסמכים, תמונות וכו')
                   </Label>
                   <Textarea
                     value={formData.dataTypes}
@@ -358,7 +422,7 @@ const OrganizationForm = () => {
                 
                 <div>
                   <Label className="text-white font-heebo mb-3 block">
-                    18. מה ללכת חתיירת את הדשתיך?
+                    מה רמת הביטחון הנדרשת לכם?
                   </Label>
                   <Input
                     value={formData.securityRequirements}
@@ -366,17 +430,29 @@ const OrganizationForm = () => {
                     className="bg-navy-dark text-white border-gold/30"
                   />
                 </div>
+                
+                <div>
+                  <Label className="text-white font-heebo mb-3 block">
+                    האם תרצו להתחבר למערכות קיימות? אם כן, אילו?
+                  </Label>
+                  <Textarea
+                    value={formData.integrationNeeds}
+                    onChange={(e) => handleInputChange('integrationNeeds', e.target.value)}
+                    className="bg-navy-dark text-white border-gold/30"
+                    rows={3}
+                  />
+                </div>
               </div>
 
-              {/* לטיחים */}
+              {/* מידע נוסף */}
               <div className="space-y-6">
                 <h3 className="text-2xl font-bold text-gold font-heebo mb-4">
-                  🔹 לטיחים
+                  🔹 מידע נוסף
                 </h3>
                 
                 <div>
                   <Label className="text-white font-heebo mb-3 block">
-                    19. האם יש לטיר גווים רוסרישי לצליש עם השטות?
+                    האם יש עוד דבר שחשוב לכם לציין עם השימוש?
                   </Label>
                   <Textarea
                     value={formData.additionalInfo}
@@ -431,8 +507,7 @@ const OrganizationForm = () => {
                 
                 <div className="text-center">
                   <p className="text-gray-300 font-heebo mb-4">
-                    העיבוד ציפוינויות ודצוכן /ירי היכולרוו התכצרוה, ברית היבניעם, הלוכולן הבינוניעם
-                    צרוים מתולצע בנעים רחצות בו מצגונה רעמונו.
+                    המידע שסופק ישמש לצורך הכנת הצעת מחיר מותאמת אישית ולא יועבר לגורמים חיצוניים.
                   </p>
                   <div className="flex justify-center space-x-4 space-x-reverse">
                     <span className="text-white font-heebo">תאריך: ______</span>
