@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -100,4 +101,30 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Custom styles for phone input */
+.PhoneInputInput {
+  @apply bg-navy-dark text-white border-gold/30 focus:border-gold focus:ring-2 focus:ring-gold/20;
+}
+
+.PhoneInputCountrySelect {
+  @apply bg-navy-dark text-white border-gold/30 focus:border-gold;
+}
+
+.PhoneInputCountrySelectArrow {
+  @apply text-gold;
+}
+
+.PhoneInputCountryIcon {
+  @apply opacity-80;
+}
+
+/* RTL support for phone input */
+[dir="rtl"] .PhoneInputInput {
+  @apply text-right;
+}
+
+[dir="rtl"] .PhoneInputCountrySelect {
+  @apply ml-2 mr-0;
 }
