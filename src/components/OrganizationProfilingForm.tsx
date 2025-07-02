@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,6 +8,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
 interface FormData {
   // פרטים כלליים
@@ -57,12 +57,14 @@ interface FormData {
   pilotAreas: string[];
   pilotAreasOther: string;
   startDate: string;
+  preferredTime: string;
   
   // לסיום
   additionalComments: string;
 }
 
 const OrganizationProfilingForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     phone: '',
@@ -99,6 +101,7 @@ const OrganizationProfilingForm = () => {
     pilotAreas: [],
     pilotAreasOther: '',
     startDate: '',
+    preferredTime: '',
     additionalComments: ''
   });
 
@@ -155,9 +158,19 @@ const OrganizationProfilingForm = () => {
       <div className="max-w-4xl mx-auto">
         <Card className="bg-white">
           <CardHeader>
-            <CardTitle className="text-2xl text-center text-navy-dark">
-              טופס איפיון לארגון להטמעת AI
-            </CardTitle>
+            <div className="flex items-center justify-between">
+              <Button 
+                variant="ghost" 
+                onClick={() => navigate('/')}
+                className="text-navy-dark hover:bg-gray-100"
+              >
+                ← חזור לדף הבית
+              </Button>
+              <CardTitle className="text-2xl text-center text-navy-dark flex-1">
+                טופס איפיון לארגון להטמעת AI
+              </CardTitle>
+              <div className="w-20"></div>
+            </div>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-8">
@@ -267,7 +280,7 @@ const OrganizationProfilingForm = () => {
                     <Label>מהם קהלי היעד המרכזיים שלכם? *</Label>
                     <div className="space-y-2 mt-2">
                       {['לקוחות פרטיים', 'עסקים', 'מוסדות / ציבורי'].map((option) => (
-                        <div key={option} className="flex items-center space-x-2">
+                        <div key={option} className="flex items-center space-x-2 space-x-reverse">
                           <Checkbox
                             id={`targetAudience-${option}`}
                             checked={formData.targetAudience.includes(option)}
@@ -276,7 +289,7 @@ const OrganizationProfilingForm = () => {
                           <Label htmlFor={`targetAudience-${option}`}>{option}</Label>
                         </div>
                       ))}
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 space-x-reverse">
                         <Checkbox
                           id="targetAudience-other"
                           checked={formData.targetAudience.includes('אחר')}
@@ -324,7 +337,7 @@ const OrganizationProfilingForm = () => {
                     <Label>אילו מחלקות עיקריות פועלות אצלכם? *</Label>
                     <div className="space-y-2 mt-2">
                       {['שיווק', 'שירות לקוחות', 'מכירות', 'כספים', 'תפעול', 'BI / דאטה', 'פיתוח / מוצר', 'משאבי אנוש'].map((option) => (
-                        <div key={option} className="flex items-center space-x-2">
+                        <div key={option} className="flex items-center space-x-2 space-x-reverse">
                           <Checkbox
                             id={`mainDepartments-${option}`}
                             checked={formData.mainDepartments.includes(option)}
@@ -333,7 +346,7 @@ const OrganizationProfilingForm = () => {
                           <Label htmlFor={`mainDepartments-${option}`}>{option}</Label>
                         </div>
                       ))}
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 space-x-reverse">
                         <Checkbox
                           id="mainDepartments-other"
                           checked={formData.mainDepartments.includes('אחר')}
@@ -353,7 +366,7 @@ const OrganizationProfilingForm = () => {
                     <Label>באילו מערכות / כלים דיגיטליים אתם משתמשים כיום? *</Label>
                     <div className="space-y-2 mt-2">
                       {['CRM', 'ERP', 'מערכת Helpdesk / צ\'אט', 'BI', 'כלי דיוור', 'Zapier / Make'].map((option) => (
-                        <div key={option} className="flex items-center space-x-2">
+                        <div key={option} className="flex items-center space-x-2 space-x-reverse">
                           <Checkbox
                             id={`digitalSystems-${option}`}
                             checked={formData.digitalSystems.includes(option)}
@@ -362,7 +375,7 @@ const OrganizationProfilingForm = () => {
                           <Label htmlFor={`digitalSystems-${option}`}>{option}</Label>
                         </div>
                       ))}
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 space-x-reverse">
                         <Checkbox
                           id="digitalSystems-other"
                           checked={formData.digitalSystems.includes('אחר')}
@@ -412,7 +425,7 @@ const OrganizationProfilingForm = () => {
                       className="mt-2"
                     >
                       {['אין ידע כלל', 'שמעו אך לא משתמשים', 'משתמשים בסיסיים', 'מתקדמים', 'מומחים פנימיים'].map((option) => (
-                        <div key={option} className="flex items-center space-x-2">
+                        <div key={option} className="flex items-center space-x-2 space-x-reverse">
                           <RadioGroupItem value={option} id={`aiKnowledge-${option}`} />
                           <Label htmlFor={`aiKnowledge-${option}`}>{option}</Label>
                         </div>
@@ -438,7 +451,7 @@ const OrganizationProfilingForm = () => {
                       className="mt-2"
                     >
                       {['כן', 'לא', 'יש עניין'].map((option) => (
-                        <div key={option} className="flex items-center space-x-2">
+                        <div key={option} className="flex items-center space-x-2 space-x-reverse">
                           <RadioGroupItem value={option} id={`aiTraining-${option}`} />
                           <Label htmlFor={`aiTraining-${option}`}>{option}</Label>
                         </div>
@@ -450,7 +463,7 @@ const OrganizationProfilingForm = () => {
                     <Label>אילו סוגי כלים מבוססי AI אתם מכירים / משתמשים בפועל? *</Label>
                     <div className="space-y-2 mt-2">
                       {['טקסט', 'BI', 'תמונה/וידאו', 'כתיבה שיווקית', 'אוטומציה', 'אין שימוש'].map((option) => (
-                        <div key={option} className="flex items-center space-x-2">
+                        <div key={option} className="flex items-center space-x-2 space-x-reverse">
                           <Checkbox
                             id={`aiTools-${option}`}
                             checked={formData.aiToolsUsed.includes(option)}
@@ -459,7 +472,7 @@ const OrganizationProfilingForm = () => {
                           <Label htmlFor={`aiTools-${option}`}>{option}</Label>
                         </div>
                       ))}
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 space-x-reverse">
                         <Checkbox
                           id="aiTools-other"
                           checked={formData.aiToolsUsed.includes('אחר')}
@@ -485,7 +498,7 @@ const OrganizationProfilingForm = () => {
                     <Label>מה הייתם רוצים להשיג מהטמעת AI בארגון? *</Label>
                     <div className="space-y-2 mt-2">
                       {['חיסכון בזמן', 'חיסכון בכוח אדם', 'ייעול', 'שירות', 'שיווק', 'ניתוח נתונים', 'יצירת תוכן'].map((option) => (
-                        <div key={option} className="flex items-center space-x-2">
+                        <div key={option} className="flex items-center space-x-2 space-x-reverse">
                           <Checkbox
                             id={`aiGoals-${option}`}
                             checked={formData.aiImplementationGoals.includes(option)}
@@ -494,7 +507,7 @@ const OrganizationProfilingForm = () => {
                           <Label htmlFor={`aiGoals-${option}`}>{option}</Label>
                         </div>
                       ))}
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 space-x-reverse">
                         <Checkbox
                           id="aiGoals-other"
                           checked={formData.aiImplementationGoals.includes('אחר')}
@@ -527,7 +540,7 @@ const OrganizationProfilingForm = () => {
                       onValueChange={(value) => handleInputChange('budgetStatus', value)}
                       className="mt-2"
                     >
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 space-x-reverse">
                         <RadioGroupItem value="כן" id="budget-yes" />
                         <Label htmlFor="budget-yes">כן</Label>
                         {formData.budgetStatus === 'כן' && (
@@ -540,11 +553,11 @@ const OrganizationProfilingForm = () => {
                           />
                         )}
                       </div>
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 space-x-reverse">
                         <RadioGroupItem value="לא אך יש נכונות" id="budget-willing" />
                         <Label htmlFor="budget-willing">לא אך יש נכונות</Label>
                       </div>
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 space-x-reverse">
                         <RadioGroupItem value="דרוש סיוע" id="budget-help" />
                         <Label htmlFor="budget-help">דרוש סיוע</Label>
                       </div>
@@ -581,7 +594,7 @@ const OrganizationProfilingForm = () => {
                     <Label>באילו תחומים נראה לכם שכדאי להתחיל פיילוט?</Label>
                     <div className="space-y-2 mt-2">
                       {['שירות לקוחות', 'המלצות', 'שיווק', 'BI', 'יצירת תוכן', 'מסמכים'].map((option) => (
-                        <div key={option} className="flex items-center space-x-2">
+                        <div key={option} className="flex items-center space-x-2 space-x-reverse">
                           <Checkbox
                             id={`pilot-${option}`}
                             checked={formData.pilotAreas.includes(option)}
@@ -590,7 +603,7 @@ const OrganizationProfilingForm = () => {
                           <Label htmlFor={`pilot-${option}`}>{option}</Label>
                         </div>
                       ))}
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 space-x-reverse">
                         <Checkbox
                           id="pilot-other"
                           checked={formData.pilotAreas.includes('אחר')}
@@ -606,15 +619,30 @@ const OrganizationProfilingForm = () => {
                     </div>
                   </div>
 
-                  <div>
-                    <Label htmlFor="startDate">מתי נוח לכם להתחיל את התהליך *</Label>
-                    <Input
-                      id="startDate"
-                      type="date"
-                      value={formData.startDate}
-                      onChange={(e) => handleInputChange('startDate', e.target.value)}
-                      required
-                    />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="startDate">מתי נוח לכם להתחיל את התהליך *</Label>
+                      <Input
+                        id="startDate"
+                        type="date"
+                        value={formData.startDate}
+                        onChange={(e) => handleInputChange('startDate', e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="preferredTime">זמן מועדף ליום הפגישה</Label>
+                      <Select value={formData.preferredTime} onValueChange={(value) => handleInputChange('preferredTime', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="בחר זמן מועדף" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="בוקר">בוקר (9:00-12:00)</SelectItem>
+                          <SelectItem value="צהריים">צהריים (12:00-16:00)</SelectItem>
+                          <SelectItem value="ערב">ערב (16:00-20:00)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
                 </div>
               </section>
