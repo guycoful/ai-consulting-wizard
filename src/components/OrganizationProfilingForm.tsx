@@ -425,9 +425,9 @@ const OrganizationProfilingForm = () => {
                       className="mt-2"
                     >
                       {['אין ידע כלל', 'שמעו אך לא משתמשים', 'משתמשים בסיסיים', 'מתקדמים', 'מומחים פנימיים'].map((option) => (
-                        <div key={option} className="flex items-center space-x-2 space-x-reverse">
+                        <div key={option} className="flex items-center gap-2 flex-row-reverse">
+                          <Label htmlFor={`aiKnowledge-${option}`} className="cursor-pointer">{option}</Label>
                           <RadioGroupItem value={option} id={`aiKnowledge-${option}`} />
-                          <Label htmlFor={`aiKnowledge-${option}`}>{option}</Label>
                         </div>
                       ))}
                     </RadioGroup>
@@ -451,9 +451,9 @@ const OrganizationProfilingForm = () => {
                       className="mt-2"
                     >
                       {['כן', 'לא', 'יש עניין'].map((option) => (
-                        <div key={option} className="flex items-center space-x-2 space-x-reverse">
+                        <div key={option} className="flex items-center gap-2 flex-row-reverse">
+                          <Label htmlFor={`aiTraining-${option}`} className="cursor-pointer">{option}</Label>
                           <RadioGroupItem value={option} id={`aiTraining-${option}`} />
-                          <Label htmlFor={`aiTraining-${option}`}>{option}</Label>
                         </div>
                       ))}
                     </RadioGroup>
@@ -540,26 +540,28 @@ const OrganizationProfilingForm = () => {
                       onValueChange={(value) => handleInputChange('budgetStatus', value)}
                       className="mt-2"
                     >
-                      <div className="flex items-center space-x-2 space-x-reverse">
+                      <div className="flex items-center gap-2 flex-row-reverse">
+                        <div className="flex items-center gap-2">
+                          <Label htmlFor="budget-yes" className="cursor-pointer">כן</Label>
+                          {formData.budgetStatus === 'כן' && (
+                            <Input
+                              type="number"
+                              value={formData.budgetAmount}
+                              onChange={(e) => handleInputChange('budgetAmount', e.target.value ? parseInt(e.target.value) : '')}
+                              placeholder="סכום בש״ח"
+                              className="w-32"
+                            />
+                          )}
+                        </div>
                         <RadioGroupItem value="כן" id="budget-yes" />
-                        <Label htmlFor="budget-yes">כן</Label>
-                        {formData.budgetStatus === 'כן' && (
-                          <Input
-                            type="number"
-                            value={formData.budgetAmount}
-                            onChange={(e) => handleInputChange('budgetAmount', e.target.value ? parseInt(e.target.value) : '')}
-                            placeholder="סכום בש״ח"
-                            className="mr-2"
-                          />
-                        )}
                       </div>
-                      <div className="flex items-center space-x-2 space-x-reverse">
+                      <div className="flex items-center gap-2 flex-row-reverse">
+                        <Label htmlFor="budget-willing" className="cursor-pointer">לא אך יש נכונות</Label>
                         <RadioGroupItem value="לא אך יש נכונות" id="budget-willing" />
-                        <Label htmlFor="budget-willing">לא אך יש נכונות</Label>
                       </div>
-                      <div className="flex items-center space-x-2 space-x-reverse">
+                      <div className="flex items-center gap-2 flex-row-reverse">
+                        <Label htmlFor="budget-help" className="cursor-pointer">דרוש סיוע</Label>
                         <RadioGroupItem value="דרוש סיוע" id="budget-help" />
-                        <Label htmlFor="budget-help">דרוש סיוע</Label>
                       </div>
                     </RadioGroup>
                   </div>
