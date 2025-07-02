@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
 
 interface FormData {
   // פרטים כלליים
@@ -67,6 +68,7 @@ interface FormData {
 const OrganizationProfilingForm = () => {
   const navigate = useNavigate();
   const [showThankYou, setShowThankYou] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     phone: '',
@@ -147,11 +149,71 @@ const OrganizationProfilingForm = () => {
     return true;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validateForm()) {
-      console.log('Form submitted:', formData);
+    
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Prepare data for Supabase insertion
+      const submissionData = {
+        שם_מלא: formData.fullName,
+        טלפון: formData.phone,
+        מייל: formData.email,
+        תחום_פעילות: formData.businessField,
+        תפקיד_בארגון: formData.position,
+        שם_בארגון: formData.organizationName,
+        'מספר_עובדים_(משוער)': formData.employeeCount || null,
+        אזור_פעילות_גאוגרפי: formData.geographicArea,
+        'שנות פעילות': formData.yearsActive || null,
+        תאר_בקצרה_את_הפעילות_של_הארגון: formData.organizationActivity,
+        'מהם_קהלי_היעד_המרכזיים_שלכם?': formData.targetAudience.concat(formData.targetAudienceOther ? [formData.targetAudienceOther] : []),
+        'מהם_השירותים_/_המוצרים_המרכזיים_שא': formData.mainServices,
+        מהם_האתגרים_המרכזיים_שאתם_מתמודדי: formData.mainChallenges,
+        'אילו_מחלקות_עיקריות_פועלות_אצלכם?': formData.mainDepartments.concat(formData.mainDepartmentsOther ? [formData.mainDepartmentsOther] : []),
+        'באילו_מערכות_/_כלים_דיגיטליים_אתם_מ': formData.digitalSystems.concat(formData.digitalSystemsOther ? [formData.digitalSystemsOther] : []),
+        אילו_תהליכים_כיום_מתבצעים_בצורה_לא: formData.inefficientProcesses,
+        אילו_משימות_היית_רוצה_לייעל_או_להו: formData.aiOptimizationGoals,
+        'עד_כמה_העובדים/המנהלים_בארגון_מכיר': [formData.aiKnowledgeLevel].filter(Boolean),
+        'אם_יש_שימוש_–_ציין_שם,_תפקיד,_תחום_ע': formData.aiUsageDetails,
+        'האם_התקיימו_הכשרות_/_סדנאות_בתחום_ה': [formData.aiTrainingHistory].filter(Boolean),
+        אילו_סוגי_כלים_מבוססי_AI_אתם_מכירים_: formData.aiToolsUsed.concat(formData.aiToolsUsedOther ? [formData.aiToolsUsedOther] : []),
+        מה_הייתם_רוצים_להשיג_מהטמעת_AI_בארג: formData.aiImplementationGoals.concat(formData.aiImplementationGoalsOther ? [formData.aiImplementationGoalsOther] : []),
+        'איך_תדעו_שהתהליך_הצליח?_מהם_המדדים_': formData.successMetrics,
+        'האם_יש_תקציב_ראשוני_לתהליך?': [formData.budgetStatus, formData.budgetAmount ? `${formData.budgetAmount} ש״ח` : ''].filter(Boolean),
+        'מי_יוביל_את_התהליך_מטעמכם?_נא_לציין': formData.processLeader,
+        האם_ראיתם_פתרונות_טכנולוגיים_או_תה: formData.inspiration,
+        באילו_תחומים_נראה_לכם_שכדאי_להתחיל: formData.pilotAreas.concat(formData.pilotAreasOther ? [formData.pilotAreasOther] : []),
+        מתי_נוח_לכם_להתחיל_את_התהליך: formData.startDate,
+        זמן_מועדף_ליום_הפגישה: [formData.preferredTime].filter(Boolean),
+        'האם_יש_משהו_נוסף_שתרצו_לשתף,_לציין_': formData.additionalComments
+      };
+
+      console.log('Submitting to Supabase:', submissionData);
+
+      const { data, error } = await supabase
+        .from('profiling_form_submissions')
+        .insert([submissionData])
+        .select();
+
+      if (error) {
+        console.error('Supabase error:', error);
+        toast.error('שגיאה בשמירת הטופס. אנא נסה שוב.');
+        return;
+      }
+
+      console.log('Form submitted successfully:', data);
+      toast.success('הטופס נשלח בהצלחה!');
       setShowThankYou(true);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast.error('שגיאה בשמירת הטופס. אנא נסה שוב.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -679,8 +741,13 @@ const OrganizationProfilingForm = () => {
                 </section>
 
                 <div className="flex justify-center pt-6">
-                  <Button type="submit" size="lg" className="bg-blue-primary hover:bg-blue-primary/90">
-                    שלח טופס
+                  <Button 
+                    type="submit" 
+                    size="lg" 
+                    className="bg-blue-primary hover:bg-blue-primary/90"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'שולח...' : 'שלח טופס'}
                   </Button>
                 </div>
               </form>
