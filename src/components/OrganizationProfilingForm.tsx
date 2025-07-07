@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -110,10 +111,12 @@ const OrganizationProfilingForm = () => {
   });
 
   const handleInputChange = (field: keyof FormData, value: any) => {
+    console.log(`Field changed: ${field}`, value);
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
   const handleCheckboxChange = (field: keyof FormData, value: string, checked: boolean) => {
+    console.log(`Checkbox changed: ${field}`, value, checked);
     const currentArray = formData[field] as string[];
     if (checked) {
       handleInputChange(field, [...currentArray, value]);
@@ -123,6 +126,7 @@ const OrganizationProfilingForm = () => {
   };
 
   const validateForm = () => {
+    console.log('Starting form validation...');
     const requiredFields = [
       'fullName', 'phone', 'email', 'businessField', 'mainServices', 'mainChallenges', 'startDate'
     ];
@@ -132,7 +136,9 @@ const OrganizationProfilingForm = () => {
     ];
 
     for (const field of requiredFields) {
-      if (!formData[field as keyof FormData]) {
+      const value = formData[field as keyof FormData];
+      if (!value || (typeof value === 'string' && value.trim() === '')) {
+        console.error(`Missing required field: ${field}`);
         toast.error(`השדה "${field}" הוא חובה`);
         return false;
       }
@@ -141,77 +147,99 @@ const OrganizationProfilingForm = () => {
     for (const field of requiredArrayFields) {
       const arrayValue = formData[field as keyof FormData] as string[];
       if (!arrayValue || arrayValue.length === 0) {
+        console.error(`Missing required array field: ${field}`);
         toast.error(`יש לבחור לפחות אפשרות אחת בשדה "${field}"`);
         return false;
       }
     }
 
+    console.log('Form validation passed');
     return true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    console.log('Form submission started');
+    console.log('Current form data:', formData);
+    
     if (!validateForm()) {
+      console.error('Form validation failed');
       return;
     }
 
     setIsSubmitting(true);
 
     try {
-      // Prepare data for Supabase insertion
+      // בניית הנתונים עם ערכים ברירת מחדל לשדות ריקים
       const submissionData = {
-        שם_מלא: formData.fullName,
-        טלפון: formData.phone,
-        מייל: formData.email,
-        תחום_פעילות: formData.businessField,
-        תפקיד_בארגון: formData.position,
-        שם_בארגון: formData.organizationName,
-        'מספר_עובדים_(משוער)': formData.employeeCount || null,
-        אזור_פעילות_גאוגרפי: formData.geographicArea,
-        'שנות פעילות': formData.yearsActive || null,
-        תאר_בקצרה_את_הפעילות_של_הארגון: formData.organizationActivity,
-        'מהם_קהלי_היעד_המרכזיים_שלכם?': formData.targetAudience.concat(formData.targetAudienceOther ? [formData.targetAudienceOther] : []),
-        'מהם_השירותים_/_המוצרים_המרכזיים_שא': formData.mainServices,
-        מהם_האתגרים_המרכזיים_שאתם_מתמודדי: formData.mainChallenges,
-        'אילו_מחלקות_עיקריות_פועלות_אצלכם?': formData.mainDepartments.concat(formData.mainDepartmentsOther ? [formData.mainDepartmentsOther] : []),
-        'באילו_מערכות_/_כלים_דיגיטליים_אתם_מ': formData.digitalSystems.concat(formData.digitalSystemsOther ? [formData.digitalSystemsOther] : []),
-        אילו_תהליכים_כיום_מתבצעים_בצורה_לא: formData.inefficientProcesses,
-        אילו_משימות_היית_רוצה_לייעל_או_להו: formData.aiOptimizationGoals,
-        'עד_כמה_העובדים/המנהלים_בארגון_מכיר': [formData.aiKnowledgeLevel].filter(Boolean),
-        'אם_יש_שימוש_–_ציין_שם,_תפקיד,_תחום_ע': formData.aiUsageDetails,
-        'האם_התקיימו_הכשרות_/_סדנאות_בתחום_ה': [formData.aiTrainingHistory].filter(Boolean),
-        אילו_סוגי_כלים_מבוססי_AI_אתם_מכירים_: formData.aiToolsUsed.concat(formData.aiToolsUsedOther ? [formData.aiToolsUsedOther] : []),
-        מה_הייתם_רוצים_להשיג_מהטמעת_AI_בארג: formData.aiImplementationGoals.concat(formData.aiImplementationGoalsOther ? [formData.aiImplementationGoalsOther] : []),
-        'איך_תדעו_שהתהליך_הצליח?_מהם_המדדים_': formData.successMetrics,
+        שם_מלא: formData.fullName || null,
+        טלפון: formData.phone || null,
+        מייל: formData.email || null,
+        תחום_פעילות: formData.businessField || null,
+        תפקיד_בארגון: formData.position || null,
+        שם_בארגון: formData.organizationName || null,
+        'מספר_עובדים_(משוער)': formData.employeeCount ? Number(formData.employeeCount) : null,
+        אזור_פעילות_גאוגרפי: formData.geographicArea || null,
+        'שנות פעילות': formData.yearsActive ? Number(formData.yearsActive) : null,
+        תאר_בקצרה_את_הפעילות_של_הארגון: formData.organizationActivity || null,
+        'מהם_קהלי_היעד_המרכזיים_שלכם?': formData.targetAudience.length > 0 ? [...formData.targetAudience, ...(formData.targetAudienceOther ? [formData.targetAudienceOther] : [])] : [],
+        'מהם_השירותים_/_המוצרים_המרכזיים_שא': formData.mainServices || null,
+        מהם_האתגרים_המרכזיים_שאתם_מתמודדי: formData.mainChallenges || null,
+        'אילו_מחלקות_עיקריות_פועלות_אצלכם?': formData.mainDepartments.length > 0 ? [...formData.mainDepartments, ...(formData.mainDepartmentsOther ? [formData.mainDepartmentsOther] : [])] : [],
+        'באילו_מערכות_/_כלים_דיגיטליים_אתם_מ': formData.digitalSystems.length > 0 ? [...formData.digitalSystems, ...(formData.digitalSystemsOther ? [formData.digitalSystemsOther] : [])] : [],
+        אילו_תהליכים_כיום_מתבצעים_בצורה_לא: formData.inefficientProcesses || null,
+        אילו_משימות_היית_רוצה_לייעל_או_להו: formData.aiOptimizationGoals || null,
+        'עד_כמה_העובדים/המנהלים_בארגון_מכיר': formData.aiKnowledgeLevel ? [formData.aiKnowledgeLevel] : [],
+        'אם_יש_שימוש_–_ציין_שם,_תפקיד,_תחום_ע': formData.aiUsageDetails || null,
+        'האם_התקיימו_הכשרות_/_סדנאות_בתחום_ה': formData.aiTrainingHistory ? [formData.aiTrainingHistory] : [],
+        אילו_סוגי_כלים_מבוססי_AI_אתם_מכירים_: formData.aiToolsUsed.length > 0 ? [...formData.aiToolsUsed, ...(formData.aiToolsUsedOther ? [formData.aiToolsUsedOther] : [])] : [],
+        מה_הייתם_רוצים_להשיג_מהטמעת_AI_בארג: formData.aiImplementationGoals.length > 0 ? [...formData.aiImplementationGoals, ...(formData.aiImplementationGoalsOther ? [formData.aiImplementationGoalsOther] : [])] : [],
+        'איך_תדעו_שהתהליך_הצליח?_מהם_המדדים_': formData.successMetrics || null,
         'האם_יש_תקציב_ראשוני_לתהליך?': [formData.budgetStatus, formData.budgetAmount ? `${formData.budgetAmount} ש״ח` : ''].filter(Boolean),
-        'מי_יוביל_את_התהליך_מטעמכם?_נא_לציין': formData.processLeader,
-        האם_ראיתם_פתרונות_טכנולוגיים_או_תה: formData.inspiration,
-        באילו_תחומים_נראה_לכם_שכדאי_להתחיל: formData.pilotAreas.concat(formData.pilotAreasOther ? [formData.pilotAreasOther] : []),
-        מתי_נוח_לכם_להתחיל_את_התהליך: formData.startDate,
-        זמן_מועדף_ליום_הפגישה: [formData.preferredTime].filter(Boolean),
-        'האם_יש_משהו_נוסף_שתרצו_לשתף,_לציין_': formData.additionalComments
+        'מי_יוביל_את_התהליך_מטעמכם?_נא_לציין': formData.processLeader || null,
+        האם_ראיתם_פתרונות_טכנולוגיים_או_תה: formData.inspiration || null,
+        באילו_תחומים_נראה_לכם_שכדאי_להתחיל: formData.pilotAreas.length > 0 ? [...formData.pilotAreas, ...(formData.pilotAreasOther ? [formData.pilotAreasOther] : [])] : [],
+        מתי_נוח_לכם_להתחיל_את_התהליך: formData.startDate || null,
+        זמן_מועדף_ליום_הפגישה: formData.preferredTime ? [formData.preferredTime] : [],
+        'האם_יש_משהו_נוסף_שתרצו_לשתף,_לציין_': formData.additionalComments || null
       };
 
-      console.log('Submitting to Supabase:', submissionData);
+      console.log('Prepared submission data:', submissionData);
 
+      // נסיון שליחה ל-Supabase
+      console.log('Attempting to insert data to Supabase...');
       const { data, error } = await supabase
         .from('profiling_form_submissions')
         .insert([submissionData])
         .select();
 
       if (error) {
-        console.error('Supabase error:', error);
-        toast.error('שגיאה בשמירת הטופס. אנא נסה שוב.');
+        console.error('Supabase insertion error:', error);
+        console.error('Error details:', {
+          code: error.code,
+          message: error.message,
+          details: error.details,
+          hint: error.hint
+        });
+        
+        if (error.message.includes('row-level security')) {
+          toast.error('שגיאה בהרשאות. אנא פנה למנהל המערכת.');
+        } else if (error.message.includes('violates')) {
+          toast.error('שגיאה בנתונים. אנא בדוק את השדות ונסה שוב.');
+        } else {
+          toast.error(`שגיאה בשמירת הטופס: ${error.message}`);
+        }
         return;
       }
 
       console.log('Form submitted successfully:', data);
       toast.success('הטופס נשלח בהצלחה!');
       setShowThankYou(true);
+      
     } catch (error) {
-      console.error('Error submitting form:', error);
-      toast.error('שגיאה בשמירת הטופס. אנא נסה שוב.');
+      console.error('Unexpected error during form submission:', error);
+      toast.error('שגיאה בלתי צפויה. אנא נסה שוב.');
     } finally {
       setIsSubmitting(false);
     }
