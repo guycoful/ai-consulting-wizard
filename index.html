@@ -39,14 +39,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-      /* Hide any potential Lovable branding */
+      /* Hide any potential Lovable branding completely */
       [data-lovable-badge],
       .lovable-badge,
       .gptengineer-badge,
       [class*="lovable"],
-      [id*="lovable"] {
+      [id*="lovable"],
+      [data-lovable],
+      .lovable-watermark,
+      .lovable-logo,
+      .lovable-icon {
         display: none !important;
         visibility: hidden !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        position: absolute !important;
+        left: -9999px !important;
+      }
+      
+      /* Hide any heart icons or similar */
+      [class*="heart"],
+      [data-icon*="heart"],
+      .heart-icon {
+        display: none !important;
       }
     </style>
   </head>
