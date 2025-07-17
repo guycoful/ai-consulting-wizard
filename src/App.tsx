@@ -14,7 +14,6 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <div style={{ display: 'none' }} className="lovable-badge gptengineer-badge" />
       <Toaster />
       <Sonner />
       <BrowserRouter>
