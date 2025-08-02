@@ -252,7 +252,7 @@ const OrganizationProfilingForm = () => {
         מדד_הצלחה_כמותי: formData.successMetric || null,
         
         תאריך_התחלה: formData.startDate || null,
-        זמן_מועדף_פגישה: formData.preferredTime || null,
+        זמן_מועדף_פגישה: formData.preferredTime ? [formData.preferredTime] : null,
         הערות_נוספות: formData.additionalComments || null
       };
 
