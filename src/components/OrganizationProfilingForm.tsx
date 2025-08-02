@@ -18,9 +18,6 @@ interface FormData {
   phone: string;
   email: string;
   businessField: string;
-  position: string;
-  organizationName: string;
-  employeeCount: number | '';
   
   // חלק א': ניהול לידים ופניות נכנסות
   leadChannels: {
@@ -31,7 +28,7 @@ interface FormData {
     referrals: number | '';
     other: number | '';
   };
-  leadProcessStep1: string; // מי מקבל התראה כשיש ליד חדש
+  
   leadProcessStep2: string; // באיזו מערכת רושמים הליד
   leadProcessResponseTime: string; // תוך כמה זמן מגיבים ללידים
   leadFirstResponse: string; // מה התגובה הראשונית
@@ -63,14 +60,14 @@ interface FormData {
   // חלק ד': מערכות קיימות ואינטגרציות
   currentSoftware: string[]; // תוכנות בשימוש
   currentSoftwareOther: string;
-  softwareWithAPI: string[]; // תוכנות עם API זמין
+  
   existingAutomations: string; // אוטומציות קיימות
   automationTools: string[]; // כלים לאוטומציה
   
   // מטרות ותכנון
   budgetStatus: string;
   budgetAmount: number | '';
-  processLeader: string;
+  
   startDate: string;
   preferredTime: string;
   additionalComments: string;
@@ -85,9 +82,6 @@ const OrganizationProfilingForm = () => {
     phone: '',
     email: '',
     businessField: '',
-    position: '',
-    organizationName: '',
-    employeeCount: '',
     
     leadChannels: {
       facebook: '',
@@ -97,7 +91,7 @@ const OrganizationProfilingForm = () => {
       referrals: '',
       other: ''
     },
-    leadProcessStep1: '',
+    
     leadProcessStep2: '',
     leadProcessResponseTime: '',
     leadFirstResponse: '',
@@ -126,13 +120,13 @@ const OrganizationProfilingForm = () => {
     
     currentSoftware: [],
     currentSoftwareOther: '',
-    softwareWithAPI: [],
+    
     existingAutomations: '',
     automationTools: [],
     
     budgetStatus: '',
     budgetAmount: '',
-    processLeader: '',
+    
     startDate: '',
     preferredTime: '',
     additionalComments: ''
@@ -202,9 +196,6 @@ const OrganizationProfilingForm = () => {
         טלפון: formData.phone || null,
         מייל: formData.email || null,
         תחום_פעילות: formData.businessField || null,
-        תפקיד_בארגון: formData.position || null,
-        שם_הארגון: formData.organizationName || null,
-        מספר_עובדים: formData.employeeCount ? Number(formData.employeeCount) : null,
         
         // חלק א': ניהול לידים
         לידים_פייסבוק_חודשי: formData.leadChannels.facebook ? Number(formData.leadChannels.facebook) : null,
@@ -213,7 +204,7 @@ const OrganizationProfilingForm = () => {
         לידים_טלפון_חודשי: formData.leadChannels.phone ? Number(formData.leadChannels.phone) : null,
         לידים_הפניות_חודשי: formData.leadChannels.referrals ? Number(formData.leadChannels.referrals) : null,
         לידים_אחר_חודשי: formData.leadChannels.other ? Number(formData.leadChannels.other) : null,
-        מי_מקבל_התראה_ליד: formData.leadProcessStep1 || null,
+        
         מערכת_רישום_לידים: formData.leadProcessStep2 || null,
         זמן_תגובה_ללידים: formData.leadProcessResponseTime || null,
         תגובה_ראשונית_ללידים: formData.leadFirstResponse || null,
@@ -241,14 +232,14 @@ const OrganizationProfilingForm = () => {
         
         // חלק ד': מערכות ואינטגרציות
         תוכנות_נוכחיות: formData.currentSoftware.concat(formData.currentSoftwareOther ? [formData.currentSoftwareOther] : []),
-        תוכנות_עם_API: formData.softwareWithAPI,
+        
         אוטומציות_קיימות: formData.existingAutomations || null,
         כלי_אוטומציה: formData.automationTools,
         
         // מטרות ותכנון
         סטטוס_תקציב: formData.budgetStatus || null,
         סכום_תקציב: formData.budgetAmount ? Number(formData.budgetAmount) : null,
-        מוביל_תהליך: formData.processLeader || null,
+        
         תאריך_התחלה: formData.startDate || null,
         זמן_מועדף_פגישה: formData.preferredTime || null,
         הערות_נוספות: formData.additionalComments || null
@@ -358,31 +349,6 @@ const OrganizationProfilingForm = () => {
                         required
                       />
                     </div>
-                    <div>
-                      <Label htmlFor="position">תפקיד בארגון</Label>
-                      <Input
-                        id="position"
-                        value={formData.position}
-                        onChange={(e) => handleInputChange('position', e.target.value)}
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="organizationName">שם הארגון</Label>
-                      <Input
-                        id="organizationName"
-                        value={formData.organizationName}
-                        onChange={(e) => handleInputChange('organizationName', e.target.value)}
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="employeeCount">מספר עובדים (משוער)</Label>
-                      <Input
-                        id="employeeCount"
-                        type="number"
-                        value={formData.employeeCount}
-                        onChange={(e) => handleInputChange('employeeCount', e.target.value ? parseInt(e.target.value) : '')}
-                      />
-                    </div>
                   </div>
                 </section>
 
@@ -415,7 +381,7 @@ const OrganizationProfilingForm = () => {
                           />
                         </div>
                         <div>
-                          <Label htmlFor="website-leads">אתר</Label>
+                          <Label htmlFor="website-leads">אתר אינטרנט</Label>
                           <Input
                             id="website-leads"
                             type="number"
@@ -445,7 +411,7 @@ const OrganizationProfilingForm = () => {
                           />
                         </div>
                         <div>
-                          <Label htmlFor="other-leads">אחר</Label>
+                          <Label htmlFor="other-leads">אחר: פרט</Label>
                           <Input
                             id="other-leads"
                             type="number"
@@ -457,15 +423,6 @@ const OrganizationProfilingForm = () => {
                       </div>
                     </div>
 
-                    <div>
-                      <Label htmlFor="leadProcessStep1">מי מקבל התראה כשיש ליד חדש? (שם/תפקיד)</Label>
-                      <Input
-                        id="leadProcessStep1"
-                        value={formData.leadProcessStep1}
-                        onChange={(e) => handleInputChange('leadProcessStep1', e.target.value)}
-                        placeholder="לדוגמה: מנהל מכירות, כל צוות המכירות, רק המזכירה"
-                      />
-                    </div>
 
                     <div>
                       <Label htmlFor="leadProcessStep2">באיזו מערכת אתם רושמים את הליד? (שם המערכת בדיוק)</Label>
@@ -569,14 +526,14 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label className="text-base font-medium">כמה זמן (בדקות) בממוצע לוקח לכם להפיק כל סוג תוכן?</Label>
+                      <Label className="text-base font-medium">כמה זמן (בדקות/שעות/ימים) בממוצע לוקח לכם להפיק כל סוג תוכן?</Label>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3">
                         <div>
                           <Label htmlFor="posts-time">פוסט בפייסבוק/אינסטגרם</Label>
                           <Input
                             id="posts-time"
                             type="number"
-                            placeholder="דקות"
+                            placeholder="דקות/שעות/ימים"
                             value={formData.contentProductionTime.posts}
                             onChange={(e) => handleNestedInputChange('contentProductionTime', 'posts', e.target.value ? parseInt(e.target.value) : '')}
                           />
@@ -586,7 +543,7 @@ const OrganizationProfilingForm = () => {
                           <Input
                             id="newsletter-time"
                             type="number"
-                            placeholder="דקות"
+                            placeholder="דקות/שעות/ימים"
                             value={formData.contentProductionTime.newsletter}
                             onChange={(e) => handleNestedInputChange('contentProductionTime', 'newsletter', e.target.value ? parseInt(e.target.value) : '')}
                           />
@@ -596,7 +553,7 @@ const OrganizationProfilingForm = () => {
                           <Input
                             id="videos-time"
                             type="number"
-                            placeholder="דקות"
+                            placeholder="דקות/שעות/ימים"
                             value={formData.contentProductionTime.videos}
                             onChange={(e) => handleNestedInputChange('contentProductionTime', 'videos', e.target.value ? parseInt(e.target.value) : '')}
                           />
@@ -784,24 +741,6 @@ const OrganizationProfilingForm = () => {
                       </div>
                     </div>
 
-                    <div>
-                      <Label>לאילו מהמערכות יש לכם גישה ל-API (ממשק חיבור)?</Label>
-                      <div className="space-y-2 mt-2">
-                        {formData.currentSoftware.map((software) => (
-                          <div key={`api-${software}`} className="flex items-center space-x-2 space-x-reverse">
-                            <Checkbox
-                              id={`api-${software}`}
-                              checked={formData.softwareWithAPI.includes(software)}
-                              onCheckedChange={(checked) => handleCheckboxChange('softwareWithAPI', software, checked as boolean)}
-                            />
-                            <Label htmlFor={`api-${software}`}>{software}</Label>
-                          </div>
-                        ))}
-                        {formData.currentSoftware.length === 0 && (
-                          <p className="text-gray-500 text-sm">בחר תחילה מערכות בשאלה הקודמת</p>
-                        )}
-                      </div>
-                    </div>
 
                     <div>
                       <Label htmlFor="existingAutomations">האם יש לכם כיום אוטומציות (Zapier, Make, או אוטומציה אחרת)? אם כן, מה הן עושות?</Label>
@@ -817,7 +756,7 @@ const OrganizationProfilingForm = () => {
                     <div>
                       <Label>באילו כלי אוטומציה אתם מכירים או משתמשים?</Label>
                       <div className="space-y-2 mt-2">
-                        {['Zapier', 'Microsoft Power Automate', 'Make (לשעבר Integromat)', 'IFTTT', 'אוטומציות מובנות במערכות', 'לא מכיר'].map((option) => (
+                        {['Zapier', 'Microsoft Power Automate', 'Make (לשעבר Integromat)', 'IFTTT', 'n8n', 'אוטומציות מובנות במערכות', 'לא מכיר'].map((option) => (
                           <div key={option} className="flex items-center space-x-2 space-x-reverse">
                             <Checkbox
                               id={`automation-${option}`}
@@ -870,16 +809,6 @@ const OrganizationProfilingForm = () => {
                       </RadioGroup>
                     </div>
 
-                    <div>
-                      <Label htmlFor="processLeader">מי יוביל את התהליך מטעמכם? (שם, תפקיד ורמה טכנולוגית)</Label>
-                      <Textarea
-                        id="processLeader"
-                        value={formData.processLeader}
-                        onChange={(e) => handleInputChange('processLeader', e.target.value)}
-                        placeholder="לדוגמה: יוסי כהן, מנהל תפעול, רמה טכנולוגית בסיסית"
-                        rows={3}
-                      />
-                    </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
