@@ -10,7 +10,7 @@ export type Database = {
   // Allows to automatically instanciate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "12.2.3 (519615d)"
+    PostgrestVersion: "12.2.12 (cd3cf9e)"
   }
   public: {
     Tables: {
@@ -18,6 +18,7 @@ export type Database = {
         Row: {
           created_at: string
           id: number
+          אוטומציות_קיימות: string | null
           אזור_פעילות_גאוגרפי: string | null
           "איך_תדעו_שהתהליך_הצליח?_מהם_המדדים_": string | null
           "אילו_מחלקות_עיקריות_פועלות_אצלכם?": string[] | null
@@ -52,6 +53,7 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: number
+          אוטומציות_קיימות?: string | null
           אזור_פעילות_גאוגרפי?: string | null
           "איך_תדעו_שהתהליך_הצליח?_מהם_המדדים_"?: string | null
           "אילו_מחלקות_עיקריות_פועלות_אצלכם?"?: string[] | null
@@ -86,6 +88,7 @@ export type Database = {
         Update: {
           created_at?: string
           id?: number
+          אוטומציות_קיימות?: string | null
           אזור_פעילות_גאוגרפי?: string | null
           "איך_תדעו_שהתהליך_הצליח?_מהם_המדדים_"?: string | null
           "אילו_מחלקות_עיקריות_פועלות_אצלכם?"?: string[] | null
