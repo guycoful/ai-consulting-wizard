@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -22,47 +21,58 @@ interface FormData {
   position: string;
   organizationName: string;
   employeeCount: number | '';
-  geographicArea: string;
-  yearsActive: number | '';
   
-  // פעילות הארגון ואתגרים מרכזיים
-  organizationActivity: string;
-  targetAudience: string[];
-  targetAudienceOther: string;
-  mainServices: string;
-  mainChallenges: string;
+  // חלק א': ניהול לידים ופניות נכנסות
+  leadChannels: {
+    facebook: number | '';
+    whatsapp: number | '';
+    website: number | '';
+    phone: number | '';
+    referrals: number | '';
+    other: number | '';
+  };
+  leadProcessStep1: string; // מי מקבל התראה כשיש ליד חדש
+  leadProcessStep2: string; // באיזו מערכת רושמים הליד
+  leadProcessResponseTime: string; // תוך כמה זמן מגיבים ללידים
+  leadFirstResponse: string; // מה התגובה הראשונית
+  leadQualificationCriteria: string; // קריטריונים לסינון לידים
+  leadManagementTools: string[]; // כלים לניהול לידים
+  leadManagementToolsOther: string;
   
-  // תהליכים קיימים ומערכות
-  mainDepartments: string[];
-  mainDepartmentsOther: string;
-  digitalSystems: string[];
-  digitalSystemsOther: string;
-  inefficientProcesses: string;
-  aiOptimizationGoals: string;
+  // חלק ב': תהליכי שיווק ושמירת קשר
+  contentTypes: string[]; // סוגי תוכן שמייצרים
+  contentProductionTime: {
+    posts: number | '';
+    newsletter: number | '';
+    videos: number | '';
+  };
+  customerDatabase: number | ''; // כמה אנשי קשר יש במאגר
+  customerDatabaseLocation: string; // היכן מנוהל המאגר
+  customerSegmentation: string[]; // איך מפולח המאגר
+  followUpProcess: string; // תהליך פנייה מחודשת
+  followUpTools: string[]; // כלים לשמירת קשר
   
-  // רמת היכרות, ניסיון ומוכנות ל-AI
-  aiKnowledgeLevel: string;
-  aiUsageDetails: string;
-  aiTrainingHistory: string;
-  aiToolsUsed: string[];
-  aiToolsUsedOther: string;
+  // חלק ג': תפעול, אדמיניסטרציה וניהול משימות
+  weeklyMeetings: number | ''; // כמה פגישות מתאמים בשבוע
+  remindersSent: number | ''; // כמה תזכורות נשלחות
+  meetingSchedulingProcess: string; // תהליך תיאום פגישות
+  recurringTasks: string[]; // משימות שחוזרות על עצמן
+  adminTimeSpent: number | ''; // שעות עבודה בשבוע על מנהלה
+  documentGeneration: string; // תהליך הפקת מסמכים
   
-  // מטרות וציפיות מהתהליך
-  aiImplementationGoals: string[];
-  aiImplementationGoalsOther: string;
-  successMetrics: string;
+  // חלק ד': מערכות קיימות ואינטגרציות
+  currentSoftware: string[]; // תוכנות בשימוש
+  currentSoftwareOther: string;
+  softwareWithAPI: string[]; // תוכנות עם API זמין
+  existingAutomations: string; // אוטומציות קיימות
+  automationTools: string[]; // כלים לאוטומציה
+  
+  // מטרות ותכנון
   budgetStatus: string;
   budgetAmount: number | '';
   processLeader: string;
-  
-  // השראה ותחומים לפיילוט
-  inspiration: string;
-  pilotAreas: string[];
-  pilotAreasOther: string;
   startDate: string;
   preferredTime: string;
-  
-  // לסיום
   additionalComments: string;
 }
 
@@ -78,33 +88,51 @@ const OrganizationProfilingForm = () => {
     position: '',
     organizationName: '',
     employeeCount: '',
-    geographicArea: '',
-    yearsActive: '',
-    organizationActivity: '',
-    targetAudience: [],
-    targetAudienceOther: '',
-    mainServices: '',
-    mainChallenges: '',
-    mainDepartments: [],
-    mainDepartmentsOther: '',
-    digitalSystems: [],
-    digitalSystemsOther: '',
-    inefficientProcesses: '',
-    aiOptimizationGoals: '',
-    aiKnowledgeLevel: '',
-    aiUsageDetails: '',
-    aiTrainingHistory: '',
-    aiToolsUsed: [],
-    aiToolsUsedOther: '',
-    aiImplementationGoals: [],
-    aiImplementationGoalsOther: '',
-    successMetrics: '',
+    
+    leadChannels: {
+      facebook: '',
+      whatsapp: '',
+      website: '',
+      phone: '',
+      referrals: '',
+      other: ''
+    },
+    leadProcessStep1: '',
+    leadProcessStep2: '',
+    leadProcessResponseTime: '',
+    leadFirstResponse: '',
+    leadQualificationCriteria: '',
+    leadManagementTools: [],
+    leadManagementToolsOther: '',
+    
+    contentTypes: [],
+    contentProductionTime: {
+      posts: '',
+      newsletter: '',
+      videos: ''
+    },
+    customerDatabase: '',
+    customerDatabaseLocation: '',
+    customerSegmentation: [],
+    followUpProcess: '',
+    followUpTools: [],
+    
+    weeklyMeetings: '',
+    remindersSent: '',
+    meetingSchedulingProcess: '',
+    recurringTasks: [],
+    adminTimeSpent: '',
+    documentGeneration: '',
+    
+    currentSoftware: [],
+    currentSoftwareOther: '',
+    softwareWithAPI: [],
+    existingAutomations: '',
+    automationTools: [],
+    
     budgetStatus: '',
     budgetAmount: '',
     processLeader: '',
-    inspiration: '',
-    pilotAreas: [],
-    pilotAreasOther: '',
     startDate: '',
     preferredTime: '',
     additionalComments: ''
@@ -113,6 +141,16 @@ const OrganizationProfilingForm = () => {
   const handleInputChange = (field: keyof FormData, value: any) => {
     console.log(`Field changed: ${field}`, value);
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleNestedInputChange = (parentField: keyof FormData, childField: string, value: any) => {
+    setFormData(prev => ({
+      ...prev,
+      [parentField]: {
+        ...(prev[parentField] as object),
+        [childField]: value
+      }
+    }));
   };
 
   const handleCheckboxChange = (field: keyof FormData, value: string, checked: boolean) => {
@@ -128,11 +166,7 @@ const OrganizationProfilingForm = () => {
   const validateForm = () => {
     console.log('Starting form validation...');
     const requiredFields = [
-      'fullName', 'phone', 'email', 'businessField', 'mainServices', 'mainChallenges', 'startDate'
-    ];
-    
-    const requiredArrayFields = [
-      'targetAudience', 'mainDepartments', 'digitalSystems', 'aiToolsUsed', 'aiImplementationGoals'
+      'fullName', 'phone', 'email', 'businessField', 'startDate'
     ];
 
     for (const field of requiredFields) {
@@ -140,15 +174,6 @@ const OrganizationProfilingForm = () => {
       if (!value || (typeof value === 'string' && value.trim() === '')) {
         console.error(`Missing required field: ${field}`);
         toast.error(`השדה "${field}" הוא חובה`);
-        return false;
-      }
-    }
-
-    for (const field of requiredArrayFields) {
-      const arrayValue = formData[field as keyof FormData] as string[];
-      if (!arrayValue || arrayValue.length === 0) {
-        console.error(`Missing required array field: ${field}`);
-        toast.error(`יש לבחור לפחות אפשרות אחת בשדה "${field}"`);
         return false;
       }
     }
@@ -171,43 +196,67 @@ const OrganizationProfilingForm = () => {
     setIsSubmitting(true);
 
     try {
-      // בניית הנתונים עם ערכים ברירת מחדל לשדות ריקים
+      // בניית הנתונים עם המבנה החדש
       const submissionData = {
         שם_מלא: formData.fullName || null,
         טלפון: formData.phone || null,
         מייל: formData.email || null,
         תחום_פעילות: formData.businessField || null,
         תפקיד_בארגון: formData.position || null,
-        שם_בארגון: formData.organizationName || null,
-        'מספר_עובדים_(משוער)': formData.employeeCount ? Number(formData.employeeCount) : null,
-        אזור_פעילות_גאוגרפי: formData.geographicArea || null,
-        'שנות פעילות': formData.yearsActive ? Number(formData.yearsActive) : null,
-        תאר_בקצרה_את_הפעילות_של_הארגון: formData.organizationActivity || null,
-        'מהם_קהלי_היעד_המרכזיים_שלכם?': formData.targetAudience.length > 0 ? [...formData.targetAudience, ...(formData.targetAudienceOther ? [formData.targetAudienceOther] : [])] : [],
-        'מהם_השירותים_/_המוצרים_המרכזיים_שא': formData.mainServices || null,
-        מהם_האתגרים_המרכזיים_שאתם_מתמודדי: formData.mainChallenges || null,
-        'אילו_מחלקות_עיקריות_פועלות_אצלכם?': formData.mainDepartments.length > 0 ? [...formData.mainDepartments, ...(formData.mainDepartmentsOther ? [formData.mainDepartmentsOther] : [])] : [],
-        'באילו_מערכות_/_כלים_דיגיטליים_אתם_מ': formData.digitalSystems.length > 0 ? [...formData.digitalSystems, ...(formData.digitalSystemsOther ? [formData.digitalSystemsOther] : [])] : [],
-        אילו_תהליכים_כיום_מתבצעים_בצורה_לא: formData.inefficientProcesses || null,
-        אילו_משימות_היית_רוצה_לייעל_או_להו: formData.aiOptimizationGoals || null,
-        'עד_כמה_העובדים/המנהלים_בארגון_מכיר': formData.aiKnowledgeLevel ? [formData.aiKnowledgeLevel] : [],
-        'אם_יש_שימוש_–_ציין_שם,_תפקיד,_תחום_ע': formData.aiUsageDetails || null,
-        'האם_התקיימו_הכשרות_/_סדנאות_בתחום_ה': formData.aiTrainingHistory ? [formData.aiTrainingHistory] : [],
-        אילו_סוגי_כלים_מבוססי_AI_אתם_מכירים_: formData.aiToolsUsed.length > 0 ? [...formData.aiToolsUsed, ...(formData.aiToolsUsedOther ? [formData.aiToolsUsedOther] : [])] : [],
-        מה_הייתם_רוצים_להשיג_מהטמעת_AI_בארג: formData.aiImplementationGoals.length > 0 ? [...formData.aiImplementationGoals, ...(formData.aiImplementationGoalsOther ? [formData.aiImplementationGoalsOther] : [])] : [],
-        'איך_תדעו_שהתהליך_הצליח?_מהם_המדדים_': formData.successMetrics || null,
-        'האם_יש_תקציב_ראשוני_לתהליך?': [formData.budgetStatus, formData.budgetAmount ? `${formData.budgetAmount} ש״ח` : ''].filter(Boolean),
-        'מי_יוביל_את_התהליך_מטעמכם?_נא_לציין': formData.processLeader || null,
-        האם_ראיתם_פתרונות_טכנולוגיים_או_תה: formData.inspiration || null,
-        באילו_תחומים_נראה_לכם_שכדאי_להתחיל: formData.pilotAreas.length > 0 ? [...formData.pilotAreas, ...(formData.pilotAreasOther ? [formData.pilotAreasOther] : [])] : [],
-        מתי_נוח_לכם_להתחיל_את_התהליך: formData.startDate || null,
-        זמן_מועדף_ליום_הפגישה: formData.preferredTime ? [formData.preferredTime] : [],
-        'האם_יש_משהו_נוסף_שתרצו_לשתף,_לציין_': formData.additionalComments || null
+        שם_הארגון: formData.organizationName || null,
+        מספר_עובדים: formData.employeeCount ? Number(formData.employeeCount) : null,
+        
+        // חלק א': ניהול לידים
+        לידים_פייסבוק_חודשי: formData.leadChannels.facebook ? Number(formData.leadChannels.facebook) : null,
+        לידים_וואטסאפ_חודשי: formData.leadChannels.whatsapp ? Number(formData.leadChannels.whatsapp) : null,
+        לידים_אתר_חודשי: formData.leadChannels.website ? Number(formData.leadChannels.website) : null,
+        לידים_טלפון_חודשי: formData.leadChannels.phone ? Number(formData.leadChannels.phone) : null,
+        לידים_הפניות_חודשי: formData.leadChannels.referrals ? Number(formData.leadChannels.referrals) : null,
+        לידים_אחר_חודשי: formData.leadChannels.other ? Number(formData.leadChannels.other) : null,
+        מי_מקבל_התראה_ליד: formData.leadProcessStep1 || null,
+        מערכת_רישום_לידים: formData.leadProcessStep2 || null,
+        זמן_תגובה_ללידים: formData.leadProcessResponseTime || null,
+        תגובה_ראשונית_ללידים: formData.leadFirstResponse || null,
+        קריטריונים_סינון_לידים: formData.leadQualificationCriteria || null,
+        כלים_ניהול_לידים: formData.leadManagementTools.concat(formData.leadManagementToolsOther ? [formData.leadManagementToolsOther] : []),
+        
+        // חלק ב': שיווק ושמירת קשר
+        סוגי_תוכן_מיוצרים: formData.contentTypes,
+        זמן_פוסטים_דקות: formData.contentProductionTime.posts ? Number(formData.contentProductionTime.posts) : null,
+        זמן_ניוזלטר_דקות: formData.contentProductionTime.newsletter ? Number(formData.contentProductionTime.newsletter) : null,
+        זמן_וידאו_דקות: formData.contentProductionTime.videos ? Number(formData.contentProductionTime.videos) : null,
+        מספר_אנשי_קשר_במאגר: formData.customerDatabase ? Number(formData.customerDatabase) : null,
+        מיקום_מאגר_לקוחות: formData.customerDatabaseLocation || null,
+        פילוח_מאגר_לקוחות: formData.customerSegmentation,
+        תהליך_פנייה_מחודשת: formData.followUpProcess || null,
+        כלים_שמירת_קשר: formData.followUpTools,
+        
+        // חלק ג': תפעול ואדמיניסטרציה
+        פגישות_שבועיות: formData.weeklyMeetings ? Number(formData.weeklyMeetings) : null,
+        תזכורות_שבועיות: formData.remindersSent ? Number(formData.remindersSent) : null,
+        תהליך_תיאום_פגישות: formData.meetingSchedulingProcess || null,
+        משימות_חוזרות: formData.recurringTasks,
+        שעות_מנהלה_שבועיות: formData.adminTimeSpent ? Number(formData.adminTimeSpent) : null,
+        תהליך_הפקת_מסמכים: formData.documentGeneration || null,
+        
+        // חלק ד': מערכות ואינטגרציות
+        תוכנות_נוכחיות: formData.currentSoftware.concat(formData.currentSoftwareOther ? [formData.currentSoftwareOther] : []),
+        תוכנות_עם_API: formData.softwareWithAPI,
+        אוטומציות_קיימות: formData.existingAutomations || null,
+        כלי_אוטומציה: formData.automationTools,
+        
+        // מטרות ותכנון
+        סטטוס_תקציב: formData.budgetStatus || null,
+        סכום_תקציב: formData.budgetAmount ? Number(formData.budgetAmount) : null,
+        מוביל_תהליך: formData.processLeader || null,
+        תאריך_התחלה: formData.startDate || null,
+        זמן_מועדף_פגישה: formData.preferredTime || null,
+        הערות_נוספות: formData.additionalComments || null
       };
 
       console.log('Prepared submission data:', submissionData);
 
-      // נסיון שליחה ל-Supabase
+      // שליחה ל-Supabase
       console.log('Attempting to insert data to Supabase...');
       const { data, error } = await supabase
         .from('profiling_form_submissions')
@@ -216,20 +265,7 @@ const OrganizationProfilingForm = () => {
 
       if (error) {
         console.error('Supabase insertion error:', error);
-        console.error('Error details:', {
-          code: error.code,
-          message: error.message,
-          details: error.details,
-          hint: error.hint
-        });
-        
-        if (error.message.includes('row-level security')) {
-          toast.error('שגיאה בהרשאות. אנא פנה למנהל המערכת.');
-        } else if (error.message.includes('violates')) {
-          toast.error('שגיאה בנתונים. אנא בדוק את השדות ונסה שוב.');
-        } else {
-          toast.error(`שגיאה בשמירת הטופס: ${error.message}`);
-        }
+        toast.error(`שגיאה בשמירת הטופס: ${error.message}`);
         return;
       }
 
@@ -266,12 +302,12 @@ const OrganizationProfilingForm = () => {
                 </Button>
                 <div className="flex-1 text-center">
                   <CardTitle className="text-2xl text-navy-dark mb-4">
-                    שאלון אפיון לקראת תהליך הטמעת AI בארגון
+                    שאלון אפיון תהליכים עסקיים לקראת הטמעת AI
                   </CardTitle>
                   <p className="text-gray-600 text-sm leading-relaxed max-w-3xl mx-auto">
-                    שאלון זה נועד לסייע לנו להבין את התמונה הכוללת של הארגון שלך, לזהות הזדמנויות לייעול ושיפור תהליכים באמצעות פתרונות מבוססי בינה מלאכותית (AI), ולהתאים תהליך אפקטיבי לצרכים שלך.
+                    השאלון נועד לאסוף מידע מדויק ותכני על התהליכים העסקיים בארגון שלך, כדי לבנות פתרונות AI מותאמים לצרכים הספציפיים שלכם.
                     <br />
-                    מילוי השאלון צפוי לקחת 7–10 דקות.
+                    מילוי השאלון צפוי לקחת 10-15 דקות.
                   </p>
                 </div>
                 <div className="w-20"></div>
@@ -282,7 +318,7 @@ const OrganizationProfilingForm = () => {
                 
                 {/* פרטים כלליים */}
                 <section>
-                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">1. פרטים כלליים</h3>
+                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">פרטי יצירת קשר</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="fullName">שם מלא *</Label>
@@ -347,246 +383,162 @@ const OrganizationProfilingForm = () => {
                         onChange={(e) => handleInputChange('employeeCount', e.target.value ? parseInt(e.target.value) : '')}
                       />
                     </div>
-                    <div>
-                      <Label htmlFor="geographicArea">אזור פעילות גאוגרפי</Label>
-                      <Input
-                        id="geographicArea"
-                        value={formData.geographicArea}
-                        onChange={(e) => handleInputChange('geographicArea', e.target.value)}
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="yearsActive">שנות פעילות</Label>
-                      <Input
-                        id="yearsActive"
-                        type="number"
-                        value={formData.yearsActive}
-                        onChange={(e) => handleInputChange('yearsActive', e.target.value ? parseInt(e.target.value) : '')}
-                      />
-                    </div>
                   </div>
                 </section>
 
-                {/* פעילות הארגון ואתגרים מרכזיים */}
+                {/* חלק א': ניהול לידים ופניות נכנסות */}
                 <section>
-                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">2. פעילות הארגון ואתגרים מרכזיים</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <Label htmlFor="organizationActivity">תאר בקצרה את הפעילות של הארגון</Label>
-                      <Textarea
-                        id="organizationActivity"
-                        value={formData.organizationActivity}
-                        onChange={(e) => handleInputChange('organizationActivity', e.target.value)}
-                        rows={3}
-                      />
-                    </div>
+                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">חלק א': ניהול לידים ופניות נכנסות</h3>
+                  <div className="space-y-6">
                     
                     <div>
-                      <Label>מהם קהלי היעד המרכזיים שלכם? *</Label>
-                      <div className="space-y-2 mt-2">
-                        {['לקוחות פרטיים', 'עסקים', 'מוסדות / ציבורי'].map((option) => (
-                          <div key={option} className="flex items-center space-x-2 space-x-reverse">
-                            <Checkbox
-                              id={`targetAudience-${option}`}
-                              checked={formData.targetAudience.includes(option)}
-                              onCheckedChange={(checked) => handleCheckboxChange('targetAudience', option, checked as boolean)}
-                            />
-                            <Label htmlFor={`targetAudience-${option}`}>{option}</Label>
-                          </div>
-                        ))}
-                        <div className="flex items-center space-x-2 space-x-reverse">
-                          <Checkbox
-                            id="targetAudience-other"
-                            checked={formData.targetAudience.includes('אחר')}
-                            onCheckedChange={(checked) => handleCheckboxChange('targetAudience', 'אחר', checked as boolean)}
-                          />
-                          <Label htmlFor="targetAudience-other">אחר:</Label>
+                      <Label className="text-base font-medium">כמה לידים (פניות) אתם מקבלים בממוצע בחודש מכל ערוץ?</Label>
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-3">
+                        <div>
+                          <Label htmlFor="facebook-leads">פייסבוק</Label>
                           <Input
-                            value={formData.targetAudienceOther}
-                            onChange={(e) => handleInputChange('targetAudienceOther', e.target.value)}
-                            className="flex-1"
+                            id="facebook-leads"
+                            type="number"
+                            placeholder="מספר לידים"
+                            value={formData.leadChannels.facebook}
+                            onChange={(e) => handleNestedInputChange('leadChannels', 'facebook', e.target.value ? parseInt(e.target.value) : '')}
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="whatsapp-leads">וואטסאפ</Label>
+                          <Input
+                            id="whatsapp-leads"
+                            type="number"
+                            placeholder="מספר לידים"
+                            value={formData.leadChannels.whatsapp}
+                            onChange={(e) => handleNestedInputChange('leadChannels', 'whatsapp', e.target.value ? parseInt(e.target.value) : '')}
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="website-leads">אתר</Label>
+                          <Input
+                            id="website-leads"
+                            type="number"
+                            placeholder="מספר לידים"
+                            value={formData.leadChannels.website}
+                            onChange={(e) => handleNestedInputChange('leadChannels', 'website', e.target.value ? parseInt(e.target.value) : '')}
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="phone-leads">טלפון</Label>
+                          <Input
+                            id="phone-leads"
+                            type="number"
+                            placeholder="מספר לידים"
+                            value={formData.leadChannels.phone}
+                            onChange={(e) => handleNestedInputChange('leadChannels', 'phone', e.target.value ? parseInt(e.target.value) : '')}
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="referrals-leads">הפניות</Label>
+                          <Input
+                            id="referrals-leads"
+                            type="number"
+                            placeholder="מספר לידים"
+                            value={formData.leadChannels.referrals}
+                            onChange={(e) => handleNestedInputChange('leadChannels', 'referrals', e.target.value ? parseInt(e.target.value) : '')}
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="other-leads">אחר</Label>
+                          <Input
+                            id="other-leads"
+                            type="number"
+                            placeholder="מספר לידים"
+                            value={formData.leadChannels.other}
+                            onChange={(e) => handleNestedInputChange('leadChannels', 'other', e.target.value ? parseInt(e.target.value) : '')}
                           />
                         </div>
                       </div>
                     </div>
 
                     <div>
-                      <Label htmlFor="mainServices">מהם השירותים / המוצרים המרכזיים שאתם מציעים *</Label>
-                      <Textarea
-                        id="mainServices"
-                        value={formData.mainServices}
-                        onChange={(e) => handleInputChange('mainServices', e.target.value)}
-                        rows={3}
-                        required
+                      <Label htmlFor="leadProcessStep1">מי מקבל התראה כשיש ליד חדש? (שם/תפקיד)</Label>
+                      <Input
+                        id="leadProcessStep1"
+                        value={formData.leadProcessStep1}
+                        onChange={(e) => handleInputChange('leadProcessStep1', e.target.value)}
+                        placeholder="לדוגמה: מנהל מכירות, כל צוות המכירות, רק המזכירה"
                       />
                     </div>
 
                     <div>
-                      <Label htmlFor="mainChallenges">מהם האתגרים המרכזיים שאתם מתמודדים איתם כיום בתהליכי העבודה או בשירות *</Label>
-                      <Textarea
-                        id="mainChallenges"
-                        value={formData.mainChallenges}
-                        onChange={(e) => handleInputChange('mainChallenges', e.target.value)}
-                        rows={3}
-                        required
+                      <Label htmlFor="leadProcessStep2">באיזו מערכת אתם רושמים את הליד? (שם המערכת בדיוק)</Label>
+                      <Input
+                        id="leadProcessStep2"
+                        value={formData.leadProcessStep2}
+                        onChange={(e) => handleInputChange('leadProcessStep2', e.target.value)}
+                        placeholder="לדוגמה: HubSpot, Excel, Monday, אין מערכת"
                       />
                     </div>
-                  </div>
-                </section>
 
-                {/* תהליכים קיימים ומערכות */}
-                <section>
-                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">3. תהליכים קיימים ומערכות</h3>
-                  <div className="space-y-4">
                     <div>
-                      <Label>אילו מחלקות עיקריות פועלות אצלכם? *</Label>
+                      <Label htmlFor="leadProcessResponseTime">תוך כמה זמן אתם מגיבים ללידים (בממוצע)?</Label>
+                      <Select value={formData.leadProcessResponseTime} onValueChange={(value) => handleInputChange('leadProcessResponseTime', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="בחר זמן תגובה" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="מיידי (עד 5 דקות)">מיידי (עד 5 דקות)</SelectItem>
+                          <SelectItem value="עד שעה">עד שעה</SelectItem>
+                          <SelectItem value="עד 3 שעות">עד 3 שעות</SelectItem>
+                          <SelectItem value="עד יום עבודה">עד יום עבודה</SelectItem>
+                          <SelectItem value="מעל יום עבודה">מעל יום עבודה</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="leadFirstResponse">מה התגובה הראשונית ללידים? (הודעה אוטומטית/שיחת טלפון/הודעת וואטסאפ)</Label>
+                      <Textarea
+                        id="leadFirstResponse"
+                        value={formData.leadFirstResponse}
+                        onChange={(e) => handleInputChange('leadFirstResponse', e.target.value)}
+                        placeholder="תאר בדיוק מה קורה ברגע שליד נכנס"
+                        rows={3}
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="leadQualificationCriteria">איך אתם מסנים לידים? מהם הקריטריונים להגדרת ליד כ"חם" או "קר"?</Label>
+                      <Textarea
+                        id="leadQualificationCriteria"
+                        value={formData.leadQualificationCriteria}
+                        onChange={(e) => handleInputChange('leadQualificationCriteria', e.target.value)}
+                        placeholder="לדוגמה: תקציב מעל X, צורך דחוף, איזור גאוגרפי מסוים"
+                        rows={3}
+                      />
+                    </div>
+
+                    <div>
+                      <Label>באילו כלים אתם משתמשים לניהול הלידים?</Label>
                       <div className="space-y-2 mt-2">
-                        {['שיווק', 'שירות לקוחות', 'מכירות', 'כספים', 'תפעול', 'BI / דאטה', 'פיתוח / מוצר', 'משאבי אנוש'].map((option) => (
+                        {['CRM ייעודי', 'Excel/Google Sheets', 'WhatsApp Business', 'Monday.com', 'ClickUp', 'אין כלי ניהול'].map((option) => (
                           <div key={option} className="flex items-center space-x-2 space-x-reverse">
                             <Checkbox
-                              id={`mainDepartments-${option}`}
-                              checked={formData.mainDepartments.includes(option)}
-                              onCheckedChange={(checked) => handleCheckboxChange('mainDepartments', option, checked as boolean)}
+                              id={`leadTools-${option}`}
+                              checked={formData.leadManagementTools.includes(option)}
+                              onCheckedChange={(checked) => handleCheckboxChange('leadManagementTools', option, checked as boolean)}
                             />
-                            <Label htmlFor={`mainDepartments-${option}`}>{option}</Label>
+                            <Label htmlFor={`leadTools-${option}`}>{option}</Label>
                           </div>
                         ))}
                         <div className="flex items-center space-x-2 space-x-reverse">
                           <Checkbox
-                            id="mainDepartments-other"
-                            checked={formData.mainDepartments.includes('אחר')}
-                            onCheckedChange={(checked) => handleCheckboxChange('mainDepartments', 'אחר', checked as boolean)}
+                            id="leadTools-other"
+                            checked={formData.leadManagementTools.includes('אחר')}
+                            onCheckedChange={(checked) => handleCheckboxChange('leadManagementTools', 'אחר', checked as boolean)}
                           />
-                          <Label htmlFor="mainDepartments-other">אחר:</Label>
+                          <Label htmlFor="leadTools-other">אחר:</Label>
                           <Input
-                            value={formData.mainDepartmentsOther}
-                            onChange={(e) => handleInputChange('mainDepartmentsOther', e.target.value)}
-                            className="flex-1"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <Label>באילו מערכות / כלים דיגיטליים אתם משתמשים כיום? *</Label>
-                      <div className="space-y-2 mt-2">
-                        {['CRM', 'ERP', 'מערכת Helpdesk / צ\'אט', 'BI', 'כלי דיוור', 'Zapier / Make'].map((option) => (
-                          <div key={option} className="flex items-center space-x-2 space-x-reverse">
-                            <Checkbox
-                              id={`digitalSystems-${option}`}
-                              checked={formData.digitalSystems.includes(option)}
-                              onCheckedChange={(checked) => handleCheckboxChange('digitalSystems', option, checked as boolean)}
-                            />
-                            <Label htmlFor={`digitalSystems-${option}`}>{option}</Label>
-                          </div>
-                        ))}
-                        <div className="flex items-center space-x-2 space-x-reverse">
-                          <Checkbox
-                            id="digitalSystems-other"
-                            checked={formData.digitalSystems.includes('אחר')}
-                            onCheckedChange={(checked) => handleCheckboxChange('digitalSystems', 'אחר', checked as boolean)}
-                          />
-                          <Label htmlFor="digitalSystems-other">אחר:</Label>
-                          <Input
-                            value={formData.digitalSystemsOther}
-                            onChange={(e) => handleInputChange('digitalSystemsOther', e.target.value)}
-                            className="flex-1"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="inefficientProcesses">אילו תהליכים כיום מתבצעים בצורה לא יעילה / ידנית / גוזלת זמן</Label>
-                      <Textarea
-                        id="inefficientProcesses"
-                        value={formData.inefficientProcesses}
-                        onChange={(e) => handleInputChange('inefficientProcesses', e.target.value)}
-                        rows={3}
-                      />
-                    </div>
-
-                    <div>
-                      <Label htmlFor="aiOptimizationGoals">אילו משימות היית רוצה לייעל או להוריד מהשולחן באמצעות AI</Label>
-                      <Textarea
-                        id="aiOptimizationGoals"
-                        value={formData.aiOptimizationGoals}
-                        onChange={(e) => handleInputChange('aiOptimizationGoals', e.target.value)}
-                        rows={3}
-                      />
-                    </div>
-                  </div>
-                </section>
-
-                {/* רמת היכרות, ניסיון ומוכנות ל-AI */}
-                <section>
-                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">4. רמת היכרות, ניסיון ומוכנות ל-AI</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <Label>עד כמה העובדים/המנהלים בארגון מכירים או משתמשים בכלי AI?</Label>
-                      <RadioGroup
-                        value={formData.aiKnowledgeLevel}
-                        onValueChange={(value) => handleInputChange('aiKnowledgeLevel', value)}
-                        className="mt-2"
-                      >
-                        {['אין ידע כלל', 'שמעו אך לא משתמשים', 'משתמשים בסיסיים', 'מתקדמים', 'מומחים פנימיים'].map((option) => (
-                          <div key={option} className="flex items-center gap-2 flex-row-reverse">
-                            <Label htmlFor={`aiKnowledge-${option}`} className="cursor-pointer">{option}</Label>
-                            <RadioGroupItem value={option} id={`aiKnowledge-${option}`} />
-                          </div>
-                        ))}
-                      </RadioGroup>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="aiUsageDetails">אם יש שימוש – ציין שם, תפקיד, תחום עיסוק</Label>
-                      <Textarea
-                        id="aiUsageDetails"
-                        value={formData.aiUsageDetails}
-                        onChange={(e) => handleInputChange('aiUsageDetails', e.target.value)}
-                        rows={3}
-                      />
-                    </div>
-
-                    <div>
-                      <Label>האם התקיימו הכשרות / סדנאות בתחום ה-AI בארגון?</Label>
-                      <RadioGroup
-                        value={formData.aiTrainingHistory}
-                        onValueChange={(value) => handleInputChange('aiTrainingHistory', value)}
-                        className="mt-2"
-                      >
-                        {['כן', 'לא', 'יש עניין'].map((option) => (
-                          <div key={option} className="flex items-center gap-2 flex-row-reverse">
-                            <Label htmlFor={`aiTraining-${option}`} className="cursor-pointer">{option}</Label>
-                            <RadioGroupItem value={option} id={`aiTraining-${option}`} />
-                          </div>
-                        ))}
-                      </RadioGroup>
-                    </div>
-
-                    <div>
-                      <Label>אילו סוגי כלים מבוססי AI אתם מכירים / משתמשים בפועל? *</Label>
-                      <div className="space-y-2 mt-2">
-                        {['טקסט', 'BI', 'תמונה/וידאו', 'כתיבה שיווקית', 'אוטומציה', 'אין שימוש'].map((option) => (
-                          <div key={option} className="flex items-center space-x-2 space-x-reverse">
-                            <Checkbox
-                              id={`aiTools-${option}`}
-                              checked={formData.aiToolsUsed.includes(option)}
-                              onCheckedChange={(checked) => handleCheckboxChange('aiToolsUsed', option, checked as boolean)}
-                            />
-                            <Label htmlFor={`aiTools-${option}`}>{option}</Label>
-                          </div>
-                        ))}
-                        <div className="flex items-center space-x-2 space-x-reverse">
-                          <Checkbox
-                            id="aiTools-other"
-                            checked={formData.aiToolsUsed.includes('אחר')}
-                            onCheckedChange={(checked) => handleCheckboxChange('aiToolsUsed', 'אחר', checked as boolean)}
-                          />
-                          <Label htmlFor="aiTools-other">אחר:</Label>
-                          <Input
-                            value={formData.aiToolsUsedOther}
-                            onChange={(e) => handleInputChange('aiToolsUsedOther', e.target.value)}
+                            value={formData.leadManagementToolsOther}
+                            onChange={(e) => handleInputChange('leadManagementToolsOther', e.target.value)}
+                            placeholder="שם הכלי"
                             className="flex-1"
                           />
                         </div>
@@ -595,33 +547,237 @@ const OrganizationProfilingForm = () => {
                   </div>
                 </section>
 
-                {/* מטרות וציפיות מהתהליך */}
+                {/* חלק ב': תהליכי שיווק ושמירת קשר */}
                 <section>
-                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">5. מטרות וציפיות מהתהליך</h3>
-                  <div className="space-y-4">
+                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">חלק ב': תהליכי שיווק ושמירת קשר</h3>
+                  <div className="space-y-6">
+                    
                     <div>
-                      <Label>מה הייתם רוצים להשיג מהטמעת AI בארגון? *</Label>
+                      <Label>איזה סוגי תוכן אתם מייצרים?</Label>
                       <div className="space-y-2 mt-2">
-                        {['חיסכון בזמן', 'חיסכון בכוח אדם', 'ייעול', 'שירות', 'שיווק', 'ניתוח נתונים', 'יצירת תוכן'].map((option) => (
+                        {['פוסטים ברשתות חברתיות', 'ניוזלטר', 'סרטוני וידאו', 'בלוג/מאמרים', 'חומרי שיווק', 'אין יצירת תוכן'].map((option) => (
                           <div key={option} className="flex items-center space-x-2 space-x-reverse">
                             <Checkbox
-                              id={`aiGoals-${option}`}
-                              checked={formData.aiImplementationGoals.includes(option)}
-                              onCheckedChange={(checked) => handleCheckboxChange('aiImplementationGoals', option, checked as boolean)}
+                              id={`content-${option}`}
+                              checked={formData.contentTypes.includes(option)}
+                              onCheckedChange={(checked) => handleCheckboxChange('contentTypes', option, checked as boolean)}
                             />
-                            <Label htmlFor={`aiGoals-${option}`}>{option}</Label>
+                            <Label htmlFor={`content-${option}`}>{option}</Label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label className="text-base font-medium">כמה זמן (בדקות) בממוצע לוקח לכם להפיק כל סוג תוכן?</Label>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3">
+                        <div>
+                          <Label htmlFor="posts-time">פוסט בפייסבוק/אינסטגרם</Label>
+                          <Input
+                            id="posts-time"
+                            type="number"
+                            placeholder="דקות"
+                            value={formData.contentProductionTime.posts}
+                            onChange={(e) => handleNestedInputChange('contentProductionTime', 'posts', e.target.value ? parseInt(e.target.value) : '')}
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="newsletter-time">ניוזלטר</Label>
+                          <Input
+                            id="newsletter-time"
+                            type="number"
+                            placeholder="דקות"
+                            value={formData.contentProductionTime.newsletter}
+                            onChange={(e) => handleNestedInputChange('contentProductionTime', 'newsletter', e.target.value ? parseInt(e.target.value) : '')}
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="videos-time">וידאו</Label>
+                          <Input
+                            id="videos-time"
+                            type="number"
+                            placeholder="דקות"
+                            value={formData.contentProductionTime.videos}
+                            onChange={(e) => handleNestedInputChange('contentProductionTime', 'videos', e.target.value ? parseInt(e.target.value) : '')}
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="customerDatabase">כמה אנשי קשר יש לכם במאגר הלקוחות?</Label>
+                      <Input
+                        id="customerDatabase"
+                        type="number"
+                        placeholder="מספר אנשי קשר"
+                        value={formData.customerDatabase}
+                        onChange={(e) => handleInputChange('customerDatabase', e.target.value ? parseInt(e.target.value) : '')}
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="customerDatabaseLocation">היכן מנוהל מאגר הלקוחות שלכם? (שם המערכת בדיוק)</Label>
+                      <Input
+                        id="customerDatabaseLocation"
+                        value={formData.customerDatabaseLocation}
+                        onChange={(e) => handleInputChange('customerDatabaseLocation', e.target.value)}
+                        placeholder="לדוגמה: MailChimp, Excel, CRM ספציפי"
+                      />
+                    </div>
+
+                    <div>
+                      <Label>איך מפולח המאגר שלכם?</Label>
+                      <div className="space-y-2 mt-2">
+                        {['לקוחות עבר', 'מתעניינים פעילים', 'לידים קרים', 'לקוחות VIP', 'אין פילוח'].map((option) => (
+                          <div key={option} className="flex items-center space-x-2 space-x-reverse">
+                            <Checkbox
+                              id={`segmentation-${option}`}
+                              checked={formData.customerSegmentation.includes(option)}
+                              onCheckedChange={(checked) => handleCheckboxChange('customerSegmentation', option, checked as boolean)}
+                            />
+                            <Label htmlFor={`segmentation-${option}`}>{option}</Label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="followUpProcess">איך אתם מבצעים פנייה מחודשת ללקוחות עבר או למתעניינים שלא סגרו?</Label>
+                      <Textarea
+                        id="followUpProcess"
+                        value={formData.followUpProcess}
+                        onChange={(e) => handleInputChange('followUpProcess', e.target.value)}
+                        placeholder="תאר את התהליך המדויק - תדירות, אמצעים, מי אחראי"
+                        rows={3}
+                      />
+                    </div>
+
+                    <div>
+                      <Label>באילו כלים אתם משתמשים לשמירת קשר עם לקוחות?</Label>
+                      <div className="space-y-2 mt-2">
+                        {['WhatsApp Business', 'מערכת דיוור (MailChimp וכו\')', 'שיחות טלפון', 'SMS', 'פגישות פיזיות', 'אין מעקב שיטתי'].map((option) => (
+                          <div key={option} className="flex items-center space-x-2 space-x-reverse">
+                            <Checkbox
+                              id={`followUpTools-${option}`}
+                              checked={formData.followUpTools.includes(option)}
+                              onCheckedChange={(checked) => handleCheckboxChange('followUpTools', option, checked as boolean)}
+                            />
+                            <Label htmlFor={`followUpTools-${option}`}>{option}</Label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                {/* חלק ג': תפעול, אדמיניסטרציה וניהול משימות */}
+                <section>
+                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">חלק ג': תפעול, אדמיניסטרציה וניהול משימות</h3>
+                  <div className="space-y-6">
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="weeklyMeetings">כמה פגישות אתם מתאמים בשבוע בממוצע?</Label>
+                        <Input
+                          id="weeklyMeetings"
+                          type="number"
+                          placeholder="מספר פגישות"
+                          value={formData.weeklyMeetings}
+                          onChange={(e) => handleInputChange('weeklyMeetings', e.target.value ? parseInt(e.target.value) : '')}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="remindersSent">כמה תזכורות אתם שולחים בשבוע בממוצע?</Label>
+                        <Input
+                          id="remindersSent"
+                          type="number"
+                          placeholder="מספר תזכורות"
+                          value={formData.remindersSent}
+                          onChange={(e) => handleInputChange('remindersSent', e.target.value ? parseInt(e.target.value) : '')}
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="meetingSchedulingProcess">מה התהליך המדויק לתיאום פגישה אצלכם?</Label>
+                      <Textarea
+                        id="meetingSchedulingProcess"
+                        value={formData.meetingSchedulingProcess}
+                        onChange={(e) => handleInputChange('meetingSchedulingProcess', e.target.value)}
+                        placeholder="תאר בדיוק: מי מתאם, איך בודקים זמינות, איך מוודאים, איך מזכירים"
+                        rows={3}
+                      />
+                    </div>
+
+                    <div>
+                      <Label>אילו משימות אדמיניסטרטיביות חוזרות על עצמן אצלכם?</Label>
+                      <div className="space-y-2 mt-2">
+                        {['הפקת הצעות מחיר', 'הכנת דוחות', 'עדכון מלאי', 'שליחת חשבוניות', 'איסוף נתונים ללקוחות', 'עדכון מערכות'].map((option) => (
+                          <div key={option} className="flex items-center space-x-2 space-x-reverse">
+                            <Checkbox
+                              id={`recurring-${option}`}
+                              checked={formData.recurringTasks.includes(option)}
+                              onCheckedChange={(checked) => handleCheckboxChange('recurringTasks', option, checked as boolean)}
+                            />
+                            <Label htmlFor={`recurring-${option}`}>{option}</Label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="adminTimeSpent">כמה שעות עבודה בשבוע אתם מעריכים שמתבזבזות על מנהלה ומשימות חוזרות?</Label>
+                      <Input
+                        id="adminTimeSpent"
+                        type="number"
+                        placeholder="שעות בשבוע"
+                        value={formData.adminTimeSpent}
+                        onChange={(e) => handleInputChange('adminTimeSpent', e.target.value ? parseInt(e.target.value) : '')}
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="documentGeneration">איך אתם מפיקים מסמכים (הצעות מחיר, חוזים, דוחות)?</Label>
+                      <Textarea
+                        id="documentGeneration"
+                        value={formData.documentGeneration}
+                        onChange={(e) => handleInputChange('documentGeneration', e.target.value)}
+                        placeholder="תאר את התהליך: תבניות, מי מכין, כמה זמן לוקח"
+                        rows={3}
+                      />
+                    </div>
+                  </div>
+                </section>
+
+                {/* חלק ד': מערכות קיימות ואינטגרציות */}
+                <section>
+                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">חלק ד': מערכות קיימות ואינטגרציות</h3>
+                  <div className="space-y-6">
+                    
+                    <div>
+                      <Label>באילו תוכנות ומערכות אתם משתמשים? (ציין שמות מדויקים)</Label>
+                      <div className="space-y-2 mt-2">
+                        {['Monday.com', 'HubSpot', 'Salesforce', 'ClickUp', 'Slack', 'Microsoft 365', 'Google Workspace', 'Zoom', 'WhatsApp Business'].map((option) => (
+                          <div key={option} className="flex items-center space-x-2 space-x-reverse">
+                            <Checkbox
+                              id={`software-${option}`}
+                              checked={formData.currentSoftware.includes(option)}
+                              onCheckedChange={(checked) => handleCheckboxChange('currentSoftware', option, checked as boolean)}
+                            />
+                            <Label htmlFor={`software-${option}`}>{option}</Label>
                           </div>
                         ))}
                         <div className="flex items-center space-x-2 space-x-reverse">
                           <Checkbox
-                            id="aiGoals-other"
-                            checked={formData.aiImplementationGoals.includes('אחר')}
-                            onCheckedChange={(checked) => handleCheckboxChange('aiImplementationGoals', 'אחר', checked as boolean)}
+                            id="software-other"
+                            checked={formData.currentSoftware.includes('אחר')}
+                            onCheckedChange={(checked) => handleCheckboxChange('currentSoftware', 'אחר', checked as boolean)}
                           />
-                          <Label htmlFor="aiGoals-other">אחר:</Label>
+                          <Label htmlFor="software-other">אחר:</Label>
                           <Input
-                            value={formData.aiImplementationGoalsOther}
-                            onChange={(e) => handleInputChange('aiImplementationGoalsOther', e.target.value)}
+                            value={formData.currentSoftwareOther}
+                            onChange={(e) => handleInputChange('currentSoftwareOther', e.target.value)}
+                            placeholder="שם התוכנה/מערכת"
                             className="flex-1"
                           />
                         </div>
@@ -629,15 +785,58 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="successMetrics">איך תדעו שהתהליך הצליח? מהם המדדים להצלחה מבחינתכם</Label>
+                      <Label>לאילו מהמערכות יש לכם גישה ל-API (ממשק חיבור)?</Label>
+                      <div className="space-y-2 mt-2">
+                        {formData.currentSoftware.map((software) => (
+                          <div key={`api-${software}`} className="flex items-center space-x-2 space-x-reverse">
+                            <Checkbox
+                              id={`api-${software}`}
+                              checked={formData.softwareWithAPI.includes(software)}
+                              onCheckedChange={(checked) => handleCheckboxChange('softwareWithAPI', software, checked as boolean)}
+                            />
+                            <Label htmlFor={`api-${software}`}>{software}</Label>
+                          </div>
+                        ))}
+                        {formData.currentSoftware.length === 0 && (
+                          <p className="text-gray-500 text-sm">בחר תחילה מערכות בשאלה הקודמת</p>
+                        )}
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="existingAutomations">האם יש לכם כיום אוטומציות (Zapier, Make, או אוטומציה אחרת)? אם כן, מה הן עושות?</Label>
                       <Textarea
-                        id="successMetrics"
-                        value={formData.successMetrics}
-                        onChange={(e) => handleInputChange('successMetrics', e.target.value)}
+                        id="existingAutomations"
+                        value={formData.existingAutomations}
+                        onChange={(e) => handleInputChange('existingAutomations', e.target.value)}
+                        placeholder="תאר בקצרה אילו אוטומציות יש ומה הן מבצעות"
                         rows={3}
                       />
                     </div>
 
+                    <div>
+                      <Label>באילו כלי אוטומציה אתם מכירים או משתמשים?</Label>
+                      <div className="space-y-2 mt-2">
+                        {['Zapier', 'Microsoft Power Automate', 'Make (לשעבר Integromat)', 'IFTTT', 'אוטומציות מובנות במערכות', 'לא מכיר'].map((option) => (
+                          <div key={option} className="flex items-center space-x-2 space-x-reverse">
+                            <Checkbox
+                              id={`automation-${option}`}
+                              checked={formData.automationTools.includes(option)}
+                              onCheckedChange={(checked) => handleCheckboxChange('automationTools', option, checked as boolean)}
+                            />
+                            <Label htmlFor={`automation-${option}`}>{option}</Label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                {/* מטרות ותכנון */}
+                <section>
+                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">מטרות ותכנון</h3>
+                  <div className="space-y-6">
+                    
                     <div>
                       <Label>האם יש תקציב ראשוני לתהליך?</Label>
                       <RadioGroup
@@ -672,63 +871,19 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="processLeader">מי יוביל את התהליך מטעמכם? נא לציין שם, תפקיד ורמת טכנולוגית</Label>
+                      <Label htmlFor="processLeader">מי יוביל את התהליך מטעמכם? (שם, תפקיד ורמה טכנולוגית)</Label>
                       <Textarea
                         id="processLeader"
                         value={formData.processLeader}
                         onChange={(e) => handleInputChange('processLeader', e.target.value)}
+                        placeholder="לדוגמה: יוסי כהן, מנהל תפעול, רמה טכנולוגית בסיסית"
                         rows={3}
                       />
-                    </div>
-                  </div>
-                </section>
-
-                {/* השראה ותחומים לפיילוט */}
-                <section>
-                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">6. השראה ותחומים לפיילוט</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <Label htmlFor="inspiration">האם ראיתם פתרונות טכנולוגיים או תהליכים בארגונים אחרים שהייתם רוצים לבדוק גם אצלכם</Label>
-                      <Textarea
-                        id="inspiration"
-                        value={formData.inspiration}
-                        onChange={(e) => handleInputChange('inspiration', e.target.value)}
-                        rows={3}
-                      />
-                    </div>
-
-                    <div>
-                      <Label>באילו תחומים נראה לכם שכדאי להתחיל פיילוט?</Label>
-                      <div className="space-y-2 mt-2">
-                        {['שירות לקוחות', 'המלצות', 'שיווק', 'BI', 'יצירת תוכן', 'מסמכים'].map((option) => (
-                          <div key={option} className="flex items-center space-x-2 space-x-reverse">
-                            <Checkbox
-                              id={`pilot-${option}`}
-                              checked={formData.pilotAreas.includes(option)}
-                              onCheckedChange={(checked) => handleCheckboxChange('pilotAreas', option, checked as boolean)}
-                            />
-                            <Label htmlFor={`pilot-${option}`}>{option}</Label>
-                          </div>
-                        ))}
-                        <div className="flex items-center space-x-2 space-x-reverse">
-                          <Checkbox
-                            id="pilot-other"
-                            checked={formData.pilotAreas.includes('אחר')}
-                            onCheckedChange={(checked) => handleCheckboxChange('pilotAreas', 'אחר', checked as boolean)}
-                          />
-                          <Label htmlFor="pilot-other">אחר:</Label>
-                          <Input
-                            value={formData.pilotAreasOther}
-                            onChange={(e) => handleInputChange('pilotAreasOther', e.target.value)}
-                            className="flex-1"
-                          />
-                        </div>
-                      </div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="startDate">מתי נוח לכם להתחיל את התהליך *</Label>
+                        <Label htmlFor="startDate">מתי נוח לכם להתחיל את התהליך? *</Label>
                         <Input
                           id="startDate"
                           type="date"
@@ -738,7 +893,7 @@ const OrganizationProfilingForm = () => {
                         />
                       </div>
                       <div>
-                        <Label htmlFor="preferredTime">זמן מועדף ליום הפגישה</Label>
+                        <Label htmlFor="preferredTime">זמן מועדף לפגישת אפיון</Label>
                         <Select value={formData.preferredTime} onValueChange={(value) => handleInputChange('preferredTime', value)}>
                           <SelectTrigger>
                             <SelectValue placeholder="בחר זמן מועדף" />
@@ -751,20 +906,16 @@ const OrganizationProfilingForm = () => {
                         </Select>
                       </div>
                     </div>
-                  </div>
-                </section>
 
-                {/* לסיום */}
-                <section>
-                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">7. לסיום</h3>
-                  <div>
-                    <Label htmlFor="additionalComments">האם יש משהו נוסף שתרצו לשתף, לציין או לשאול לפני שנתחיל</Label>
-                    <Textarea
-                      id="additionalComments"
-                      value={formData.additionalComments}
-                      onChange={(e) => handleInputChange('additionalComments', e.target.value)}
-                      rows={4}
-                    />
+                    <div>
+                      <Label htmlFor="additionalComments">הערות נוספות או מידע שחשוב לכם לשתף</Label>
+                      <Textarea
+                        id="additionalComments"
+                        value={formData.additionalComments}
+                        onChange={(e) => handleInputChange('additionalComments', e.target.value)}
+                        rows={4}
+                      />
+                    </div>
                   </div>
                 </section>
 
@@ -791,7 +942,7 @@ const OrganizationProfilingForm = () => {
               תודה על מילוי הפרטים!
             </AlertDialogTitle>
             <AlertDialogDescription className="text-gray-600">
-              נציג ייצור קשר בקרוב
+              נציג ייצור קשר בקרוב לתיאום פגישת אפיון מפורטת
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogAction onClick={handleCloseThankYou} className="bg-blue-primary hover:bg-blue-primary/90">
