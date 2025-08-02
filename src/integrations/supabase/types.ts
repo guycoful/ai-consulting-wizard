@@ -41,19 +41,47 @@ export type Database = {
           זמן_תגובה_ללידים: string | null
           טלפון: string | null
           כלי_אוטומציה: string[] | null
+          כלים_ניהול_לידים: string[] | null
+          כלים_שמירת_קשר: string[] | null
+          לידים_אחר_חודשי: number | null
+          לידים_אתר_חודשי: number | null
+          לידים_הפניות_חודשי: number | null
+          לידים_וואטסאפ_חודשי: number | null
+          לידים_טלפון_חודשי: number | null
+          לידים_פייסבוק_חודשי: number | null
+          מדד_הצלחה_כמותי: string | null
           מה_הייתם_רוצים_להשיג_מהטמעת_AI_בארג: string[] | null
           מהם_האתגרים_המרכזיים_שאתם_מתמודדי: string | null
           "מהם_השירותים_/_המוצרים_המרכזיים_שא": string | null
           "מהם_קהלי_היעד_המרכזיים_שלכם?": string[] | null
           "מי_יוביל_את_התהליך_מטעמכם?_נא_לציין": string | null
           מייל: string | null
+          מיקום_מאגר_לקוחות: string | null
+          מספר_אנשי_קשר_במאגר: number | null
           "מספר_עובדים_(משוער)": number | null
+          מערכת_רישום_לידים: string | null
+          משימות_חוזרות: string[] | null
           מתי_נוח_לכם_להתחיל_את_התהליך: string | null
+          סוגי_תוכן_מיוצרים: string[] | null
+          סטטוס_תקציב: string | null
+          סכום_תקציב: number | null
           "עד_כמה_העובדים/המנהלים_בארגון_מכיר": string[] | null
+          פגישות_שבועיות: number | null
+          פילוח_מאגר_לקוחות: string[] | null
+          פירוט_תהליך_עבודה_מרכזי: string | null
+          קריטריונים_סינון_לידים: string | null
           שם_בארגון: string | null
           שם_מלא: string | null
           "שנות פעילות": number | null
+          שעות_מנהלה_שבועיות: number | null
           תאר_בקצרה_את_הפעילות_של_הארגון: string | null
+          תאריך_התחלה: string | null
+          תגובה_ראשונית_ללידים: string | null
+          תהליך_הפקת_מסמכים: string | null
+          תהליך_פנייה_מחודשת: string | null
+          תהליך_תיאום_פגישות: string | null
+          תוכנות_נוכחיות: string[] | null
+          תזכורות_שבועיות: number | null
           תחום_פעילות: string | null
           תפקיד_בארגון: string | null
         }
@@ -83,19 +111,47 @@ export type Database = {
           זמן_תגובה_ללידים?: string | null
           טלפון?: string | null
           כלי_אוטומציה?: string[] | null
+          כלים_ניהול_לידים?: string[] | null
+          כלים_שמירת_קשר?: string[] | null
+          לידים_אחר_חודשי?: number | null
+          לידים_אתר_חודשי?: number | null
+          לידים_הפניות_חודשי?: number | null
+          לידים_וואטסאפ_חודשי?: number | null
+          לידים_טלפון_חודשי?: number | null
+          לידים_פייסבוק_חודשי?: number | null
+          מדד_הצלחה_כמותי?: string | null
           מה_הייתם_רוצים_להשיג_מהטמעת_AI_בארג?: string[] | null
           מהם_האתגרים_המרכזיים_שאתם_מתמודדי?: string | null
           "מהם_השירותים_/_המוצרים_המרכזיים_שא"?: string | null
           "מהם_קהלי_היעד_המרכזיים_שלכם?"?: string[] | null
           "מי_יוביל_את_התהליך_מטעמכם?_נא_לציין"?: string | null
           מייל?: string | null
+          מיקום_מאגר_לקוחות?: string | null
+          מספר_אנשי_קשר_במאגר?: number | null
           "מספר_עובדים_(משוער)"?: number | null
+          מערכת_רישום_לידים?: string | null
+          משימות_חוזרות?: string[] | null
           מתי_נוח_לכם_להתחיל_את_התהליך?: string | null
+          סוגי_תוכן_מיוצרים?: string[] | null
+          סטטוס_תקציב?: string | null
+          סכום_תקציב?: number | null
           "עד_כמה_העובדים/המנהלים_בארגון_מכיר"?: string[] | null
+          פגישות_שבועיות?: number | null
+          פילוח_מאגר_לקוחות?: string[] | null
+          פירוט_תהליך_עבודה_מרכזי?: string | null
+          קריטריונים_סינון_לידים?: string | null
           שם_בארגון?: string | null
           שם_מלא?: string | null
           "שנות פעילות"?: number | null
+          שעות_מנהלה_שבועיות?: number | null
           תאר_בקצרה_את_הפעילות_של_הארגון?: string | null
+          תאריך_התחלה?: string | null
+          תגובה_ראשונית_ללידים?: string | null
+          תהליך_הפקת_מסמכים?: string | null
+          תהליך_פנייה_מחודשת?: string | null
+          תהליך_תיאום_פגישות?: string | null
+          תוכנות_נוכחיות?: string[] | null
+          תזכורות_שבועיות?: number | null
           תחום_פעילות?: string | null
           תפקיד_בארגון?: string | null
         }
@@ -125,19 +181,47 @@ export type Database = {
           זמן_תגובה_ללידים?: string | null
           טלפון?: string | null
           כלי_אוטומציה?: string[] | null
+          כלים_ניהול_לידים?: string[] | null
+          כלים_שמירת_קשר?: string[] | null
+          לידים_אחר_חודשי?: number | null
+          לידים_אתר_חודשי?: number | null
+          לידים_הפניות_חודשי?: number | null
+          לידים_וואטסאפ_חודשי?: number | null
+          לידים_טלפון_חודשי?: number | null
+          לידים_פייסבוק_חודשי?: number | null
+          מדד_הצלחה_כמותי?: string | null
           מה_הייתם_רוצים_להשיג_מהטמעת_AI_בארג?: string[] | null
           מהם_האתגרים_המרכזיים_שאתם_מתמודדי?: string | null
           "מהם_השירותים_/_המוצרים_המרכזיים_שא"?: string | null
           "מהם_קהלי_היעד_המרכזיים_שלכם?"?: string[] | null
           "מי_יוביל_את_התהליך_מטעמכם?_נא_לציין"?: string | null
           מייל?: string | null
+          מיקום_מאגר_לקוחות?: string | null
+          מספר_אנשי_קשר_במאגר?: number | null
           "מספר_עובדים_(משוער)"?: number | null
+          מערכת_רישום_לידים?: string | null
+          משימות_חוזרות?: string[] | null
           מתי_נוח_לכם_להתחיל_את_התהליך?: string | null
+          סוגי_תוכן_מיוצרים?: string[] | null
+          סטטוס_תקציב?: string | null
+          סכום_תקציב?: number | null
           "עד_כמה_העובדים/המנהלים_בארגון_מכיר"?: string[] | null
+          פגישות_שבועיות?: number | null
+          פילוח_מאגר_לקוחות?: string[] | null
+          פירוט_תהליך_עבודה_מרכזי?: string | null
+          קריטריונים_סינון_לידים?: string | null
           שם_בארגון?: string | null
           שם_מלא?: string | null
           "שנות פעילות"?: number | null
+          שעות_מנהלה_שבועיות?: number | null
           תאר_בקצרה_את_הפעילות_של_הארגון?: string | null
+          תאריך_התחלה?: string | null
+          תגובה_ראשונית_ללידים?: string | null
+          תהליך_הפקת_מסמכים?: string | null
+          תהליך_פנייה_מחודשת?: string | null
+          תהליך_תיאום_פגישות?: string | null
+          תוכנות_נוכחיות?: string[] | null
+          תזכורות_שבועיות?: number | null
           תחום_פעילות?: string | null
           תפקיד_בארגון?: string | null
         }
