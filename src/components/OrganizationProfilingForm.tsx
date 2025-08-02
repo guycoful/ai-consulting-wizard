@@ -363,6 +363,23 @@ const OrganizationProfilingForm = () => {
                   </div>
                 </section>
 
+                {/* פירוט תהליך העבודה המרכזי */}
+                <section>
+                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">פירוט תהליך העבודה המרכזי</h3>
+                  <div>
+                    <Label htmlFor="mainWorkflowDetail">
+                      בחר את התהליך האחד שהכי גוזל ממך זמן (לדוגמה: טיפול בלידים, הכנת חומרים לשיווק, תיאום פגישות). כעת, תאר אותו שלב אחר שלב, כאילו אתה כותב מדריך לעובד חדש. תתחיל מהנקודה שבה התהליך מתחיל ותסיים בתוצאה הסופית.
+                    </Label>
+                    <Textarea
+                      id="mainWorkflowDetail"
+                      value={formData.mainWorkflowDetail}
+                      onChange={(e) => handleInputChange('mainWorkflowDetail', e.target.value)}
+                      rows={8}
+                      className="mt-2"
+                    />
+                  </div>
+                </section>
+
                 {/* חלק א': ניהול לידים ופניות נכנסות */}
                 <section>
                   <h3 className="text-xl font-semibold mb-4 text-navy-dark">חלק א': ניהול לידים ופניות נכנסות</h3>
@@ -782,23 +799,6 @@ const OrganizationProfilingForm = () => {
                   </div>
                 </section>
 
-                {/* פירוט תהליך העבודה המרכזי */}
-                <section>
-                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">פירוט תהליך העבודה המרכזי</h3>
-                  <div>
-                    <Label htmlFor="mainWorkflowDetail">
-                      בחר את התהליך האחד שהכי גוזל ממך זמן (לדוגמה: טיפול בלידים, הכנת חומרים לשיווק, תיאום פגישות). כעת, תאר אותו שלב אחר שלב, כאילו אתה כותב מדריך לעובד חדש. תתחיל מהנקודה שבה התהליך מתחיל ותסיים בתוצאה הסופית.
-                    </Label>
-                    <Textarea
-                      id="mainWorkflowDetail"
-                      value={formData.mainWorkflowDetail}
-                      onChange={(e) => handleInputChange('mainWorkflowDetail', e.target.value)}
-                      rows={8}
-                      className="mt-2"
-                    />
-                  </div>
-                </section>
-
                 {/* מטרות ותכנון */}
                 <section>
                   <h3 className="text-xl font-semibold mb-4 text-navy-dark">מטרות ותכנון</h3>
@@ -839,13 +839,14 @@ const OrganizationProfilingForm = () => {
 
                     <div>
                       <Label htmlFor="successMetric">מהו המדד הכמותי האחד שהצלחת התהליך תימדד לפיו? תהיה מדויק ככל האפשר. המטרה היא להגדיר יעד ברור שנוכל למדוד לפני ואחרי ההטמעה. *</Label>
-                      <Input
+                      <Textarea
                         id="successMetric"
                         value={formData.successMetric}
                         onChange={(e) => handleInputChange('successMetric', e.target.value)}
                         placeholder="לדוגמה: להגדיל את כמות הפניות האיכותיות ב-25%, לחסוך 8 שעות עבודה שבועיות על תפעול, לקצר את זמן המענה הראשוני לליד ל-5 דקות, להפחית את כמות הפגישות המבוטלות ב-40%."
                         required
                         className="mt-2"
+                        rows={2}
                       />
                     </div>
 
