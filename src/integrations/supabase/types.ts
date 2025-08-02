@@ -35,6 +35,7 @@ export type Database = {
           הערות_נוספות: string | null
           זמן_וידאו_דקות: number | null
           זמן_מועדף_ליום_הפגישה: string[] | null
+          זמן_מועדף_פגישה: string[] | null
           טלפון: string | null
           מה_הייתם_רוצים_להשיג_מהטמעת_AI_בארג: string[] | null
           מהם_האתגרים_המרכזיים_שאתם_מתמודדי: string | null
@@ -72,6 +73,7 @@ export type Database = {
           הערות_נוספות?: string | null
           זמן_וידאו_דקות?: number | null
           זמן_מועדף_ליום_הפגישה?: string[] | null
+          זמן_מועדף_פגישה?: string[] | null
           טלפון?: string | null
           מה_הייתם_רוצים_להשיג_מהטמעת_AI_בארג?: string[] | null
           מהם_האתגרים_המרכזיים_שאתם_מתמודדי?: string | null
@@ -109,6 +111,7 @@ export type Database = {
           הערות_נוספות?: string | null
           זמן_וידאו_דקות?: number | null
           זמן_מועדף_ליום_הפגישה?: string[] | null
+          זמן_מועדף_פגישה?: string[] | null
           טלפון?: string | null
           מה_הייתם_רוצים_להשיג_מהטמעת_AI_בארג?: string[] | null
           מהם_האתגרים_המרכזיים_שאתם_מתמודדי?: string | null
