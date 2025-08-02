@@ -64,9 +64,13 @@ interface FormData {
   existingAutomations: string; // אוטומציות קיימות
   automationTools: string[]; // כלים לאוטומציה
   
+  // פירוט תהליך העבודה המרכזי
+  mainWorkflowDetail: string;
+  
   // מטרות ותכנון
   budgetStatus: string;
   budgetAmount: number | '';
+  successMetric: string; // המדד הכמותי לקביעת הצלחה
   
   startDate: string;
   preferredTime: string;
@@ -124,8 +128,11 @@ const OrganizationProfilingForm = () => {
     existingAutomations: '',
     automationTools: [],
     
+    mainWorkflowDetail: '',
+    
     budgetStatus: '',
     budgetAmount: '',
+    successMetric: '',
     
     startDate: '',
     preferredTime: '',
@@ -160,7 +167,7 @@ const OrganizationProfilingForm = () => {
   const validateForm = () => {
     console.log('Starting form validation...');
     const requiredFields = [
-      'fullName', 'phone', 'email', 'businessField', 'startDate'
+      'fullName', 'phone', 'email', 'businessField', 'successMetric', 'startDate'
     ];
 
     for (const field of requiredFields) {
@@ -236,9 +243,13 @@ const OrganizationProfilingForm = () => {
         אוטומציות_קיימות: formData.existingAutomations || null,
         כלי_אוטומציה: formData.automationTools,
         
+        // פירוט תהליך העבודה המרכזי
+        פירוט_תהליך_עבודה_מרכזי: formData.mainWorkflowDetail || null,
+        
         // מטרות ותכנון
         סטטוס_תקציב: formData.budgetStatus || null,
         סכום_תקציב: formData.budgetAmount ? Number(formData.budgetAmount) : null,
+        מדד_הצלחה_כמותי: formData.successMetric || null,
         
         תאריך_התחלה: formData.startDate || null,
         זמן_מועדף_פגישה: formData.preferredTime || null,
@@ -771,6 +782,23 @@ const OrganizationProfilingForm = () => {
                   </div>
                 </section>
 
+                {/* פירוט תהליך העבודה המרכזי */}
+                <section>
+                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">פירוט תהליך העבודה המרכזי</h3>
+                  <div>
+                    <Label htmlFor="mainWorkflowDetail">
+                      בחר את התהליך האחד שהכי גוזל ממך זמן (לדוגמה: טיפול בלידים, הכנת חומרים לשיווק, תיאום פגישות). כעת, תאר אותו שלב אחר שלב, כאילו אתה כותב מדריך לעובד חדש. תתחיל מהנקודה שבה התהליך מתחיל ותסיים בתוצאה הסופית.
+                    </Label>
+                    <Textarea
+                      id="mainWorkflowDetail"
+                      value={formData.mainWorkflowDetail}
+                      onChange={(e) => handleInputChange('mainWorkflowDetail', e.target.value)}
+                      rows={8}
+                      className="mt-2"
+                    />
+                  </div>
+                </section>
+
                 {/* מטרות ותכנון */}
                 <section>
                   <h3 className="text-xl font-semibold mb-4 text-navy-dark">מטרות ותכנון</h3>
@@ -809,6 +837,17 @@ const OrganizationProfilingForm = () => {
                       </RadioGroup>
                     </div>
 
+                    <div>
+                      <Label htmlFor="successMetric">מהו המדד הכמותי האחד שהצלחת התהליך תימדד לפיו? תהיה מדויק ככל האפשר. המטרה היא להגדיר יעד ברור שנוכל למדוד לפני ואחרי ההטמעה. *</Label>
+                      <Input
+                        id="successMetric"
+                        value={formData.successMetric}
+                        onChange={(e) => handleInputChange('successMetric', e.target.value)}
+                        placeholder="לדוגמה: להגדיל את כמות הפניות האיכותיות ב-25%, לחסוך 8 שעות עבודה שבועיות על תפעול, לקצר את זמן המענה הראשוני לליד ל-5 דקות, להפחית את כמות הפגישות המבוטלות ב-40%."
+                        required
+                        className="mt-2"
+                      />
+                    </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
