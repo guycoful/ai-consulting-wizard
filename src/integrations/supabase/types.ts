@@ -40,6 +40,7 @@ export type Database = {
           זמן_פוסטים_דקות: number | null
           זמן_תגובה_ללידים: string | null
           טלפון: string | null
+          כלי_אוטומציה: string[] | null
           מה_הייתם_רוצים_להשיג_מהטמעת_AI_בארג: string[] | null
           מהם_האתגרים_המרכזיים_שאתם_מתמודדי: string | null
           "מהם_השירותים_/_המוצרים_המרכזיים_שא": string | null
@@ -81,6 +82,7 @@ export type Database = {
           זמן_פוסטים_דקות?: number | null
           זמן_תגובה_ללידים?: string | null
           טלפון?: string | null
+          כלי_אוטומציה?: string[] | null
           מה_הייתם_רוצים_להשיג_מהטמעת_AI_בארג?: string[] | null
           מהם_האתגרים_המרכזיים_שאתם_מתמודדי?: string | null
           "מהם_השירותים_/_המוצרים_המרכזיים_שא"?: string | null
@@ -122,6 +124,7 @@ export type Database = {
           זמן_פוסטים_דקות?: number | null
           זמן_תגובה_ללידים?: string | null
           טלפון?: string | null
+          כלי_אוטומציה?: string[] | null
           מה_הייתם_רוצים_להשיג_מהטמעת_AI_בארג?: string[] | null
           מהם_האתגרים_המרכזיים_שאתם_מתמודדי?: string | null
           "מהם_השירותים_/_המוצרים_המרכזיים_שא"?: string | null
