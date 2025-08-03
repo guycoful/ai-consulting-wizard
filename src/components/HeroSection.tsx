@@ -37,7 +37,7 @@ const HeroSection = () => {
 
         <div className="mb-8 md:mb-12 px-4">
           <img 
-            src="/lovable-uploads/c6adca96-5d55-40b2-9125-f5961c7275d8.png" 
+            src="/lovable-uploads/8e02f4ed-b626-4ed7-b7fe-898705f9e925.png" 
             alt="יועץ AI לעסקים" 
             className="mx-auto max-w-full w-full sm:max-w-md h-auto"
           />
