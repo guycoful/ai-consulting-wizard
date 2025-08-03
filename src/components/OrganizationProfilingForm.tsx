@@ -70,6 +70,7 @@ interface FormData {
   // מטרות ותכנון
   budgetStatus: string;
   budgetAmount: number | '';
+  budgetDetails: string; // פרטי התקציב כאשר בוחרים "כן"
   successMetric: string; // המדד הכמותי לקביעת הצלחה
   
   startDate: string;
@@ -132,6 +133,7 @@ const OrganizationProfilingForm = () => {
     
     budgetStatus: '',
     budgetAmount: '',
+    budgetDetails: '',
     successMetric: '',
     
     startDate: '',
@@ -167,7 +169,11 @@ const OrganizationProfilingForm = () => {
   const validateForm = () => {
     console.log('Starting form validation...');
     const requiredFields = [
-      'fullName', 'phone', 'email', 'businessField', 'successMetric', 'startDate'
+      'fullName', 'phone', 'email', 'businessField', 'leadProcessStep2', 
+      'leadProcessResponseTime', 'leadFirstResponse', 'leadQualificationCriteria',
+      'customerDatabaseLocation', 'followUpProcess', 'meetingSchedulingProcess',
+      'documentGeneration', 'existingAutomations', 'mainWorkflowDetail',
+      'budgetStatus', 'successMetric', 'startDate', 'preferredTime'
     ];
 
     for (const field of requiredFields) {
@@ -177,6 +183,50 @@ const OrganizationProfilingForm = () => {
         toast.error(`השדה "${field}" הוא חובה`);
         return false;
       }
+    }
+
+    // בדיקת שדות מחויבים שהם מערכים
+    const requiredArrayFields = ['leadManagementTools', 'contentTypes', 'customerSegmentation', 
+      'followUpTools', 'recurringTasks', 'currentSoftware', 'automationTools'];
+    
+    for (const field of requiredArrayFields) {
+      const value = formData[field as keyof FormData] as string[];
+      if (!value || value.length === 0) {
+        console.error(`Missing required array field: ${field}`);
+        toast.error(`השדה "${field}" הוא חובה`);
+        return false;
+      }
+    }
+
+    // בדיקת שדות מספריים מחויבים
+    const requiredNumberFields = ['customerDatabase', 'weeklyMeetings', 'remindersSent', 'adminTimeSpent'];
+    for (const field of requiredNumberFields) {
+      const value = formData[field as keyof FormData];
+      if (value === '' || value === null || value === undefined) {
+        console.error(`Missing required number field: ${field}`);
+        toast.error(`השדה "${field}" הוא חובה`);
+        return false;
+      }
+    }
+
+    // בדיקת שדות זמן ייצור תוכן (לפחות אחד חובה)
+    const { posts, newsletter, videos } = formData.contentProductionTime;
+    if (posts === '' && newsletter === '' && videos === '') {
+      toast.error('חובה למלא לפחות זמן אחד לייצור תוכן');
+      return false;
+    }
+
+    // בדיקת שדות לידים (לפחות אחד חובה)
+    const { facebook, whatsapp, website, phone, referrals, other } = formData.leadChannels;
+    if (facebook === '' && whatsapp === '' && website === '' && phone === '' && referrals === '' && other === '') {
+      toast.error('חובה למלא לפחות ערוץ אחד ללידים');
+      return false;
+    }
+
+    // בדיקת שדה פרטי תקציב אם בחרו "כן"
+    if (formData.budgetStatus === 'כן' && (!formData.budgetDetails || formData.budgetDetails.trim() === '')) {
+      toast.error('אנא פרט על התקציב הזמין');
+      return false;
     }
 
     console.log('Form validation passed');
@@ -368,7 +418,7 @@ const OrganizationProfilingForm = () => {
                   <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-navy-dark">פירוט תהליך העבודה המרכזי</h3>
                   <div>
                     <Label htmlFor="mainWorkflowDetail">
-                      בחר את התהליך האחד שהכי גוזל ממך זמן (לדוגמה: טיפול בלידים, הכנת חומרים לשיווק, תיאום פגישות). כעת, תאר אותו שלב אחר שלב, כאילו אתה כותב מדריך לעובד חדש. תתחיל מהנקודה שבה התהליך מתחיל ותסיים בתוצאה הסופית.
+                      בחר את התהליך האחד שהכי גוזל ממך זמן (לדוגמה: טיפול בלידים, הכנת חומרים לשיווק, תיאום פגישות). כעת, תאר אותו שלב אחר שלב, כאילו אתה כותב מדריך לעובד חדש. תתחיל מהנקודה שבה התהליך מתחיל ותסיים בתוצאה הסופית. *
                     </Label>
                     <Textarea
                       id="mainWorkflowDetail"
@@ -386,7 +436,7 @@ const OrganizationProfilingForm = () => {
                   <div className="space-y-6">
                     
                     <div>
-                      <Label className="text-base font-medium">כמה לידים (פניות) אתם מקבלים בממוצע בחודש מכל ערוץ?</Label>
+                      <Label className="text-base font-medium">כמה לידים (פניות) אתם מקבלים בממוצע בחודש מכל ערוץ? *</Label>
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mt-3">
                         <div>
                           <Label htmlFor="facebook-leads">פייסבוק</Label>
@@ -453,7 +503,7 @@ const OrganizationProfilingForm = () => {
 
 
                     <div>
-                      <Label htmlFor="leadProcessStep2">באיזו מערכת אתם רושמים את הליד? (שם המערכת בדיוק)</Label>
+                      <Label htmlFor="leadProcessStep2">באיזו מערכת אתם רושמים את הליד? (שם המערכת בדיוק) *</Label>
                       <Input
                         id="leadProcessStep2"
                         value={formData.leadProcessStep2}
@@ -463,7 +513,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="leadProcessResponseTime">תוך כמה זמן אתם מגיבים ללידים (בממוצע)?</Label>
+                      <Label htmlFor="leadProcessResponseTime">תוך כמה זמן אתם מגיבים ללידים (בממוצע)? *</Label>
                       <Select value={formData.leadProcessResponseTime} onValueChange={(value) => handleInputChange('leadProcessResponseTime', value)}>
                         <SelectTrigger>
                           <SelectValue placeholder="בחר זמן תגובה" />
@@ -479,7 +529,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="leadFirstResponse">מה התגובה הראשונית ללידים? (הודעה אוטומטית/שיחת טלפון/הודעת וואטסאפ)</Label>
+                      <Label htmlFor="leadFirstResponse">מה התגובה הראשונית ללידים? (הודעה אוטומטית/שיחת טלפון/הודעת וואטסאפ) *</Label>
                       <Textarea
                         id="leadFirstResponse"
                         value={formData.leadFirstResponse}
@@ -490,7 +540,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="leadQualificationCriteria">איך אתם מסנים לידים? מהם הקריטריונים להגדרת ליד כ"חם" או "קר"?</Label>
+                      <Label htmlFor="leadQualificationCriteria">איך אתם מסנים לידים? מהם הקריטריונים להגדרת ליד כ"חם" או "קר"? *</Label>
                       <Textarea
                         id="leadQualificationCriteria"
                         value={formData.leadQualificationCriteria}
@@ -501,7 +551,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label>באילו כלים אתם משתמשים לניהול הלידים?</Label>
+                      <Label>באילו כלים אתם משתמשים לניהול הלידים? *</Label>
                       <div className="space-y-2 mt-2">
                         {['CRM ייעודי', 'Excel/Google Sheets', 'WhatsApp Business', 'Monday.com', 'ClickUp', 'אין כלי ניהול'].map((option) => (
                           <div key={option} className="flex items-center space-x-2 space-x-reverse">
@@ -538,7 +588,7 @@ const OrganizationProfilingForm = () => {
                   <div className="space-y-6">
                     
                     <div>
-                      <Label>איזה סוגי תוכן אתם מייצרים?</Label>
+                      <Label>איזה סוגי תוכן אתם מייצרים? *</Label>
                       <div className="space-y-2 mt-2">
                         {['פוסטים ברשתות חברתיות', 'ניוזלטר', 'סרטוני וידאו', 'בלוג/מאמרים', 'חומרי שיווק', 'אין יצירת תוכן'].map((option) => (
                           <div key={option} className="flex items-center space-x-2 space-x-reverse">
@@ -554,7 +604,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label className="text-base font-medium">כמה זמן (בדקות/שעות/ימים) בממוצע לוקח לכם להפיק כל סוג תוכן?</Label>
+                      <Label className="text-base font-medium">כמה זמן (בדקות/שעות/ימים) בממוצע לוקח לכם להפיק כל סוג תוכן? *</Label>
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mt-3">
                         <div>
                           <Label htmlFor="posts-time">פוסט בפייסבוק/אינסטגרם</Label>
@@ -590,7 +640,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="customerDatabase">כמה אנשי קשר יש לכם במאגר הלקוחות?</Label>
+                      <Label htmlFor="customerDatabase">כמה אנשי קשר יש לכם במאגר הלקוחות? *</Label>
                       <Input
                         id="customerDatabase"
                         type="number"
@@ -601,7 +651,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="customerDatabaseLocation">היכן מנוהל מאגר הלקוחות שלכם? (שם המערכת בדיוק)</Label>
+                      <Label htmlFor="customerDatabaseLocation">היכן מנוהל מאגר הלקוחות שלכם? (שם המערכת בדיוק) *</Label>
                       <Input
                         id="customerDatabaseLocation"
                         value={formData.customerDatabaseLocation}
@@ -611,7 +661,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label>איך מפולח המאגר שלכם?</Label>
+                      <Label>איך מפולח המאגר שלכם? *</Label>
                       <div className="space-y-2 mt-2">
                         {['לקוחות עבר', 'מתעניינים פעילים', 'לידים קרים', 'לקוחות VIP', 'אין פילוח'].map((option) => (
                           <div key={option} className="flex items-center space-x-2 space-x-reverse">
@@ -627,7 +677,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="followUpProcess">איך אתם מבצעים פנייה מחודשת ללקוחות עבר או למתעניינים שלא סגרו?</Label>
+                      <Label htmlFor="followUpProcess">איך אתם מבצעים פנייה מחודשת ללקוחות עבר או למתעניינים שלא סגרו? *</Label>
                       <Textarea
                         id="followUpProcess"
                         value={formData.followUpProcess}
@@ -638,7 +688,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label>באילו כלים אתם משתמשים לשמירת קשר עם לקוחות?</Label>
+                      <Label>באילו כלים אתם משתמשים לשמירת קשר עם לקוחות? *</Label>
                       <div className="space-y-2 mt-2">
                         {['WhatsApp Business', 'מערכת דיוור (MailChimp וכו\')', 'שיחות טלפון', 'SMS', 'פגישות פיזיות', 'אין מעקב שיטתי'].map((option) => (
                           <div key={option} className="flex items-center space-x-2 space-x-reverse">
@@ -662,7 +712,7 @@ const OrganizationProfilingForm = () => {
                     
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       <div>
-                        <Label htmlFor="weeklyMeetings">כמה פגישות אתם מתאמים בשבוע בממוצע?</Label>
+                        <Label htmlFor="weeklyMeetings">כמה פגישות אתם מתאמים בשבוע בממוצע? *</Label>
                         <Input
                           id="weeklyMeetings"
                           type="number"
@@ -672,7 +722,7 @@ const OrganizationProfilingForm = () => {
                         />
                       </div>
                       <div>
-                        <Label htmlFor="remindersSent">כמה תזכורות אתם שולחים בשבוע בממוצע?</Label>
+                        <Label htmlFor="remindersSent">כמה תזכורות אתם שולחים בשבוע בממוצע? *</Label>
                         <Input
                           id="remindersSent"
                           type="number"
@@ -684,7 +734,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="meetingSchedulingProcess">מה התהליך המדויק לתיאום פגישה אצלכם?</Label>
+                      <Label htmlFor="meetingSchedulingProcess">מה התהליך המדויק לתיאום פגישה אצלכם? *</Label>
                       <Textarea
                         id="meetingSchedulingProcess"
                         value={formData.meetingSchedulingProcess}
@@ -695,7 +745,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label>אילו משימות אדמיניסטרטיביות חוזרות על עצמן אצלכם?</Label>
+                      <Label>אילו משימות אדמיניסטרטיביות חוזרות על עצמן אצלכם? *</Label>
                       <div className="space-y-2 mt-2">
                         {['הפקת הצעות מחיר', 'הכנת דוחות', 'עדכון מלאי', 'שליחת חשבוניות', 'איסוף נתונים ללקוחות', 'עדכון מערכות'].map((option) => (
                           <div key={option} className="flex items-center space-x-2 space-x-reverse">
@@ -711,7 +761,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="adminTimeSpent">כמה שעות עבודה בשבוע אתם מעריכים שמתבזבזות על מנהלה ומשימות חוזרות?</Label>
+                      <Label htmlFor="adminTimeSpent">כמה שעות עבודה בשבוע אתם מעריכים שמתבזבזות על מנהלה ומשימות חוזרות? *</Label>
                       <Input
                         id="adminTimeSpent"
                         type="number"
@@ -722,7 +772,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="documentGeneration">איך אתם מפיקים מסמכים (הצעות מחיר, חוזים, דוחות)?</Label>
+                      <Label htmlFor="documentGeneration">איך אתם מפיקים מסמכים (הצעות מחיר, חוזים, דוחות)? *</Label>
                       <Textarea
                         id="documentGeneration"
                         value={formData.documentGeneration}
@@ -740,7 +790,7 @@ const OrganizationProfilingForm = () => {
                   <div className="space-y-6">
                     
                     <div>
-                      <Label>באילו תוכנות ומערכות אתם משתמשים? (ציין שמות מדויקים)</Label>
+                      <Label>באילו תוכנות ומערכות אתם משתמשים? (ציין שמות מדויקים) *</Label>
                       <div className="space-y-2 mt-2">
                         {['Monday.com', 'HubSpot', 'Salesforce', 'ClickUp', 'Slack', 'Microsoft 365', 'Google Workspace', 'Zoom', 'WhatsApp Business'].map((option) => (
                           <div key={option} className="flex items-center space-x-2 space-x-reverse">
@@ -771,7 +821,7 @@ const OrganizationProfilingForm = () => {
 
 
                     <div>
-                      <Label htmlFor="existingAutomations">האם יש לכם כיום אוטומציות (Zapier, Make, או אוטומציה אחרת)? אם כן, מה הן עושות?</Label>
+                      <Label htmlFor="existingAutomations">האם יש לכם כיום אוטומציות (Zapier, Make, או אוטומציה אחרת)? אם כן, מה הן עושות? *</Label>
                       <Textarea
                         id="existingAutomations"
                         value={formData.existingAutomations}
@@ -782,7 +832,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label>באילו כלי אוטומציה אתם מכירים או משתמשים?</Label>
+                      <Label>באילו כלי אוטומציה אתם מכירים או משתמשים? *</Label>
                       <div className="space-y-2 mt-2">
                         {['Zapier', 'Microsoft Power Automate', 'Make (לשעבר Integromat)', 'IFTTT', 'n8n', 'אוטומציות מובנות במערכות', 'לא מכיר'].map((option) => (
                           <div key={option} className="flex items-center space-x-2 space-x-reverse">
@@ -805,7 +855,7 @@ const OrganizationProfilingForm = () => {
                   <div className="space-y-6">
                     
                     <div>
-                      <Label>האם יש תקציב ראשוני לתהליך?</Label>
+                      <Label>האם יש תקציב ראשוני לתהליך? *</Label>
                       <RadioGroup
                         value={formData.budgetStatus}
                         onValueChange={(value) => handleInputChange('budgetStatus', value)}
@@ -835,6 +885,20 @@ const OrganizationProfilingForm = () => {
                           <RadioGroupItem value="דרוש סיוע" id="budget-help" />
                         </div>
                       </RadioGroup>
+                      
+                      {formData.budgetStatus === 'כן' && (
+                        <div className="mt-4">
+                          <Label htmlFor="budgetDetails">פרטי התקציב *</Label>
+                          <Textarea
+                            id="budgetDetails"
+                            value={formData.budgetDetails}
+                            onChange={(e) => handleInputChange('budgetDetails', e.target.value)}
+                            placeholder="אנא פרט על התקציב הזמין - סכום, מקור התקציב, מגבלות זמן"
+                            rows={3}
+                            className="mt-2"
+                          />
+                        </div>
+                      )}
                     </div>
 
                     <div>
@@ -862,7 +926,7 @@ const OrganizationProfilingForm = () => {
                         />
                       </div>
                       <div>
-                        <Label htmlFor="preferredTime">זמן מועדף לפגישת אפיון</Label>
+                        <Label htmlFor="preferredTime">זמן מועדף לפגישת אפיון *</Label>
                         <Select value={formData.preferredTime} onValueChange={(value) => handleInputChange('preferredTime', value)}>
                           <SelectTrigger>
                             <SelectValue placeholder="בחר זמן מועדף" />
