@@ -65,6 +65,7 @@ export type Database = {
           סוגי_תוכן_מיוצרים: string[] | null
           סטטוס_תקציב: string | null
           סכום_תקציב: number | null
+          סכום_תקציב_חודשי: number | null
           "עד_כמה_העובדים/המנהלים_בארגון_מכיר": string[] | null
           פגישות_שבועיות: number | null
           פילוח_מאגר_לקוחות: string[] | null
@@ -136,6 +137,7 @@ export type Database = {
           סוגי_תוכן_מיוצרים?: string[] | null
           סטטוס_תקציב?: string | null
           סכום_תקציב?: number | null
+          סכום_תקציב_חודשי?: number | null
           "עד_כמה_העובדים/המנהלים_בארגון_מכיר"?: string[] | null
           פגישות_שבועיות?: number | null
           פילוח_מאגר_לקוחות?: string[] | null
@@ -207,6 +209,7 @@ export type Database = {
           סוגי_תוכן_מיוצרים?: string[] | null
           סטטוס_תקציב?: string | null
           סכום_תקציב?: number | null
+          סכום_תקציב_חודשי?: number | null
           "עד_כמה_העובדים/המנהלים_בארגון_מכיר"?: string[] | null
           פגישות_שבועיות?: number | null
           פילוח_מאגר_לקוחות?: string[] | null
