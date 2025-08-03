@@ -888,15 +888,16 @@ const OrganizationProfilingForm = () => {
                       </RadioGroup>
                       
                       {formData.budgetStatus === 'כן' && (
-                        <div className="mt-4">
-                          <Label htmlFor="budgetDetails">פרטי התקציב *</Label>
+                        <div className="mt-4 border-t pt-4">
+                          <Label htmlFor="budgetDetails" className="text-base font-medium">פרטי התקציב *</Label>
                           <Textarea
                             id="budgetDetails"
                             value={formData.budgetDetails}
                             onChange={(e) => handleInputChange('budgetDetails', e.target.value)}
-                            placeholder="אנא פרט על התקציב הזמין - סכום, מקור התקציב, מגבלות זמן"
-                            rows={3}
+                            placeholder="אנא פרט על התקציב הזמין - סכום בש״ח, מקור התקציב, מגבלות זמן, תנאים מיוחדים"
+                            rows={4}
                             className="mt-2"
+                            required
                           />
                         </div>
                       )}
