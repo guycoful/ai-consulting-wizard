@@ -69,7 +69,8 @@ interface FormData {
   
   // מטרות ותכנון
   budgetStatus: string;
-  budgetAmount: number | '';
+  budgetAmountOneTime: number | ''; // סכום חד פעמי
+  budgetAmountMonthly: number | ''; // סכום חודשי
   budgetDetails: string; // פרטי התקציב כאשר בוחרים "כן"
   successMetric: string; // המדד הכמותי לקביעת הצלחה
   
@@ -132,7 +133,8 @@ const OrganizationProfilingForm = () => {
     mainWorkflowDetail: '',
     
     budgetStatus: '',
-    budgetAmount: '',
+    budgetAmountOneTime: '',
+    budgetAmountMonthly: '',
     budgetDetails: '',
     successMetric: '',
     
@@ -224,9 +226,16 @@ const OrganizationProfilingForm = () => {
     }
 
     // בדיקת שדה פרטי תקציב אם בחרו "כן"
-    if (formData.budgetStatus === 'כן' && (!formData.budgetDetails || formData.budgetDetails.trim() === '')) {
-      toast.error('אנא פרט על התקציב הזמין');
-      return false;
+    if (formData.budgetStatus === 'כן') {
+      if (!formData.budgetDetails || formData.budgetDetails.trim() === '') {
+        toast.error('אנא פרט על התקציב הזמין');
+        return false;
+      }
+      // בדיקה שלפחות אחד מהסכומים מולא
+      if (formData.budgetAmountOneTime === '' && formData.budgetAmountMonthly === '') {
+        toast.error('אנא מלא לפחות סכום אחד (חד פעמי או חודשי)');
+        return false;
+      }
     }
 
     console.log('Form validation passed');
@@ -298,7 +307,8 @@ const OrganizationProfilingForm = () => {
         
         // מטרות ותכנון
         סטטוס_תקציב: formData.budgetStatus || null,
-        סכום_תקציב: formData.budgetAmount ? Number(formData.budgetAmount) : null,
+        סכום_תקציב: formData.budgetAmountOneTime ? Number(formData.budgetAmountOneTime) : null,
+        סכום_תקציב_חודשי: formData.budgetAmountMonthly ? Number(formData.budgetAmountMonthly) : null,
         פרטי_תקציב: formData.budgetDetails || null,
         מדד_הצלחה_כמותי: formData.successMetric || null,
         
@@ -863,42 +873,56 @@ const OrganizationProfilingForm = () => {
                         className="mt-2"
                       >
                         <div className="flex items-center gap-2 flex-row-reverse">
-                          <div className="flex items-center gap-2">
-                            <Label htmlFor="budget-yes" className="cursor-pointer">כן</Label>
-                            {formData.budgetStatus === 'כן' && (
-                              <Input
-                                type="number"
-                                value={formData.budgetAmount}
-                                onChange={(e) => handleInputChange('budgetAmount', e.target.value ? parseInt(e.target.value) : '')}
-                                placeholder="סכום בש״ח"
-                                className="w-32"
-                              />
-                            )}
-                          </div>
+                          <Label htmlFor="budget-yes" className="cursor-pointer">כן</Label>
                           <RadioGroupItem value="כן" id="budget-yes" />
                         </div>
                         <div className="flex items-center gap-2 flex-row-reverse">
                           <Label htmlFor="budget-willing" className="cursor-pointer">לא אך יש נכונות</Label>
                           <RadioGroupItem value="לא אך יש נכונות" id="budget-willing" />
                         </div>
-                        <div className="flex items-center gap-2 flex-row-reverse">
-                          <Label htmlFor="budget-help" className="cursor-pointer">דרוש סיוע</Label>
-                          <RadioGroupItem value="דרוש סיוע" id="budget-help" />
-                        </div>
                       </RadioGroup>
                       
                       {formData.budgetStatus === 'כן' && (
-                        <div className="mt-4 border-t pt-4">
-                          <Label htmlFor="budgetDetails" className="text-base font-medium">פרטי התקציב *</Label>
-                          <Textarea
-                            id="budgetDetails"
-                            value={formData.budgetDetails}
-                            onChange={(e) => handleInputChange('budgetDetails', e.target.value)}
-                            placeholder="אנא פרט על התקציב הזמין - סכום בש״ח, מקור התקציב, מגבלות זמן, תנאים מיוחדים"
-                            rows={4}
-                            className="mt-2"
-                            required
-                          />
+                        <div className="mt-4 border-t pt-4 space-y-4">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                              <Label htmlFor="budgetAmountOneTime" className="text-base font-medium">סכום חד פעמי (בש״ח)</Label>
+                              <Input
+                                id="budgetAmountOneTime"
+                                type="number"
+                                value={formData.budgetAmountOneTime}
+                                onChange={(e) => handleInputChange('budgetAmountOneTime', e.target.value ? parseInt(e.target.value) : '')}
+                                placeholder="סכום חד פעמי"
+                                className="mt-2"
+                              />
+                            </div>
+                            <div>
+                              <Label htmlFor="budgetAmountMonthly" className="text-base font-medium">סכום חודשי (בש״ח)</Label>
+                              <Input
+                                id="budgetAmountMonthly"
+                                type="number"
+                                value={formData.budgetAmountMonthly}
+                                onChange={(e) => handleInputChange('budgetAmountMonthly', e.target.value ? parseInt(e.target.value) : '')}
+                                placeholder="סכום חודשי"
+                                className="mt-2"
+                              />
+                            </div>
+                          </div>
+                          <div>
+                            <Label htmlFor="budgetDetails" className="text-base font-medium">פרטי התקציב *</Label>
+                            <Textarea
+                              id="budgetDetails"
+                              value={formData.budgetDetails}
+                              onChange={(e) => handleInputChange('budgetDetails', e.target.value)}
+                              placeholder="אנא פרט על התקציב הזמין - מקור התקציב, מגבלות זמן, תנאים מיוחדים"
+                              rows={4}
+                              className="mt-2"
+                              required
+                            />
+                          </div>
+                          <p className="text-sm text-muted-foreground">
+                            * יש למלא לפחות אחד מהסכומים (חד פעמי או חודשי)
+                          </p>
                         </div>
                       )}
                     </div>
