@@ -299,6 +299,7 @@ const OrganizationProfilingForm = () => {
         // מטרות ותכנון
         סטטוס_תקציב: formData.budgetStatus || null,
         סכום_תקציב: formData.budgetAmount ? Number(formData.budgetAmount) : null,
+        פרטי_תקציב: formData.budgetDetails || null,
         מדד_הצלחה_כמותי: formData.successMetric || null,
         
         תאריך_התחלה: formData.startDate || null,

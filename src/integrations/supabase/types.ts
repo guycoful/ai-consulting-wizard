@@ -69,6 +69,7 @@ export type Database = {
           פגישות_שבועיות: number | null
           פילוח_מאגר_לקוחות: string[] | null
           פירוט_תהליך_עבודה_מרכזי: string | null
+          פרטי_תקציב: string | null
           קריטריונים_סינון_לידים: string | null
           שם_בארגון: string | null
           שם_מלא: string | null
@@ -139,6 +140,7 @@ export type Database = {
           פגישות_שבועיות?: number | null
           פילוח_מאגר_לקוחות?: string[] | null
           פירוט_תהליך_עבודה_מרכזי?: string | null
+          פרטי_תקציב?: string | null
           קריטריונים_סינון_לידים?: string | null
           שם_בארגון?: string | null
           שם_מלא?: string | null
@@ -209,6 +211,7 @@ export type Database = {
           פגישות_שבועיות?: number | null
           פילוח_מאגר_לקוחות?: string[] | null
           פירוט_תהליך_עבודה_מרכזי?: string | null
+          פרטי_תקציב?: string | null
           קריטריונים_סינון_לידים?: string | null
           שם_בארגון?: string | null
           שם_מלא?: string | null
