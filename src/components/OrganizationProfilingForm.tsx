@@ -290,38 +290,38 @@ const OrganizationProfilingForm = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-navy-dark p-4" dir="rtl">
+      <div className="min-h-screen bg-navy-dark p-2 sm:p-4" dir="rtl">
         <div className="max-w-4xl mx-auto">
-          <Card className="bg-white">
-            <CardHeader>
-              <div className="flex items-center justify-between">
+          <Card className="bg-white w-full">
+            <CardHeader className="p-4 sm:p-6">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <Button 
                   variant="ghost" 
                   onClick={() => navigate('/')}
-                  className="text-navy-dark hover:bg-gray-100"
+                  className="text-navy-dark hover:bg-gray-100 self-start"
                 >
                   ← חזור לדף הבית
                 </Button>
                 <div className="flex-1 text-center">
-                  <CardTitle className="text-2xl text-navy-dark mb-4">
+                  <CardTitle className="text-lg sm:text-2xl text-navy-dark mb-2 sm:mb-4">
                     שאלון אפיון תהליכים עסקיים לקראת הטמעת AI
                   </CardTitle>
-                  <p className="text-gray-600 text-sm leading-relaxed max-w-3xl mx-auto">
+                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed max-w-3xl mx-auto">
                     השאלון נועד לאסוף מידע מדויק ותכני על התהליכים העסקיים בארגון שלך, כדי לבנות פתרונות AI מותאמים לצרכים הספציפיים שלכם.
                     <br />
                     מילוי השאלון צפוי לקחת 10-15 דקות.
                   </p>
                 </div>
-                <div className="w-20"></div>
+                <div className="hidden sm:block w-20"></div>
               </div>
             </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-8">
+            <CardContent className="p-4 sm:p-6">
+              <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
                 
                 {/* פרטים כלליים */}
                 <section>
-                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">פרטי יצירת קשר</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-navy-dark">פרטי יצירת קשר</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                       <Label htmlFor="fullName">שם מלא *</Label>
                       <Input
@@ -365,7 +365,7 @@ const OrganizationProfilingForm = () => {
 
                 {/* פירוט תהליך העבודה המרכזי */}
                 <section>
-                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">פירוט תהליך העבודה המרכזי</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-navy-dark">פירוט תהליך העבודה המרכזי</h3>
                   <div>
                     <Label htmlFor="mainWorkflowDetail">
                       בחר את התהליך האחד שהכי גוזל ממך זמן (לדוגמה: טיפול בלידים, הכנת חומרים לשיווק, תיאום פגישות). כעת, תאר אותו שלב אחר שלב, כאילו אתה כותב מדריך לעובד חדש. תתחיל מהנקודה שבה התהליך מתחיל ותסיים בתוצאה הסופית.
@@ -382,12 +382,12 @@ const OrganizationProfilingForm = () => {
 
                 {/* חלק א': ניהול לידים ופניות נכנסות */}
                 <section>
-                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">חלק א': ניהול לידים ופניות נכנסות</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-navy-dark">חלק א': ניהול לידים ופניות נכנסות</h3>
                   <div className="space-y-6">
                     
                     <div>
                       <Label className="text-base font-medium">כמה לידים (פניות) אתם מקבלים בממוצע בחודש מכל ערוץ?</Label>
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mt-3">
                         <div>
                           <Label htmlFor="facebook-leads">פייסבוק</Label>
                           <Input
@@ -534,7 +534,7 @@ const OrganizationProfilingForm = () => {
 
                 {/* חלק ב': תהליכי שיווק ושמירת קשר */}
                 <section>
-                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">חלק ב': תהליכי שיווק ושמירת קשר</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-navy-dark">חלק ב': תהליכי שיווק ושמירת קשר</h3>
                   <div className="space-y-6">
                     
                     <div>
@@ -555,7 +555,7 @@ const OrganizationProfilingForm = () => {
 
                     <div>
                       <Label className="text-base font-medium">כמה זמן (בדקות/שעות/ימים) בממוצע לוקח לכם להפיק כל סוג תוכן?</Label>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mt-3">
                         <div>
                           <Label htmlFor="posts-time">פוסט בפייסבוק/אינסטגרם</Label>
                           <Input
@@ -657,10 +657,10 @@ const OrganizationProfilingForm = () => {
 
                 {/* חלק ג': תפעול, אדמיניסטרציה וניהול משימות */}
                 <section>
-                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">חלק ג': תפעול, אדמיניסטרציה וניהול משימות</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-navy-dark">חלק ג': תפעול, אדמיניסטרציה וניהול משימות</h3>
                   <div className="space-y-6">
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       <div>
                         <Label htmlFor="weeklyMeetings">כמה פגישות אתם מתאמים בשבוע בממוצע?</Label>
                         <Input
@@ -736,7 +736,7 @@ const OrganizationProfilingForm = () => {
 
                 {/* חלק ד': מערכות קיימות ואינטגרציות */}
                 <section>
-                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">חלק ד': מערכות קיימות ואינטגרציות</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-navy-dark">חלק ד': מערכות קיימות ואינטגרציות</h3>
                   <div className="space-y-6">
                     
                     <div>
@@ -801,7 +801,7 @@ const OrganizationProfilingForm = () => {
 
                 {/* מטרות ותכנון */}
                 <section>
-                  <h3 className="text-xl font-semibold mb-4 text-navy-dark">מטרות ותכנון</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-navy-dark">מטרות ותכנון</h3>
                   <div className="space-y-6">
                     
                     <div>
@@ -850,7 +850,7 @@ const OrganizationProfilingForm = () => {
                       />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       <div>
                         <Label htmlFor="startDate">מתי נוח לכם להתחיל את התהליך? *</Label>
                         <Input
