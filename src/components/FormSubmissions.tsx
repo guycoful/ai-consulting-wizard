@@ -6,7 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
-import { Search, Phone, Mail, Calendar, Building } from 'lucide-react';
+import { Search, Phone, Mail, Calendar, Building, LogOut } from 'lucide-react';
+import type { User } from '@supabase/supabase-js';
 
 interface FormSubmission {
   id: number;
@@ -28,12 +29,38 @@ const FormSubmissions = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedSubmission, setSelectedSubmission] = useState<FormSubmission | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
-    fetchSubmissions();
+    // Check if user is already signed in
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      if (session?.user) {
+        fetchSubmissions();
+      } else {
+        setLoading(false);
+      }
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+      if (session?.user) {
+        fetchSubmissions();
+      } else {
+        setSubmissions([]);
+        setLoading(false);
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const fetchSubmissions = async () => {
+    if (!user) return;
+    
     try {
       setLoading(true);
       const { data, error } = await supabase
@@ -56,6 +83,26 @@ const FormSubmissions = () => {
     }
   };
 
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      toast.error('שגיאה בהתחברות: ' + error.message);
+      setLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    toast.success('התנתקת בהצלחה');
+  };
+
   const filteredSubmissions = submissions.filter(submission =>
     submission.שם_מלא?.toLowerCase().includes(searchTerm.toLowerCase()) ||
     submission.מייל?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -73,6 +120,43 @@ const FormSubmissions = () => {
     });
   };
 
+  if (!user) {
+    return (
+      <div className="flex justify-center items-center min-h-screen" dir="rtl">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle className="text-center">התחברות לאזור הניהול</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div>
+                <Input
+                  type="email"
+                  placeholder="כתובת מייל"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div>
+                <Input
+                  type="password"
+                  placeholder="סיסמה"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <Button type="submit" className="w-full" disabled={loading}>
+                {loading ? 'מתחבר...' : 'התחבר'}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -84,7 +168,13 @@ const FormSubmissions = () => {
   return (
     <div className="container mx-auto p-6" dir="rtl">
       <div className="mb-6">
-        <h1 className="text-3xl font-bold mb-4">טפסי איפיון שהתקבלו</h1>
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-3xl font-bold">טפסי איפיון שהתקבלו</h1>
+          <Button onClick={handleLogout} variant="outline" size="sm">
+            <LogOut className="h-4 w-4 ml-2" />
+            התנתק
+          </Button>
+        </div>
         
         <div className="relative mb-4">
           <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
