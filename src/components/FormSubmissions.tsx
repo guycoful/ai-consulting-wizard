@@ -32,6 +32,7 @@ const FormSubmissions = () => {
   const [user, setUser] = useState<User | null>(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isSignUp, setIsSignUp] = useState(false);
 
   useEffect(() => {
     // Check if user is already signed in
@@ -87,15 +88,32 @@ const FormSubmissions = () => {
     e.preventDefault();
     setLoading(true);
     
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    if (isSignUp) {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/admin/submissions`
+        }
+      });
 
-    if (error) {
-      toast.error('שגיאה בהתחברות: ' + error.message);
-      setLoading(false);
+      if (error) {
+        toast.error('שגיאה בהרשמה: ' + error.message);
+      } else {
+        toast.success('נרשמת בהצלחה! בדוק את המייל לאישור החשבון.');
+      }
+    } else {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        toast.error('שגיאה בהתחברות: ' + error.message);
+      }
     }
+    
+    setLoading(false);
   };
 
   const handleLogout = async () => {
@@ -125,7 +143,9 @@ const FormSubmissions = () => {
       <div className="flex justify-center items-center min-h-screen" dir="rtl">
         <Card className="w-full max-w-md">
           <CardHeader>
-            <CardTitle className="text-center">התחברות לאזור הניהול</CardTitle>
+            <CardTitle className="text-center">
+              {isSignUp ? 'הרשמה לאזור הניהול' : 'התחברות לאזור הניהול'}
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleLogin} className="space-y-4">
@@ -148,7 +168,15 @@ const FormSubmissions = () => {
                 />
               </div>
               <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? 'מתחבר...' : 'התחבר'}
+                {loading ? (isSignUp ? 'נרשם...' : 'מתחבר...') : (isSignUp ? 'הרשמה' : 'התחבר')}
+              </Button>
+              <Button 
+                type="button" 
+                variant="ghost" 
+                className="w-full" 
+                onClick={() => setIsSignUp(!isSignUp)}
+              >
+                {isSignUp ? 'יש לך כבר חשבון? התחבר' : 'אין לך חשבון? הירשם'}
               </Button>
             </form>
           </CardContent>
