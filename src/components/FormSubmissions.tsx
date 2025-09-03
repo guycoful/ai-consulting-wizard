@@ -32,32 +32,24 @@ const FormSubmissions = () => {
   const [user, setUser] = useState<User | null>(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isSignUp, setIsSignUp] = useState(false);
 
   useEffect(() => {
-    console.log('FormSubmissions useEffect started');
     // Check if user is already signed in
     supabase.auth.getSession().then(({ data: { session } }) => {
-      console.log('Current session:', session);
       setUser(session?.user ?? null);
       if (session?.user) {
-        console.log('User found, fetching submissions');
         fetchSubmissions(session.user);
       } else {
-        console.log('No user found, stopping loading');
         setLoading(false);
       }
     });
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      console.log('Auth state changed:', _event, session);
       setUser(session?.user ?? null);
       if (session?.user) {
-        console.log('User authenticated, fetching submissions');
         fetchSubmissions(session.user);
       } else {
-        console.log('User logged out, clearing submissions');
         setSubmissions([]);
         setLoading(false);
       }
@@ -68,21 +60,14 @@ const FormSubmissions = () => {
 
   const fetchSubmissions = async (currentUser?: any) => {
     const userToUse = currentUser || user;
-    console.log('fetchSubmissions called, user:', userToUse);
-    if (!userToUse) {
-      console.log('No user, skipping fetch');
-      return;
-    }
+    if (!userToUse) return;
     
     try {
       setLoading(true);
-      console.log('Starting to fetch submissions...');
       const { data, error } = await supabase
         .from('profiling_form_submissions')
         .select('*')
         .order('created_at', { ascending: false });
-
-      console.log('Fetch result:', { data, error });
 
       if (error) {
         console.error('Error fetching submissions:', error);
@@ -90,13 +75,11 @@ const FormSubmissions = () => {
         return;
       }
 
-      console.log('Setting submissions:', data?.length || 0, 'items');
       setSubmissions(data || []);
     } catch (error) {
       console.error('Error:', error);
       toast.error('שגיאה בטעינת הטפסים');
     } finally {
-      console.log('Fetch completed, setting loading to false');
       setLoading(false);
     }
   };
@@ -105,29 +88,13 @@ const FormSubmissions = () => {
     e.preventDefault();
     setLoading(true);
     
-    if (isSignUp) {
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo: `${window.location.origin}/admin/submissions`
-        }
-      });
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
-      if (error) {
-        toast.error('שגיאה בהרשמה: ' + error.message);
-      } else {
-        toast.success('נרשמת בהצלחה! בדוק את המייל לאישור החשבון.');
-      }
-    } else {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
-      if (error) {
-        toast.error('שגיאה בהתחברות: ' + error.message);
-      }
+    if (error) {
+      toast.error('שגיאה בהתחברות: ' + error.message);
     }
     
     setLoading(false);
@@ -160,9 +127,7 @@ const FormSubmissions = () => {
       <div className="flex justify-center items-center min-h-screen" dir="rtl">
         <Card className="w-full max-w-md">
           <CardHeader>
-            <CardTitle className="text-center">
-              {isSignUp ? 'הרשמה לאזור הניהול' : 'התחברות לאזור הניהול'}
-            </CardTitle>
+            <CardTitle className="text-center">התחברות לאזור הניהול</CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleLogin} className="space-y-4">
@@ -185,15 +150,7 @@ const FormSubmissions = () => {
                 />
               </div>
               <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? (isSignUp ? 'נרשם...' : 'מתחבר...') : (isSignUp ? 'הרשמה' : 'התחבר')}
-              </Button>
-              <Button 
-                type="button" 
-                variant="ghost" 
-                className="w-full" 
-                onClick={() => setIsSignUp(!isSignUp)}
-              >
-                {isSignUp ? 'יש לך כבר חשבון? התחבר' : 'אין לך חשבון? הירשם'}
+                {loading ? 'מתחבר...' : 'התחבר'}
               </Button>
             </form>
           </CardContent>
