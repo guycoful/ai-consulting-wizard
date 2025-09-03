@@ -42,7 +42,7 @@ const FormSubmissions = () => {
       setUser(session?.user ?? null);
       if (session?.user) {
         console.log('User found, fetching submissions');
-        fetchSubmissions();
+        fetchSubmissions(session.user);
       } else {
         console.log('No user found, stopping loading');
         setLoading(false);
@@ -55,7 +55,7 @@ const FormSubmissions = () => {
       setUser(session?.user ?? null);
       if (session?.user) {
         console.log('User authenticated, fetching submissions');
-        fetchSubmissions();
+        fetchSubmissions(session.user);
       } else {
         console.log('User logged out, clearing submissions');
         setSubmissions([]);
@@ -66,9 +66,10 @@ const FormSubmissions = () => {
     return () => subscription.unsubscribe();
   }, []);
 
-  const fetchSubmissions = async () => {
-    console.log('fetchSubmissions called, user:', user);
-    if (!user) {
+  const fetchSubmissions = async (currentUser?: any) => {
+    const userToUse = currentUser || user;
+    console.log('fetchSubmissions called, user:', userToUse);
+    if (!userToUse) {
       console.log('No user, skipping fetch');
       return;
     }
