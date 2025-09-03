@@ -35,22 +35,29 @@ const FormSubmissions = () => {
   const [isSignUp, setIsSignUp] = useState(false);
 
   useEffect(() => {
+    console.log('FormSubmissions useEffect started');
     // Check if user is already signed in
     supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log('Current session:', session);
       setUser(session?.user ?? null);
       if (session?.user) {
+        console.log('User found, fetching submissions');
         fetchSubmissions();
       } else {
+        console.log('No user found, stopping loading');
         setLoading(false);
       }
     });
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      console.log('Auth state changed:', _event, session);
       setUser(session?.user ?? null);
       if (session?.user) {
+        console.log('User authenticated, fetching submissions');
         fetchSubmissions();
       } else {
+        console.log('User logged out, clearing submissions');
         setSubmissions([]);
         setLoading(false);
       }
@@ -60,14 +67,21 @@ const FormSubmissions = () => {
   }, []);
 
   const fetchSubmissions = async () => {
-    if (!user) return;
+    console.log('fetchSubmissions called, user:', user);
+    if (!user) {
+      console.log('No user, skipping fetch');
+      return;
+    }
     
     try {
       setLoading(true);
+      console.log('Starting to fetch submissions...');
       const { data, error } = await supabase
         .from('profiling_form_submissions')
         .select('*')
         .order('created_at', { ascending: false });
+
+      console.log('Fetch result:', { data, error });
 
       if (error) {
         console.error('Error fetching submissions:', error);
@@ -75,11 +89,13 @@ const FormSubmissions = () => {
         return;
       }
 
+      console.log('Setting submissions:', data?.length || 0, 'items');
       setSubmissions(data || []);
     } catch (error) {
       console.error('Error:', error);
       toast.error('שגיאה בטעינת הטפסים');
     } finally {
+      console.log('Fetch completed, setting loading to false');
       setLoading(false);
     }
   };
