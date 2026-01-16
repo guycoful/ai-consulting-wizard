@@ -30,7 +30,7 @@ const HeroSection = () => {
             <Button 
               onClick={handleFormNavigation}
               size="lg"
-              className="bg-white text-blue-primary hover:bg-gray-100 font-heebo font-medium px-8 py-4 text-lg w-full"
+              className="bg-white text-blue-primary hover:bg-gray-100 font-heebo font-medium px-8 py-4 text-lg w-full transition-all duration-300 transform hover:scale-105 shadow-lg animate-pulse hover:animate-none"
             >
               מלא טופס איפיון
             </Button>
@@ -41,7 +41,7 @@ const HeroSection = () => {
             <Button 
               onClick={handleFormNavigation}
               size="lg"
-              className="bg-white text-blue-primary hover:bg-gray-100 font-heebo font-medium px-8 py-4 text-lg"
+              className="bg-white text-blue-primary hover:bg-gray-100 font-heebo font-medium px-8 py-4 text-lg transition-all duration-300 transform hover:scale-105 shadow-lg animate-pulse hover:animate-none"
             >
               מלא טופס איפיון
             </Button>
