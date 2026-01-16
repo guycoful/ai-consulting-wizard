@@ -18,27 +18,12 @@ const HeroSection = () => {
     <section id="hero" className="bg-navy-dark py-8 md:py-16 lg:py-24 animate-fade-in">
       <div className="container mx-auto px-4 text-center max-w-6xl">
         <div className="relative mb-6 md:mb-8">
-          {/* Desktop: Title with button on the right */}
-          <div className="flex flex-col md:flex-row md:items-start md:justify-center md:gap-6">
-            <div className="flex-1">
-              <h1 className="text-2xl md:text-4xl lg:text-6xl xl:text-7xl font-bold font-heebo text-white mb-4 md:mb-6 leading-tight px-2">
-                ייעוץ AI לעסקים קטנים ובינוניים:
-              </h1>
-              <h2 className="text-xl md:text-3xl lg:text-5xl xl:text-6xl font-bold font-heebo text-white mb-4 md:mb-6 leading-tight px-2">
-                פותרים את הבעיות הכי כואבות בעסק שלך בעזרת פתרונות AI מותאמים אישית
-              </h2>
-            </div>
-            {/* Desktop CTA button - hidden on mobile */}
-            <div className="hidden md:flex md:items-start md:pt-4">
-              <Button 
-                onClick={handleFormNavigation}
-                size="lg"
-                className="bg-white text-blue-primary hover:bg-gray-100 font-heebo font-medium px-8 py-4 text-lg whitespace-nowrap"
-              >
-                מלא טופס איפיון
-              </Button>
-            </div>
-          </div>
+          <h1 className="text-2xl md:text-4xl lg:text-6xl xl:text-7xl font-bold font-heebo text-white mb-4 md:mb-6 leading-tight px-2">
+            ייעוץ AI לעסקים קטנים ובינוניים:
+          </h1>
+          <h2 className="text-xl md:text-3xl lg:text-5xl xl:text-6xl font-bold font-heebo text-white mb-4 md:mb-6 leading-tight px-2">
+            פותרים את הבעיות הכי כואבות בעסק שלך בעזרת פתרונות AI מותאמים אישית
+          </h2>
           
           {/* Mobile CTA button - shown only on mobile, full width */}
           <div className="md:hidden mb-4 px-4">
@@ -46,6 +31,17 @@ const HeroSection = () => {
               onClick={handleFormNavigation}
               size="lg"
               className="bg-white text-blue-primary hover:bg-gray-100 font-heebo font-medium px-8 py-4 text-lg w-full"
+            >
+              מלא טופס איפיון
+            </Button>
+          </div>
+          
+          {/* Desktop/Tablet CTA button - between title and purple line */}
+          <div className="hidden md:block mb-6">
+            <Button 
+              onClick={handleFormNavigation}
+              size="lg"
+              className="bg-white text-blue-primary hover:bg-gray-100 font-heebo font-medium px-8 py-4 text-lg"
             >
               מלא טופס איפיון
             </Button>
