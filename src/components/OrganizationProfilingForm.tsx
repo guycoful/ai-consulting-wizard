@@ -321,10 +321,9 @@ const OrganizationProfilingForm = () => {
 
       // שליחה ל-Supabase
       console.log('Attempting to insert data to Supabase...');
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('profiling_form_submissions')
-        .insert([submissionData])
-        .select();
+        .insert([submissionData]);
 
       if (error) {
         console.error('Supabase insertion error:', error);
@@ -332,7 +331,7 @@ const OrganizationProfilingForm = () => {
         return;
       }
 
-      console.log('Form submitted successfully:', data);
+      console.log('Form submitted successfully');
       toast.success('הטופס נשלח בהצלחה!');
       setShowThankYou(true);
       
