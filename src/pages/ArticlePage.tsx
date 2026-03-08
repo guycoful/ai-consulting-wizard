@@ -92,11 +92,11 @@ const ArticlePage = () => {
             prose-headings:font-heebo prose-headings:text-white prose-headings:font-bold
             prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4
             prose-h4:text-lg prose-h4:mt-6 prose-h4:mb-3
-            prose-p:text-white prose-p:leading-relaxed prose-p:mb-4
-            prose-li:text-white prose-li:leading-relaxed
-            prose-strong:text-white
+            prose-p:leading-relaxed prose-p:mb-4
             prose-ul:my-4 prose-ol:my-4
-            prose-a:text-purple-400 prose-a:no-underline hover:prose-a:underline"
+            prose-a:text-purple-400 prose-a:no-underline hover:prose-a:underline
+            [&_p]:!text-gray-100 [&_li]:!text-gray-100 [&_strong]:!text-white
+            [&_h3]:!text-white [&_h4]:!text-white [&_ol]:!text-gray-100"
           dangerouslySetInnerHTML={{ __html: article.content }}
         />
 
