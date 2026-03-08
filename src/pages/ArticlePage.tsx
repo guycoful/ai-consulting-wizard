@@ -92,8 +92,8 @@ const ArticlePage = () => {
             prose-headings:font-heebo prose-headings:text-white prose-headings:font-bold
             prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4
             prose-h4:text-lg prose-h4:mt-6 prose-h4:mb-3
-            prose-p:text-gray-100 prose-p:leading-relaxed prose-p:mb-4
-            prose-li:text-gray-100 prose-li:leading-relaxed
+            prose-p:text-white prose-p:leading-relaxed prose-p:mb-4
+            prose-li:text-white prose-li:leading-relaxed
             prose-strong:text-white
             prose-ul:my-4 prose-ol:my-4
             prose-a:text-purple-400 prose-a:no-underline hover:prose-a:underline"
