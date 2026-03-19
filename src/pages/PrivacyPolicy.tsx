@@ -9,7 +9,7 @@ const PrivacyPolicy = () => {
         <h1 className="text-3xl md:text-4xl font-bold font-heebo text-white mb-8">
           {title}
         </h1>
-        <div className="text-gray-300 font-heebo text-lg leading-[1.9] whitespace-pre-line">
+        <div className="text-gray-300 font-heebo text-sm leading-[1.9] whitespace-pre-line">
           {body}
         </div>
       </div>
