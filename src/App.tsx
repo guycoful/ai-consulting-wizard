@@ -12,6 +12,10 @@ import ArticlePage from "./pages/ArticlePage";
 import ProfilingForm from "./pages/ProfilingForm";
 import AdminFormSubmissions from "./pages/AdminFormSubmissions";
 import NotFound from "./pages/NotFound";
+import Accessibility from "./pages/Accessibility";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfUse from "./pages/TermsOfUse";
+import LegalFooter from "./components/LegalFooter";
 
 const queryClient = new QueryClient();
 
@@ -43,8 +47,12 @@ const App = () => (
           <Route path="/articles/:slug" element={<ArticlePage />} />
           <Route path="/profiling-form" element={<ProfilingForm />} />
           <Route path="/admin/submissions" element={<AdminFormSubmissions />} />
+          <Route path="/accessibility" element={<Accessibility />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-use" element={<TermsOfUse />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <LegalFooter />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
