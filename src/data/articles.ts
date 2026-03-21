@@ -131,7 +131,7 @@ export const articles: Article[] = [
 
 <h3>ועכשיו החלק שמפתיע את כולם 🧩</h3>
 
-<p>רוב בעלי העסקים חושבים שזה דורש הקלטה ידנית לכל ליד או צוות שמתעורר בלילה.<br>בפועל? אתם מקליטים פעם אחת (או משתמשים ב-AI להקלטה), והאוטומציה שולחת לכולם – מותאם אישית. בונים את זה ב-Make.com תוך חצי שעה, בלי קוד.</p>
+<p>רוב בעלי העסקים חושבים שזה דורש הקלטה ידנית לכל ליד או צוות שמתעורר בלילה.<br>בפועל? אתם מקליטים פעם אחת (או משתמשים ב-AI להקלטה), והאוטומציה שולחת לכולם – מותאם אישית. בונים את זה ב-<span dir="ltr">Make.com</span> תוך חצי שעה, בלי קוד.</p>
 
 <p>ככה זה עובד בפשטות:</p>
 
@@ -208,7 +208,7 @@ export const articles: Article[] = [
 <p>באותו צ'אט, כתבתי:<br>💬 "תכתוב לי הנחיה מוכנה לבוט שילווה אותי ביומיום. אעלה דיווח פעם ביום."</p>
 <p>🤖 הוא ייצר הנחיית מערכת מוכנה להעתקה.</p>
 
-<p>העתקתי. הדבקתי ב-Gemini Gems תוך דקה - בוט עובד. <strong>אני לא כתבתי את ההנחיה. ה-AI כתב לי אותה.</strong></p>
+<p>העתקתי. הדבקתי ב-<span dir="ltr">Gemini Gems</span> תוך דקה - בוט עובד. <strong>אני לא כתבתי את ההנחיה. ה-AI כתב לי אותה.</strong></p>
 
 <hr>
 
@@ -353,7 +353,7 @@ export const articles: Article[] = [
 
 <h3>שלב 0: מבוא — מה זה Gem?</h3>
 
-<p>Gem (ג'ם) הוא סוכן AI אישי שבונים בתוך Google Gemini. בניגוד לצ'אט רגיל, הסוכן:</p>
+<p>Gem (ג'ם) הוא סוכן AI אישי שבונים בתוך <span dir="ltr">Google Gemini</span>. בניגוד לצ'אט רגיל, הסוכן:</p>
 
 <ul>
 <li>✅ זוכר את ההנחיות שנתתם לו — לא צריך לחזור עליהן כל פעם</li>
@@ -400,11 +400,11 @@ export const articles: Article[] = [
 <p>איך בפועל בונים Gem ב-Gemini:</p>
 
 <ol>
-<li>נכנסים ל-<strong>gemini.google.com</strong></li>
-<li>בצד ימין לוחצים על <strong>"Gem Manager"</strong> (מנהל ג'מים)</li>
-<li>לוחצים על <strong>"New Gem"</strong> (ג'ם חדש)</li>
+<li>נכנסים ל-<strong><span dir="ltr">gemini.google.com</span></strong></li>
+<li>בצד ימין לוחצים על <strong>"<span dir="ltr">Gem Manager</span>"</strong> (מנהל ג'מים)</li>
+<li>לוחצים על <strong>"<span dir="ltr">New Gem</span>"</strong> (ג'ם חדש)</li>
 <li>נותנים שם לסוכן</li>
-<li>כותבים את <strong>הנחיית המערכת</strong> (System Instructions) — וזה השלב הכי חשוב</li>
+<li>כותבים את <strong>הנחיית המערכת</strong> (<span dir="ltr">System Instructions</span>) — וזה השלב הכי חשוב</li>
 </ol>
 
 <p>הנחיית המערכת היא הלב של הסוכן. כל מה שתכתבו שם — הסוכן יזכור ויפעל לפיו בכל שיחה.</p>
@@ -508,7 +508,7 @@ export const articles: Article[] = [
 
 <ol>
 <li><strong>מטרה אחת</strong> — לא "כלבוט", אלא סוכן ממוקד</li>
-<li><strong>מודל RTSO</strong> — Role, Task, Style, Output = פרומפט מנצח</li>
+<li><strong>מודל RTSO</strong> — <span dir="ltr">Role, Task, Style, Output</span> = פרומפט מנצח</li>
 <li><strong>5 ממדים</strong> — כל סוכן הוא שילוב ייחודי של ניתוח, אמפתיה, פעולה, עומק וקשיחות</li>
 <li><strong>בדיקה ותיקון</strong> — כל באג נפתר בעוד משפט בהנחיה</li>
 <li><strong>לא צריך קוד</strong> — רק לדעת מה אתם רוצים ואיך להסביר את זה</li>

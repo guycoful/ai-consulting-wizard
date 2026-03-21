@@ -5,8 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const ContactSection = () => {
+  const { ref, isVisible } = useScrollAnimation();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -68,7 +70,7 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="bg-navy-dark py-20 md:py-32">
-      <div className="container mx-auto px-4 max-w-5xl">
+      <div ref={ref} className={`animate-scroll-in ${isVisible ? 'visible' : ''} container mx-auto px-4 max-w-5xl`}>
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold font-heebo text-white mb-6">
             רוצה לבדוק איך AI יכול להקפיץ את העסק שלך?
@@ -150,7 +152,7 @@ const ContactSection = () => {
             disabled={isSubmitting}
             className="w-full bg-blue-primary hover:bg-blue-primary/90 text-white py-6 text-xl font-heebo font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isSubmitting ? "שולח..." : "שלחו לי ייעוץ ראשוני"}
+            {isSubmitting ? "שולח..." : "שלח לי ייעוץ ראשוני"}
           </Button>
           
           <p className="text-base text-gray-400 font-heebo text-center mt-8">

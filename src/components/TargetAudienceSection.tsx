@@ -1,6 +1,8 @@
 import { Check } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const TargetAudienceSection = () => {
+  const { ref, isVisible } = useScrollAnimation();
   const targetPoints = [
     "בעלי עסקים קטנים ובינוניים שרוצים להכניס טכנולוגיה מתקדמת",
     "בעלי מקצועות חופשיים שמרגישים שהעסק לא ממקסם פוטנציאל",
@@ -12,7 +14,7 @@ const TargetAudienceSection = () => {
 
   return (
     <section id="target-audience" className="bg-navy-light py-16 md:py-20">
-      <div className="container mx-auto px-4 max-w-4xl">
+      <div ref={ref} className={`animate-scroll-in ${isVisible ? 'visible' : ''} container mx-auto px-4 max-w-4xl`}>
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold font-heebo text-white mb-4">
             למי זה מתאים?

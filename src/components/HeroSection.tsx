@@ -35,7 +35,7 @@ const HeroSection = () => {
         </div>
 
         {/* CTAs - Primary and Secondary */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 md:mb-12 px-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6 md:mb-8 px-4">
           <Button
             onClick={scrollToContact}
             className="bg-blue-primary hover:bg-blue-primary/90 text-white px-8 md:px-14 py-5 md:py-7 text-lg md:text-2xl font-heebo font-bold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-xl w-full sm:w-auto animate-glow-pulse hover:animate-none"
@@ -49,6 +49,17 @@ const HeroSection = () => {
           >
             מלא טופס איפיון
           </Button>
+        </div>
+
+        {/* Social Proof Strip */}
+        <div className="flex items-center justify-center mb-8 md:mb-12 px-4">
+          <div className="flex items-center justify-center gap-6 flex-wrap bg-navy-light/30 rounded-full px-6 py-2">
+            <span className="text-gray-400 text-sm md:text-base font-heebo">600+ חברי קהילה</span>
+            <span className="text-purple-400 text-sm md:text-base">·</span>
+            <span className="text-gray-400 text-sm md:text-base font-heebo">עשרות עסקים מלווים</span>
+            <span className="text-purple-400 text-sm md:text-base">·</span>
+            <span className="text-gray-400 text-sm md:text-base font-heebo">שיחת ייעוץ ראשונית ללא עלות</span>
+          </div>
         </div>
 
         <div className="mb-8 md:mb-12 px-4">

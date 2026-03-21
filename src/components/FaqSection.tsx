@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 interface FaqItem {
   question: string;
@@ -95,9 +96,10 @@ const faqJsonLd = {
 };
 
 const FaqSection = () => {
+  const { ref, isVisible } = useScrollAnimation();
   return (
     <section id="faq" className="bg-navy-dark py-20 md:py-32" dir="rtl">
-      <div className="container mx-auto px-4 max-w-4xl">
+      <div ref={ref} className={`animate-scroll-in ${isVisible ? 'visible' : ''} container mx-auto px-4 max-w-4xl`}>
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold font-heebo text-white mb-6">
@@ -105,7 +107,7 @@ const FaqSection = () => {
           </h2>
           <div className="w-32 h-1 bg-purple-500 mx-auto mb-8"></div>
           <p className="text-xl text-gray-300 font-heebo leading-relaxed max-w-3xl mx-auto">
-            כל מה שרציתם לדעת על ייעוץ AI לעסקים — במקום אחד
+            כל מה שרצית לדעת על ייעוץ AI לעסקים — במקום אחד
           </p>
         </div>
 

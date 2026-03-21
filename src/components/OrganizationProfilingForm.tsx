@@ -367,7 +367,7 @@ const OrganizationProfilingForm = () => {
                     שאלון אפיון תהליכים עסקיים לקראת הטמעת AI
                   </CardTitle>
                   <p className="text-gray-600 text-xs sm:text-sm leading-relaxed max-w-3xl mx-auto">
-                    השאלון נועד לאסוף מידע מדויק ותכני על התהליכים העסקיים בארגון שלך, כדי לבנות פתרונות AI מותאמים לצרכים הספציפיים שלכם.
+                    השאלון נועד לאסוף מידע מדויק ותכני על התהליכים העסקיים בעסק שלך, כדי לבנות פתרונות AI מותאמים לצרכים הספציפיים שלך.
                     <br />
                     מילוי השאלון צפוי לקחת 10-15 דקות.
                   </p>
@@ -446,7 +446,7 @@ const OrganizationProfilingForm = () => {
                   <div className="space-y-6">
                     
                     <div>
-                      <Label className="text-base font-medium">כמה לידים (פניות) אתם מקבלים בממוצע בחודש מכל ערוץ? *</Label>
+                      <Label className="text-base font-medium">כמה לידים (פניות) אתה מקבל בממוצע בחודש מכל ערוץ? *</Label>
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mt-3">
                         <div>
                           <Label htmlFor="facebook-leads">פייסבוק</Label>
@@ -513,7 +513,7 @@ const OrganizationProfilingForm = () => {
 
 
                     <div>
-                      <Label htmlFor="leadProcessStep2">באיזו מערכת אתם רושמים את הליד? (שם המערכת בדיוק) *</Label>
+                      <Label htmlFor="leadProcessStep2">באיזו מערכת אתה רושם את הליד? (שם המערכת בדיוק) *</Label>
                       <Input
                         id="leadProcessStep2"
                         value={formData.leadProcessStep2}
@@ -523,7 +523,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="leadProcessResponseTime">תוך כמה זמן אתם מגיבים ללידים (בממוצע)? *</Label>
+                      <Label htmlFor="leadProcessResponseTime">תוך כמה זמן אתה מגיב ללידים (בממוצע)? *</Label>
                       <Select value={formData.leadProcessResponseTime} onValueChange={(value) => handleInputChange('leadProcessResponseTime', value)}>
                         <SelectTrigger>
                           <SelectValue placeholder="בחר זמן תגובה" />
@@ -550,7 +550,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="leadQualificationCriteria">איך אתם מסנים לידים? מהם הקריטריונים להגדרת ליד כ"חם" או "קר"? *</Label>
+                      <Label htmlFor="leadQualificationCriteria">איך אתה מסנן לידים? מהם הקריטריונים להגדרת ליד כ"חם" או "קר"? *</Label>
                       <Textarea
                         id="leadQualificationCriteria"
                         value={formData.leadQualificationCriteria}
@@ -561,7 +561,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label>באילו כלים אתם משתמשים לניהול הלידים? *</Label>
+                      <Label>באילו כלים אתה משתמש לניהול הלידים? *</Label>
                       <div className="space-y-2 mt-2">
                         {['CRM ייעודי', 'Excel/Google Sheets', 'WhatsApp Business', 'Monday.com', 'ClickUp', 'אין כלי ניהול'].map((option) => (
                           <div key={option} className="flex items-center space-x-2 space-x-reverse">
@@ -598,7 +598,7 @@ const OrganizationProfilingForm = () => {
                   <div className="space-y-6">
                     
                     <div>
-                      <Label>איזה סוגי תוכן אתם מייצרים? *</Label>
+                      <Label>איזה סוגי תוכן אתה מייצר? *</Label>
                       <div className="space-y-2 mt-2">
                         {['פוסטים ברשתות חברתיות', 'ניוזלטר', 'סרטוני וידאו', 'בלוג/מאמרים', 'חומרי שיווק', 'אין יצירת תוכן'].map((option) => (
                           <div key={option} className="flex items-center space-x-2 space-x-reverse">
@@ -614,7 +614,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label className="text-base font-medium">כמה זמן (בדקות/שעות/ימים) בממוצע לוקח לכם להפיק כל סוג תוכן? *</Label>
+                      <Label className="text-base font-medium">כמה זמן (בדקות/שעות/ימים) בממוצע לוקח לך להפיק כל סוג תוכן? *</Label>
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mt-3">
                         <div>
                           <Label htmlFor="posts-time">פוסט בפייסבוק/אינסטגרם</Label>
@@ -650,7 +650,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="customerDatabase">כמה אנשי קשר יש לכם במאגר הלקוחות? *</Label>
+                      <Label htmlFor="customerDatabase">כמה אנשי קשר יש לך במאגר הלקוחות? *</Label>
                       <Input
                         id="customerDatabase"
                         type="number"
@@ -661,7 +661,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="customerDatabaseLocation">היכן מנוהל מאגר הלקוחות שלכם? (שם המערכת בדיוק) *</Label>
+                      <Label htmlFor="customerDatabaseLocation">היכן מנוהל מאגר הלקוחות שלך? (שם המערכת בדיוק) *</Label>
                       <Input
                         id="customerDatabaseLocation"
                         value={formData.customerDatabaseLocation}
@@ -671,7 +671,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label>איך מפולח המאגר שלכם? *</Label>
+                      <Label>איך מפולח המאגר שלך? *</Label>
                       <div className="space-y-2 mt-2">
                         {['לקוחות עבר', 'מתעניינים פעילים', 'לידים קרים', 'לקוחות VIP', 'אין פילוח'].map((option) => (
                           <div key={option} className="flex items-center space-x-2 space-x-reverse">
@@ -687,7 +687,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="followUpProcess">איך אתם מבצעים פנייה מחודשת ללקוחות עבר או למתעניינים שלא סגרו? *</Label>
+                      <Label htmlFor="followUpProcess">איך אתה מבצע פנייה מחודשת ללקוחות עבר או למתעניינים שלא סגרו? *</Label>
                       <Textarea
                         id="followUpProcess"
                         value={formData.followUpProcess}
@@ -698,7 +698,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label>באילו כלים אתם משתמשים לשמירת קשר עם לקוחות? *</Label>
+                      <Label>באילו כלים אתה משתמש לשמירת קשר עם לקוחות? *</Label>
                       <div className="space-y-2 mt-2">
                         {['WhatsApp Business', 'מערכת דיוור (MailChimp וכו\')', 'שיחות טלפון', 'SMS', 'פגישות פיזיות', 'אין מעקב שיטתי'].map((option) => (
                           <div key={option} className="flex items-center space-x-2 space-x-reverse">
@@ -722,7 +722,7 @@ const OrganizationProfilingForm = () => {
                     
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       <div>
-                        <Label htmlFor="weeklyMeetings">כמה פגישות אתם מתאמים בשבוע בממוצע? *</Label>
+                        <Label htmlFor="weeklyMeetings">כמה פגישות אתה מתאם בשבוע בממוצע? *</Label>
                         <Input
                           id="weeklyMeetings"
                           type="number"
@@ -732,7 +732,7 @@ const OrganizationProfilingForm = () => {
                         />
                       </div>
                       <div>
-                        <Label htmlFor="remindersSent">כמה תזכורות אתם שולחים בשבוע בממוצע? *</Label>
+                        <Label htmlFor="remindersSent">כמה תזכורות אתה שולח בשבוע בממוצע? *</Label>
                         <Input
                           id="remindersSent"
                           type="number"
@@ -744,7 +744,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="meetingSchedulingProcess">מה התהליך המדויק לתיאום פגישה אצלכם? *</Label>
+                      <Label htmlFor="meetingSchedulingProcess">מה התהליך המדויק לתיאום פגישה אצלך? *</Label>
                       <Textarea
                         id="meetingSchedulingProcess"
                         value={formData.meetingSchedulingProcess}
@@ -755,7 +755,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label>אילו משימות אדמיניסטרטיביות חוזרות על עצמן אצלכם? *</Label>
+                      <Label>אילו משימות אדמיניסטרטיביות חוזרות על עצמן אצלך? *</Label>
                       <div className="space-y-2 mt-2">
                         {['הפקת הצעות מחיר', 'הכנת דוחות', 'עדכון מלאי', 'שליחת חשבוניות', 'איסוף נתונים ללקוחות', 'עדכון מערכות'].map((option) => (
                           <div key={option} className="flex items-center space-x-2 space-x-reverse">
@@ -771,7 +771,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="adminTimeSpent">כמה שעות עבודה בשבוע אתם מעריכים שמתבזבזות על מנהלה ומשימות חוזרות? *</Label>
+                      <Label htmlFor="adminTimeSpent">כמה שעות עבודה בשבוע אתה מעריך שמתבזבזות על מנהלה ומשימות חוזרות? *</Label>
                       <Input
                         id="adminTimeSpent"
                         type="number"
@@ -782,7 +782,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="documentGeneration">איך אתם מפיקים מסמכים (הצעות מחיר, חוזים, דוחות)? *</Label>
+                      <Label htmlFor="documentGeneration">איך אתה מפיק מסמכים (הצעות מחיר, חוזים, דוחות)? *</Label>
                       <Textarea
                         id="documentGeneration"
                         value={formData.documentGeneration}
@@ -800,7 +800,7 @@ const OrganizationProfilingForm = () => {
                   <div className="space-y-6">
                     
                     <div>
-                      <Label>באילו תוכנות ומערכות אתם משתמשים? (ציין שמות מדויקים) *</Label>
+                      <Label>באילו תוכנות ומערכות אתה משתמש? (ציין שמות מדויקים) *</Label>
                       <div className="space-y-2 mt-2">
                         {['Monday.com', 'HubSpot', 'Salesforce', 'ClickUp', 'Slack', 'Microsoft 365', 'Google Workspace', 'Zoom', 'WhatsApp Business'].map((option) => (
                           <div key={option} className="flex items-center space-x-2 space-x-reverse">
@@ -831,7 +831,7 @@ const OrganizationProfilingForm = () => {
 
 
                     <div>
-                      <Label htmlFor="existingAutomations">האם יש לכם כיום אוטומציות (Zapier, Make, או אוטומציה אחרת)? אם כן, מה הן עושות? *</Label>
+                      <Label htmlFor="existingAutomations">האם יש לך כיום אוטומציות (Zapier, Make, או אוטומציה אחרת)? אם כן, מה הן עושות? *</Label>
                       <Textarea
                         id="existingAutomations"
                         value={formData.existingAutomations}
@@ -842,7 +842,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label>באילו כלי אוטומציה אתם מכירים או משתמשים? *</Label>
+                      <Label>באילו כלי אוטומציה אתה מכיר או משתמש? *</Label>
                       <div className="space-y-2 mt-2">
                         {['Zapier', 'Microsoft Power Automate', 'Make (לשעבר Integromat)', 'IFTTT', 'n8n', 'אוטומציות מובנות במערכות', 'לא מכיר'].map((option) => (
                           <div key={option} className="flex items-center space-x-2 space-x-reverse">
@@ -941,7 +941,7 @@ const OrganizationProfilingForm = () => {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       <div>
-                        <Label htmlFor="startDate">מתי נוח לכם להתחיל את התהליך? *</Label>
+                        <Label htmlFor="startDate">מתי נוח לך להתחיל את התהליך? *</Label>
                         <Input
                           id="startDate"
                           type="date"
@@ -966,7 +966,7 @@ const OrganizationProfilingForm = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="additionalComments">הערות נוספות או מידע שחשוב לכם לשתף</Label>
+                      <Label htmlFor="additionalComments">הערות נוספות או מידע שחשוב לך לשתף</Label>
                       <Textarea
                         id="additionalComments"
                         value={formData.additionalComments}

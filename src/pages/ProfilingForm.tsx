@@ -13,7 +13,7 @@ const ProfilingForm = () => {
     <>
       <Helmet>
         <title>טופס איפיון AI לעסק | גיא כהן</title>
-        <meta name="description" content="טופס איפיון מפורט שיעזור לנו להבין בדיוק מה הארגון שלכם צריך ולהתאים פתרון AI מושלם" />
+        <meta name="description" content="טופס איפיון מפורט שיעזור לנו להבין בדיוק מה העסק שלך צריך ולהתאים פתרון AI מושלם" />
       </Helmet>
       <OrganizationProfilingForm />
     </>

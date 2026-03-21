@@ -1,6 +1,8 @@
 import { Users, Target, Search, Lightbulb, Cog, ArrowRight } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const ProcessSection = () => {
+  const { ref, isVisible } = useScrollAnimation();
   const steps = [
     {
       icon: <Users className="w-8 h-8 text-purple-700" />,
@@ -31,7 +33,7 @@ const ProcessSection = () => {
 
   return (
     <section id="process" className="bg-navy-dark py-16 md:py-20">
-      <div className="container mx-auto px-4 max-w-7xl">
+      <div ref={ref} className={`animate-scroll-in ${isVisible ? 'visible' : ''} container mx-auto px-4 max-w-7xl`}>
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold font-heebo text-white mb-4">
             איך זה עובד?

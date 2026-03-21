@@ -2,15 +2,17 @@ import { Link } from "react-router-dom";
 import { Calendar, ArrowLeft } from "lucide-react";
 import { articles } from "@/data/articles";
 import { formatDate } from "@/lib/utils";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const LatestArticlesSection = () => {
+  const { ref, isVisible } = useScrollAnimation();
   const latest = [...articles]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 3);
 
   return (
     <section className="bg-navy-dark py-16 md:py-20" dir="rtl">
-      <div className="container mx-auto px-4 max-w-6xl">
+      <div ref={ref} className={`animate-scroll-in ${isVisible ? 'visible' : ''} container mx-auto px-4 max-w-6xl`}>
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white font-heebo mb-4">
             מהקהילה

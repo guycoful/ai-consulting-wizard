@@ -178,7 +178,7 @@ const ArticlePage = () => {
             רוצה ליהנות מתכנים כאלה ישירות?
           </h3>
           <p className="text-gray-300 font-heebo mb-6">
-            הצטרפו לקהילת הוואטסאפ שלי או קבעו שיחת ייעוץ ראשונית ללא עלות
+            הצטרף לקהילת הוואטסאפ שלי או קבע שיחת ייעוץ ראשונית ללא עלות
           </p>
           <Link to="/#contact">
             <Button className="bg-blue-primary hover:bg-blue-primary/90 text-white font-heebo font-medium px-8 py-3">

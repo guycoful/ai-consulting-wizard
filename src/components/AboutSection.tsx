@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { User, GraduationCap, Award, Users, FileText } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const AboutSection = () => {
+  const { ref, isVisible } = useScrollAnimation();
   useEffect(() => {
     const script = document.createElement("script");
     script.type = "application/ld+json";
@@ -27,7 +29,7 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="bg-navy-light py-16 md:py-20" dir="rtl">
-      <div className="container mx-auto px-4 max-w-6xl">
+      <div ref={ref} className={`animate-scroll-in ${isVisible ? 'visible' : ''} container mx-auto px-4 max-w-6xl`}>
 
         {/* Bio Section - 2 columns on desktop, stacked on mobile */}
         <div className="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center mb-16">

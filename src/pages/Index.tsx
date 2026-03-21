@@ -24,9 +24,13 @@ const Index = () => {
         <meta name="description" content="ייעוץ בינה מלאכותית לעסקים קטנים ובינוניים. פתרונות AI מותאמים אישית שיגדילו הכנסות, ישפרו שירות ויחסכו זמן." />
       </Helmet>
       <HeroSection />
+      <div className="h-16 bg-gradient-to-b from-navy-dark to-navy-light" />
       <TargetAudienceSection />
+      <div className="h-16 bg-gradient-to-b from-navy-light to-navy-dark" />
       <ProcessSection />
+      <div className="h-16 bg-gradient-to-b from-navy-dark to-navy-light" />
       <AboutSection />
+      <div className="h-16 bg-gradient-to-b from-navy-light to-navy-dark" />
       <LatestArticlesSection />
       <ContactSection />
       <FaqSection />
@@ -35,10 +39,10 @@ const Index = () => {
       <section className="bg-blue-primary py-16" dir="rtl">
         <div className="container mx-auto px-4 text-center">
           <h3 className="text-2xl md:text-3xl font-bold text-white mb-6 font-heebo">
-            מוכנים להתחיל? מלאו את טופס האיפיון
+            מוכן להתחיל? מלא את טופס האיפיון
           </h3>
           <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto font-heebo">
-            טופס מפורט שיעזור לנו להבין בדיוק מה הארגון שלכם צריך ולהתאים פתרון AI מושלם
+            טופס מפורט שיעזור לנו להבין בדיוק מה העסק שלך צריך ולהתאים פתרון AI מושלם
           </p>
           <Button
             onClick={handleFormNavigation}
