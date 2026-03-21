@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { User, GraduationCap, Award, Users, FileText } from "lucide-react";
+import { GraduationCap, Award, Users, FileText } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const AboutSection = () => {
@@ -34,11 +34,14 @@ const AboutSection = () => {
         {/* Bio Section - 2 columns on desktop, stacked on mobile */}
         <div className="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center mb-16">
 
-          {/* Photo / Avatar Placeholder - right side on desktop */}
-          {/* תמונת פורטרט - להחליף עם תמונה אמיתית בעתיד */}
+          {/* תמונת פורטרט */}
           <div className="flex-shrink-0">
-            <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-navy-dark border-4 border-purple-700/40 flex items-center justify-center shadow-lg shadow-purple-700/10">
-              <User className="w-24 h-24 md:w-28 md:h-28 text-purple-400/60" strokeWidth={1} />
+            <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-purple-700/40 shadow-lg shadow-purple-700/10">
+              <img
+                src="/images/guy-cohen-portrait.png"
+                alt="גיא כהן — יועץ בינה מלאכותית לעסקים"
+                className="w-full h-full object-cover object-top"
+              />
             </div>
           </div>
 
