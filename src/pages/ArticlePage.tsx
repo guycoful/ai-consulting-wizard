@@ -100,17 +100,17 @@ const ArticlePage = () => {
         {/* Article content — trusted source: own data file, not user input */}
         <article
           className="prose prose-invert prose-lg max-w-none font-heebo
-            prose-headings:font-heebo prose-headings:text-white prose-headings:font-bold
-            prose-h3:text-2xl prose-h3:mt-12 prose-h3:mb-6
-            prose-h4:text-xl prose-h4:mt-10 prose-h4:mb-4
-            prose-p:leading-loose prose-p:mb-6
-            prose-ul:my-6 prose-ul:space-y-2 prose-ol:my-6 prose-ol:space-y-2
-            prose-li:leading-relaxed
-            prose-hr:my-10 prose-hr:border-purple-700/30
-            prose-blockquote:my-8 prose-blockquote:border-purple-500/50
+            prose-headings:font-heebo prose-headings:font-bold
             prose-a:text-purple-400 prose-a:no-underline hover:prose-a:underline
-            [&_p]:!text-gray-100 [&_li]:!text-gray-100 [&_strong]:!text-white
-            [&_h3]:!text-white [&_h4]:!text-white [&_ol]:!text-gray-100"
+            [&_h3]:!text-2xl [&_h3]:!md:text-3xl [&_h3]:!mt-14 [&_h3]:!mb-6 [&_h3]:!text-white [&_h3]:!leading-snug
+            [&_h4]:!text-xl [&_h4]:!md:text-2xl [&_h4]:!mt-10 [&_h4]:!mb-5 [&_h4]:!text-white [&_h4]:!leading-snug
+            [&_p]:!text-gray-100 [&_p]:!mb-6 [&_p]:!leading-8
+            [&_ul]:!my-8 [&_ol]:!my-8
+            [&_li]:!text-gray-100 [&_li]:!mb-3 [&_li]:!leading-8
+            [&_strong]:!text-white
+            [&_hr]:!my-12 [&_hr]:!border-purple-700/30
+            [&_blockquote]:!my-8 [&_blockquote]:!border-purple-500/50 [&_blockquote]:!text-gray-200
+            [&_ol]:!text-gray-100"
           dangerouslySetInnerHTML={{ __html: article.content }}
         />
 
