@@ -56,6 +56,17 @@ const ArticlePage = () => {
           חזרה למאמרים
         </Link>
 
+        {/* Hero image */}
+        {article.image && (
+          <div className="w-full rounded-xl overflow-hidden mb-8">
+            <img
+              src={article.image}
+              alt={article.title}
+              className="w-full h-auto max-h-[400px] object-cover"
+            />
+          </div>
+        )}
+
         {/* Header */}
         <header className="mb-10">
           <div className="flex flex-wrap gap-2 mb-4">

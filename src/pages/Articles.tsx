@@ -35,36 +35,49 @@ const Articles = () => {
               to={`/articles/${article.slug}`}
               className="group"
             >
-              <article className="bg-navy-light rounded-xl border border-purple-700/20 p-6 h-full flex flex-col transition-all duration-300 hover:border-purple-700/50 hover:shadow-lg hover:shadow-purple-700/10 hover:-translate-y-1">
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {article.tags.map((tag) => (
-                    <Badge
-                      key={tag}
-                      variant="secondary"
-                      className="bg-purple-700/20 text-purple-300 border-0 font-heebo text-xs"
-                    >
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
+              <article className="bg-navy-light rounded-xl border border-purple-700/20 overflow-hidden h-full flex flex-col transition-all duration-300 hover:border-purple-700/50 hover:shadow-lg hover:shadow-purple-700/10 hover:-translate-y-1">
+                {article.image && (
+                  <div className="w-full h-48 overflow-hidden">
+                    <img
+                      src={article.image}
+                      alt={article.title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
 
-                <h2 className="text-xl font-bold font-heebo text-white mb-3 group-hover:text-purple-400 transition-colors leading-tight">
-                  {article.title}
-                </h2>
+                <div className="p-6 flex flex-col flex-grow">
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {article.tags.map((tag) => (
+                      <Badge
+                        key={tag}
+                        variant="secondary"
+                        className="bg-purple-700/20 text-purple-300 border-0 font-heebo text-xs"
+                      >
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
 
-                <p className="text-gray-400 font-heebo text-sm leading-relaxed mb-6 flex-grow">
-                  {article.excerpt}
-                </p>
+                  <h2 className="text-xl font-bold font-heebo text-white mb-3 group-hover:text-purple-400 transition-colors leading-tight">
+                    {article.title}
+                  </h2>
 
-                <div className="flex items-center gap-4 text-xs text-gray-500 font-heebo mt-auto pt-4 border-t border-purple-700/10">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="h-3.5 w-3.5" />
-                    {formatDate(article.date)}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="h-3.5 w-3.5" />
-                    {article.readingTime} דק' קריאה
-                  </span>
+                  <p className="text-gray-400 font-heebo text-sm leading-relaxed mb-6 flex-grow">
+                    {article.excerpt}
+                  </p>
+
+                  <div className="flex items-center gap-4 text-xs text-gray-500 font-heebo mt-auto pt-4 border-t border-purple-700/10">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="h-3.5 w-3.5" />
+                      {formatDate(article.date)}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="h-3.5 w-3.5" />
+                      {article.readingTime} דק' קריאה
+                    </span>
+                  </div>
                 </div>
               </article>
             </Link>

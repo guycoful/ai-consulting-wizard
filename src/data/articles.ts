@@ -7,6 +7,7 @@ export interface Article {
   date: string; // ISO format: "2025-07-10"
   readingTime: number; // minutes
   tags: string[];
+  image?: string; // path relative to /public, e.g. "/images/articles/foo.jpg"
 }
 
 export const articles: Article[] = [
@@ -137,6 +138,7 @@ export const articles: Article[] = [
     date: "2026-03-08",
     readingTime: 3,
     tags: ["קהילת הסוכנים", "סוכן AI", "חיסכון כסף"],
+    image: "/images/articles/supermarket-agent.png",
   },
   {
     id: "5",
@@ -184,6 +186,7 @@ export const articles: Article[] = [
     date: "2026-03-07",
     readingTime: 4,
     tags: ["קהילת העסקים", "אוטומציה", "וואטסאפ", "לידים"],
+    image: "/images/articles/whatsapp-chat.jpg",
   },
   {
     id: "6",
@@ -228,6 +231,7 @@ export const articles: Article[] = [
     date: "2026-03-09",
     readingTime: 3,
     tags: ["קהילת העסקים", "אוטומציה", "הודעות קוליות", "לידים"],
+    image: "/images/articles/voice-messages.jpg",
   },
   {
     id: "7",
@@ -267,6 +271,7 @@ export const articles: Article[] = [
     date: "2026-03-05",
     readingTime: 3,
     tags: ["קהילת הסוכנים", "סוכן AI", "תזונה", "בריאות"],
+    image: "/images/articles/calorie-agent.png",
   },
   {
     id: "8",
@@ -307,6 +312,7 @@ export const articles: Article[] = [
     date: "2026-03-06",
     readingTime: 3,
     tags: ["קהילת הסוכנים", "סוכן AI", "התפתחות אישית", "מנטורינג"],
+    image: "/images/articles/why-agent.png",
   },
   {
     id: "9",
@@ -353,5 +359,6 @@ export const articles: Article[] = [
     date: "2026-03-04",
     readingTime: 4,
     tags: ["קהילת הסוכנים", "סוכן AI", "פרודוקטיביות", "התפתחות אישית"],
+    image: "/images/articles/barrier-agent.jpg",
   },
 ];
