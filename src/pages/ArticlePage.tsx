@@ -62,7 +62,7 @@ const ArticlePage = () => {
             <img
               src={article.image}
               alt={article.title}
-              className="w-full h-auto max-h-[400px] object-cover"
+              className="w-full h-auto"
             />
           </div>
         )}
