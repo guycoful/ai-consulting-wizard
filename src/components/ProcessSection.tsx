@@ -1,4 +1,4 @@
-import { Users, Target, Search, Lightbulb, Cog, ArrowLeft } from "lucide-react";
+import { Users, Target, Search, Lightbulb, Cog, ArrowRight } from "lucide-react";
 
 const ProcessSection = () => {
   const steps = [
@@ -62,7 +62,7 @@ const ProcessSection = () => {
               
               {index < steps.length - 1 && (
                 <div className="hidden lg:flex items-center mx-4">
-                  <ArrowLeft className="w-8 h-8 text-purple-700 animate-pulse" />
+                  <ArrowRight className="w-8 h-8 text-purple-700 animate-pulse" />
                 </div>
               )}
             </div>
