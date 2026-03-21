@@ -519,5 +519,6 @@ export const articles: Article[] = [
     readingTime: 8,
     tags: ["סוכן AI", "Gemini Gem", "מדריך", "פרומפט"],
     category: "agents",
+    image: "/images/articles/gem-guide.png",
   },
 ];

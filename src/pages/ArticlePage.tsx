@@ -101,10 +101,13 @@ const ArticlePage = () => {
         <article
           className="prose prose-invert prose-lg max-w-none font-heebo
             prose-headings:font-heebo prose-headings:text-white prose-headings:font-bold
-            prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4
-            prose-h4:text-lg prose-h4:mt-6 prose-h4:mb-3
-            prose-p:leading-relaxed prose-p:mb-4
-            prose-ul:my-4 prose-ol:my-4
+            prose-h3:text-2xl prose-h3:mt-12 prose-h3:mb-6
+            prose-h4:text-xl prose-h4:mt-10 prose-h4:mb-4
+            prose-p:leading-loose prose-p:mb-6
+            prose-ul:my-6 prose-ul:space-y-2 prose-ol:my-6 prose-ol:space-y-2
+            prose-li:leading-relaxed
+            prose-hr:my-10 prose-hr:border-purple-700/30
+            prose-blockquote:my-8 prose-blockquote:border-purple-500/50
             prose-a:text-purple-400 prose-a:no-underline hover:prose-a:underline
             [&_p]:!text-gray-100 [&_li]:!text-gray-100 [&_strong]:!text-white
             [&_h3]:!text-white [&_h4]:!text-white [&_ol]:!text-gray-100"
