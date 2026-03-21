@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -12,15 +13,50 @@ const ContactSection = () => {
     phone: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "הטופס נשלח בהצלחה!",
-      description: "נחזור אליך בהקדם האפשרי",
-    });
-    setFormData({ name: '', email: '', phone: '', message: '' });
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase
+        .from('contact_submissions' as any)
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone || null,
+            message: formData.message,
+          },
+        ]);
+
+      if (error) {
+        console.error('Supabase insertion error:', error);
+        toast({
+          title: "שגיאה בשליחת הטופס",
+          description: "אנא נסה שנית מאוחר יותר או צור קשר ישירות",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      toast({
+        title: "הטופס נשלח בהצלחה!",
+        description: "נחזור אליך בהקדם האפשרי",
+      });
+      setFormData({ name: '', email: '', phone: '', message: '' });
+    } catch (err) {
+      console.error('Unexpected error submitting contact form:', err);
+      toast({
+        title: "שגיאה בשליחת הטופס",
+        description: "אירעה שגיאה בלתי צפויה. אנא נסה שנית.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -111,9 +147,10 @@ const ContactSection = () => {
           
           <Button
             type="submit"
-            className="w-full bg-blue-primary hover:bg-blue-primary/90 text-white py-6 text-xl font-heebo font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+            disabled={isSubmitting}
+            className="w-full bg-blue-primary hover:bg-blue-primary/90 text-white py-6 text-xl font-heebo font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            שלחו לי ייעוץ ראשוני
+            {isSubmitting ? "שולח..." : "שלחו לי ייעוץ ראשוני"}
           </Button>
           
           <p className="text-base text-gray-400 font-heebo text-center mt-8">

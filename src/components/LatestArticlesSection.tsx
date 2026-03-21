@@ -1,18 +1,12 @@
 import { Link } from "react-router-dom";
 import { Calendar, ArrowLeft } from "lucide-react";
 import { articles } from "@/data/articles";
+import { formatDate } from "@/lib/utils";
 
 const LatestArticlesSection = () => {
   const latest = [...articles]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 3);
-
-  const formatDate = (iso: string) =>
-    new Date(iso).toLocaleDateString("he-IL", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
 
   return (
     <section className="bg-navy-dark py-16 md:py-20" dir="rtl">
@@ -36,11 +30,11 @@ const LatestArticlesSection = () => {
             >
               <article className="bg-navy-light rounded-xl border border-purple-700/20 overflow-hidden h-full flex flex-col transition-all duration-300 hover:border-purple-700/50 hover:shadow-lg hover:shadow-purple-700/10 hover:-translate-y-1">
                 {article.image && (
-                  <div className="w-full h-40 overflow-hidden">
+                  <div className={`w-full h-40 overflow-hidden ${article.image.includes("gem-guide") ? "bg-navy-light" : ""}`}>
                     <img
                       src={article.image}
                       alt={article.title}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      className={`w-full h-full transition-transform duration-300 group-hover:scale-105 ${article.image.includes("gem-guide") ? "object-contain" : "object-cover"}`}
                       loading="lazy"
                     />
                   </div>

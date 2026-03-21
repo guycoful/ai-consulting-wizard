@@ -20,6 +20,7 @@ export default {
 		},
 		extend: {
 			fontFamily: {
+				sans: ['Heebo', 'sans-serif'],
 				'heebo': ['Heebo', 'sans-serif'],
 			},
 			colors: {

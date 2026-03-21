@@ -1,9 +1,11 @@
+import { Helmet } from "react-helmet-async";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { ArrowRight, Calendar, Clock, Share2, MessageCircle, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { articles } from "@/data/articles";
+import { formatDate } from "@/lib/utils";
 import { useEffect } from "react";
 
 const ArticlePage = () => {
@@ -18,13 +20,6 @@ const ArticlePage = () => {
   if (!article) {
     return <Navigate to="/articles" replace />;
   }
-
-  const formatDate = (iso: string) =>
-    new Date(iso).toLocaleDateString("he-IL", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
 
   const articleUrl = `https://guycohen-ai.co.il/articles/${article.slug}`;
 
@@ -46,6 +41,10 @@ const ArticlePage = () => {
   // not from user input or external sources. Safe to render as HTML.
   return (
     <div className="bg-navy-dark min-h-screen py-12">
+      <Helmet>
+        <title>{`${article.title} | גיא כהן`}</title>
+        <meta name="description" content={article.excerpt} />
+      </Helmet>
       <div className="container mx-auto px-4 max-w-3xl">
         {/* Back button */}
         <Link

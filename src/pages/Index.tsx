@@ -1,4 +1,5 @@
 
+import { Helmet } from "react-helmet-async";
 import HeroSection from "@/components/HeroSection";
 import TargetAudienceSection from "@/components/TargetAudienceSection";
 import ProcessSection from "@/components/ProcessSection";
@@ -17,6 +18,10 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>ייעוץ AI לעסקים קטנים ובינוניים | גיא כהן</title>
+        <meta name="description" content="ייעוץ בינה מלאכותית לעסקים קטנים ובינוניים. פתרונות AI מותאמים אישית שיגדילו הכנסות, ישפרו שירות ויחסכו זמן." />
+      </Helmet>
       <HeroSection />
       <TargetAudienceSection />
       <ProcessSection />

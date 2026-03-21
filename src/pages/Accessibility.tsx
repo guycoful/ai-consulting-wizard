@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { legalContent } from "@/lib/legal-content";
 
 const Accessibility = () => {
@@ -5,6 +6,10 @@ const Accessibility = () => {
 
   return (
     <main dir="rtl" lang="he" className="bg-navy-dark min-h-screen py-20 md:py-32">
+      <Helmet>
+        <title>הצהרת נגישות | גיא כהן</title>
+        <meta name="description" content="הצהרת הנגישות של אתר ייעוץ AI לעסקים - גיא כהן" />
+      </Helmet>
       <div className="container mx-auto px-4 max-w-[680px]">
         <h1 className="text-3xl md:text-4xl font-bold font-heebo text-white mb-8">
           {title}

@@ -39,10 +39,10 @@ const ProcessSection = () => {
           <div className="w-24 h-1 bg-purple-700 mx-auto"></div>
         </div>
         
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-6 overflow-x-auto">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-6 overflow-hidden">
           {steps.map((step, index) => (
             <div key={index} className="flex items-center">
-              <div className="text-center group flex-shrink-0 min-w-[200px]">
+              <div className="text-center group">
                 <div className="bg-navy-light w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-700 group-hover:text-navy-dark transition-all duration-300 border-2 border-purple-700">
                   {step.icon}
                 </div>

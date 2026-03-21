@@ -1,7 +1,9 @@
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Calendar, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { articles, type ArticleCategory } from "@/data/articles";
+import { formatDate } from "@/lib/utils";
 
 const categoryConfig: Record<ArticleCategory, { emoji: string; title: string; color: string }> = {
   agents: {
@@ -17,13 +19,6 @@ const categoryConfig: Record<ArticleCategory, { emoji: string; title: string; co
 };
 
 const Articles = () => {
-  const formatDate = (iso: string) =>
-    new Date(iso).toLocaleDateString("he-IL", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-
   const agentArticles = [...articles]
     .filter((a) => a.category === "agents")
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -36,11 +31,11 @@ const Articles = () => {
     <Link key={article.id} to={`/articles/${article.slug}`} className="group">
       <article className="bg-navy-light rounded-xl border border-purple-700/20 overflow-hidden h-full flex flex-col transition-all duration-300 hover:border-purple-700/50 hover:shadow-lg hover:shadow-purple-700/10 hover:-translate-y-1">
         {article.image && (
-          <div className="w-full h-48 overflow-hidden">
+          <div className={`w-full h-48 overflow-hidden ${article.image.includes("gem-guide") ? "bg-navy-light" : ""}`}>
             <img
               src={article.image}
               alt={article.title}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              className={`w-full h-full transition-transform duration-300 group-hover:scale-105 ${article.image.includes("gem-guide") ? "object-contain" : "object-cover"}`}
               loading="lazy"
             />
           </div>
@@ -104,6 +99,10 @@ const Articles = () => {
 
   return (
     <div className="bg-navy-dark min-h-screen py-16">
+      <Helmet>
+        <title>מאמרים על AI לעסקים | גיא כהן</title>
+        <meta name="description" content="פוסטים ותובנות על בינה מלאכותית לעסקים - כל מה שצריך לדעת על AI לעסקים קטנים ובינוניים, במקום אחד" />
+      </Helmet>
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold font-heebo text-white mb-4">
