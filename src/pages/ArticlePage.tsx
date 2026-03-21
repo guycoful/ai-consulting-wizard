@@ -44,6 +44,24 @@ const ArticlePage = () => {
       <Helmet>
         <title>{`${article.title} | גיא כהן`}</title>
         <meta name="description" content={article.excerpt} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: article.title,
+            datePublished: article.date,
+            description: article.excerpt,
+            author: {
+              "@type": "Person",
+              name: "\u05D2\u05D9\u05D0 \u05DB\u05D4\u05DF",
+              url: "https://guycohen-ai.co.il",
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "\u05D2\u05D9\u05D0 \u05DB\u05D4\u05DF \u2014 \u05D9\u05D9\u05E2\u05D5\u05E5 AI",
+            },
+          })}
+        </script>
       </Helmet>
       <div className="container mx-auto px-4 max-w-3xl">
         {/* Back button */}
@@ -112,6 +130,21 @@ const ArticlePage = () => {
             [&_ol]:!text-gray-100"
           dangerouslySetInnerHTML={{ __html: article.content }}
         />
+
+        {/* Author bio */}
+        <div className="mt-12 border border-purple-500/30 rounded-xl p-6 bg-navy-light">
+          <div className="flex items-start gap-4">
+            <div className="w-1 h-full min-h-[60px] bg-purple-500 rounded-full shrink-0"></div>
+            <div>
+              <p className="text-lg font-bold font-heebo text-white mb-2">
+                נכתב על ידי גיא כהן
+              </p>
+              <p className="text-base font-heebo text-gray-300 leading-relaxed">
+                יועץ AI לעסקים קטנים ובינוניים. בוגר מנהל עסקים מאוניברסיטת בן גוריון ומאסטר קלאס AI של הייקיו דיגיטל.
+              </p>
+            </div>
+          </div>
+        </div>
 
         {/* Share buttons */}
         <div className="mt-12 pt-8 border-t border-purple-700/20">

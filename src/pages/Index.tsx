@@ -6,6 +6,7 @@ import ProcessSection from "@/components/ProcessSection";
 import AboutSection from "@/components/AboutSection";
 import LatestArticlesSection from "@/components/LatestArticlesSection";
 import ContactSection from "@/components/ContactSection";
+import FaqSection from "@/components/FaqSection";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 
@@ -28,6 +29,7 @@ const Index = () => {
       <AboutSection />
       <LatestArticlesSection />
       <ContactSection />
+      <FaqSection />
 
       {/* כפתור למעבר לטופס איפיון */}
       <section className="bg-blue-primary py-16" dir="rtl">

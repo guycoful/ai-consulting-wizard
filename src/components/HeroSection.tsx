@@ -45,7 +45,7 @@ const HeroSection = () => {
           <Button
             onClick={handleFormNavigation}
             variant="outline"
-            className="border-2 border-white/60 text-white hover:bg-white/10 hover:border-white font-heebo font-medium px-6 md:px-8 py-3 md:py-4 text-base md:text-lg rounded-lg transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+            className="bg-white border-2 border-white text-navy-dark hover:bg-gray-100 font-heebo font-bold px-6 md:px-8 py-3 md:py-4 text-base md:text-lg rounded-lg transition-all duration-300 hover:scale-105 w-full sm:w-auto"
           >
             מלא טופס איפיון
           </Button>
@@ -54,7 +54,7 @@ const HeroSection = () => {
         <div className="mb-8 md:mb-12 px-4">
           <img 
             src="/images/guy-cohen-hero.png" 
-            alt="יועץ AI לעסקים" 
+            alt="גיא כהן - יועץ בינה מלאכותית לעסקים קטנים ובינוניים"
             className="mx-auto max-w-full w-full sm:max-w-md h-auto"
           />
         </div>
