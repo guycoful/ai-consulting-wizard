@@ -1,3 +1,5 @@
+export type ArticleCategory = "agents" | "business";
+
 export interface Article {
   id: string;
   slug: string;
@@ -7,101 +9,11 @@ export interface Article {
   date: string; // ISO format: "2025-07-10"
   readingTime: number; // minutes
   tags: string[];
+  category: ArticleCategory;
   image?: string; // path relative to /public, e.g. "/images/articles/foo.jpg"
 }
 
 export const articles: Article[] = [
-  {
-    id: "1",
-    slug: "ai-for-small-business-2025",
-    title: "למה עסקים קטנים חייבים להתחיל עם AI עכשיו",
-    excerpt: "ב-2025 כבר אי אפשר להתעלם מ-AI. עסקים קטנים שמאמצים את הטכנולוגיה היום ייהנו מיתרון תחרותי משמעותי. הנה למה ואיך.",
-    content: `<p>אם אתם בעלי עסק קטן ועדיין לא משתמשים ב-AI — אתם מפסידים.</p>
-
-<p>לא מדובר בגימיקים או בטכנולוגיה שמתאימה רק לחברות ענק. היום, כלים מבוססי AI זמינים, זולים, ולפעמים אפילו חינמיים — ויכולים לשנות את הדרך שבה העסק שלכם עובד.</p>
-
-<h3>מה AI יכול לעשות לעסק שלכם?</h3>
-
-<ul>
-<li><strong>חיסכון בזמן:</strong> אוטומציה של משימות חוזרות כמו מענה ללקוחות, תזמון פגישות, ויצירת תוכן</li>
-<li><strong>שיפור שירות לקוחות:</strong> צ'אטבוטים חכמים שעונים 24/7</li>
-<li><strong>הגדלת מכירות:</strong> ניתוח נתונים שמזהה הזדמנויות שאתם מפספסים</li>
-<li><strong>שיווק ממוקד:</strong> יצירת תוכן מותאם אישית לכל קהל יעד</li>
-</ul>
-
-<h3>מאיפה מתחילים?</h3>
-
-<p>הצעד הראשון הוא <strong>מיפוי</strong>. לפני שרצים לקנות כלים, צריך להבין:</p>
-
-<ol>
-<li>מה המשימות שגוזלות הכי הרבה זמן?</li>
-<li>איפה יש טעויות חוזרות?</li>
-<li>מה הלקוחות שלכם הכי מתלוננים עליו?</li>
-</ol>
-
-<p>אחרי שמיפיתם את האתגרים — אפשר להתאים פתרון AI ספציפי שיפתור בדיוק את הבעיה, בלי להסתבך עם טכנולוגיה מיותרת.</p>
-
-<p><strong>רוצים עזרה במיפוי?</strong> זה בדיוק מה שאני עושה. שיחת ייעוץ ראשונית ללא עלות.</p>`,
-    date: "2025-07-10",
-    readingTime: 3,
-    tags: ["AI לעסקים", "עסקים קטנים", "טיפים"],
-  },
-  {
-    id: "2",
-    slug: "chatgpt-mistakes-businesses",
-    title: "5 טעויות נפוצות בשימוש ב-ChatGPT בעסקים",
-    excerpt: "כולם משתמשים ב-ChatGPT, אבל רוב העסקים עושים את זה לא נכון. הנה 5 הטעויות הנפוצות ביותר ואיך לתקן אותן.",
-    content: `<p>ChatGPT הוא כלי מדהים — אבל הרבה עסקים משתמשים בו בצורה שלא ממצה את הפוטנציאל. הנה הטעויות הנפוצות:</p>
-
-<h3>1. פרומפטים כלליים מדי</h3>
-<p>"כתוב לי פוסט לפייסבוק" זה לא מספיק. צריך לתת הקשר: מי קהל היעד, מה הטון, מה המטרה, מה האורך הרצוי. ככל שהפרומפט מפורט יותר — התוצאה טובה יותר.</p>
-
-<h3>2. אי-בדיקת התוצאות</h3>
-<p>AI טועה. הוא ממציא עובדות, מבלבל מספרים, וכותב דברים שנשמעים מצוין אבל פשוט לא נכונים. <strong>תמיד</strong> בדקו את הפלט לפני שאתם משתמשים בו.</p>
-
-<h3>3. שימוש בכלי אחד לכל דבר</h3>
-<p>ChatGPT מעולה לטקסט, אבל לא תמיד הוא הכלי הנכון. לעיצוב יש Canva AI, לניתוח נתונים יש כלים ייעודיים, לאוטומציה יש Make או Zapier.</p>
-
-<h3>4. חוסר עקביות</h3>
-<p>שימוש חד-פעמי לא יביא תוצאות. צריך לבנות תהליכי עבודה קבועים שמשלבים AI בשגרה היומיומית.</p>
-
-<h3>5. התעלמות מאבטחת מידע</h3>
-<p>לא להכניס מידע רגיש של לקוחות ל-ChatGPT. לא מספרי כרטיסי אשראי, לא פרטים אישיים, לא מסמכים סודיים.</p>
-
-<p><strong>רוצים ללמוד איך להשתמש ב-AI נכון בעסק שלכם?</strong> בואו לשיחת ייעוץ.</p>`,
-    date: "2025-08-05",
-    readingTime: 4,
-    tags: ["ChatGPT", "טיפים", "טעויות נפוצות"],
-  },
-  {
-    id: "3",
-    slug: "ai-automation-save-time",
-    title: "איך אוטומציה עם AI חוסכת 10 שעות בשבוע",
-    excerpt: "בעלי עסקים מבזבזים שעות על משימות שחוזרות על עצמן. הנה דוגמאות אמיתיות לאוטומציות שחוסכות זמן יקר.",
-    content: `<p>כבעל עסק, הזמן שלכם הוא המשאב הכי יקר. ובכל זאת, רוב בעלי העסקים מבזבזים שעות על משימות שמכונה יכולה לעשות בשניות.</p>
-
-<h3>דוגמאות לאוטומציות שעובדות</h3>
-
-<h4>מענה ללידים — חיסכון של 2 שעות ביום</h4>
-<p>במקום לענות ידנית לכל פנייה, מערכת אוטומטית שולחת תגובה מותאמת תוך דקות. הליד מקבל מענה מיידי, ואתם לא מפספסים אף פנייה.</p>
-
-<h4>יצירת תוכן — חיסכון של 5 שעות בשבוע</h4>
-<p>במקום לשבת שעות על פוסט אחד, משתמשים ב-AI ליצירת טיוטות שאתם רק משפרים ומתאימים. 30 דקות במקום 3 שעות.</p>
-
-<h4>תזמון ומעקב — חיסכון של 3 שעות בשבוע</h4>
-<p>אוטומציה של תזכורות, מעקב אחרי לקוחות, ושליחת הודעות פולואפ. בלי לשכוח, בלי טעויות.</p>
-
-<h3>איך מתחילים?</h3>
-
-<p>הכלל פשוט: <strong>אם אתם עושים את אותו הדבר יותר מ-3 פעמים בשבוע — אפשר לאוטומט את זה.</strong></p>
-
-<p>התחילו מדבר אחד קטן. תראו את התוצאות. ואז תרחיבו.</p>
-
-<p><strong>צריכים עזרה לזהות מה לאוטומט?</strong> זה בדיוק מה שאנחנו עושים בתהליך האיפיון.</p>`,
-    date: "2025-09-01",
-    readingTime: 3,
-    tags: ["אוטומציה", "חיסכון זמן", "טיפים"],
-  },
   {
     id: "4",
     slug: "ai-supermarket-agent-save-money",
@@ -141,7 +53,8 @@ export const articles: Article[] = [
 <p><a href="https://gemini.google.com/gem/10PSYJSsxLwI1fsZT6ADwYLK2vsYTeDv8?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors text-center">פתח את סוכן הסופר ב-Gemini</a></p>`,
     date: "2026-03-08",
     readingTime: 3,
-    tags: ["קהילת הסוכנים", "סוכן AI", "חיסכון כסף"],
+    tags: ["סוכן AI", "חיסכון כסף"],
+    category: "agents",
     image: "/images/articles/supermarket-agent.png",
   },
   {
@@ -195,7 +108,8 @@ export const articles: Article[] = [
 </ul>`,
     date: "2026-03-07",
     readingTime: 4,
-    tags: ["קהילת העסקים", "אוטומציה", "וואטסאפ", "לידים"],
+    tags: ["אוטומציה", "וואטסאפ", "לידים"],
+    category: "business",
     image: "/images/articles/whatsapp-chat.jpg",
   },
   {
@@ -240,7 +154,8 @@ export const articles: Article[] = [
 </ul>`,
     date: "2026-03-09",
     readingTime: 3,
-    tags: ["קהילת העסקים", "אוטומציה", "הודעות קוליות", "לידים"],
+    tags: ["אוטומציה", "הודעות קוליות", "לידים"],
+    category: "business",
     image: "/images/articles/voice-messages.jpg",
   },
   {
@@ -341,7 +256,8 @@ export const articles: Article[] = [
 <p><strong>רוצים לקבל את ההנחיה המלאה שכתבתי לבוט התזונה — מוכנה להעתקה?</strong> שלחו לי הודעה פרטית.</p>`,
     date: "2026-02-24",
     readingTime: 6,
-    tags: ["קהילת הסוכנים", "סוכן AI", "תזונה", "מדריך"],
+    tags: ["סוכן AI", "תזונה", "מדריך"],
+    category: "agents",
     image: "/images/articles/calorie-agent.png",
   },
   {
@@ -368,7 +284,8 @@ export const articles: Article[] = [
 <p><a href="https://gemini.google.com/gem/1CWc3aTGxJVEcBOQHD9DoYovxxiTIKJyt?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors text-center">פתח את סוכן 7 הלמות ב-Gemini</a></p>`,
     date: "2026-03-03",
     readingTime: 2,
-    tags: ["קהילת הסוכנים", "סוכן AI", "התפתחות אישית", "מנטורינג"],
+    tags: ["סוכן AI", "התפתחות אישית", "מנטורינג"],
+    category: "agents",
     image: "/images/articles/why-agent.png",
   },
   {
@@ -411,7 +328,8 @@ export const articles: Article[] = [
 <p><a href="https://gemini.google.com/gem/1CWc3aTGxJVEcBOQHD9DoYovxxiTIKJyt?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors text-center">פתח את סוכן החסמים ב-Gemini</a></p>`,
     date: "2026-02-26",
     readingTime: 4,
-    tags: ["קהילת הסוכנים", "סוכן AI", "פרודוקטיביות", "התפתחות אישית"],
+    tags: ["סוכן AI", "פרודוקטיביות", "התפתחות אישית"],
+    category: "agents",
     image: "/images/articles/barrier-agent.jpg",
   },
 ];

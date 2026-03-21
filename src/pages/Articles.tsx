@@ -1,19 +1,106 @@
 import { Link } from "react-router-dom";
 import { Calendar, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { articles } from "@/data/articles";
+import { articles, type ArticleCategory } from "@/data/articles";
+
+const categoryConfig: Record<ArticleCategory, { emoji: string; title: string; color: string }> = {
+  agents: {
+    emoji: "🤖",
+    title: "פוסטים מקהילת הסוכנים",
+    color: "purple",
+  },
+  business: {
+    emoji: "💼",
+    title: "פוסטים מקהילת העסקים",
+    color: "blue",
+  },
+};
 
 const Articles = () => {
-  const sorted = [...articles].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
-
   const formatDate = (iso: string) =>
     new Date(iso).toLocaleDateString("he-IL", {
       year: "numeric",
       month: "long",
       day: "numeric",
     });
+
+  const agentArticles = [...articles]
+    .filter((a) => a.category === "agents")
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  const businessArticles = [...articles]
+    .filter((a) => a.category === "business")
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  const renderArticleCard = (article: (typeof articles)[number]) => (
+    <Link key={article.id} to={`/articles/${article.slug}`} className="group">
+      <article className="bg-navy-light rounded-xl border border-purple-700/20 overflow-hidden h-full flex flex-col transition-all duration-300 hover:border-purple-700/50 hover:shadow-lg hover:shadow-purple-700/10 hover:-translate-y-1">
+        {article.image && (
+          <div className="w-full h-48 overflow-hidden">
+            <img
+              src={article.image}
+              alt={article.title}
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
+            />
+          </div>
+        )}
+
+        <div className="p-6 flex flex-col flex-grow">
+          <div className="flex flex-wrap gap-2 mb-4">
+            {article.tags.map((tag) => (
+              <Badge
+                key={tag}
+                variant="secondary"
+                className="bg-purple-700/20 text-purple-300 border-0 font-heebo text-xs"
+              >
+                {tag}
+              </Badge>
+            ))}
+          </div>
+
+          <h2 className="text-xl font-bold font-heebo text-white mb-3 group-hover:text-purple-400 transition-colors leading-tight">
+            {article.title}
+          </h2>
+
+          <p className="text-gray-400 font-heebo text-sm leading-relaxed mb-6 flex-grow">
+            {article.excerpt}
+          </p>
+
+          <div className="flex items-center gap-4 text-xs text-gray-500 font-heebo mt-auto pt-4 border-t border-purple-700/10">
+            <span className="flex items-center gap-1">
+              <Calendar className="h-3.5 w-3.5" />
+              {formatDate(article.date)}
+            </span>
+            <span className="flex items-center gap-1">
+              <Clock className="h-3.5 w-3.5" />
+              {article.readingTime} דק' קריאה
+            </span>
+          </div>
+        </div>
+      </article>
+    </Link>
+  );
+
+  const renderSection = (category: ArticleCategory, items: typeof articles) => {
+    const config = categoryConfig[category];
+    return (
+      <section className="mb-16">
+        <div className="flex items-center gap-3 mb-8">
+          <div className="w-12 h-12 rounded-full bg-purple-700/20 flex items-center justify-center text-2xl shrink-0">
+            {config.emoji}
+          </div>
+          <h2 className="text-2xl md:text-3xl font-bold font-heebo text-white">
+            {config.title}
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {items.map(renderArticleCard)}
+        </div>
+      </section>
+    );
+  };
 
   return (
     <div className="bg-navy-dark min-h-screen py-16">
@@ -28,61 +115,8 @@ const Articles = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {sorted.map((article) => (
-            <Link
-              key={article.id}
-              to={`/articles/${article.slug}`}
-              className="group"
-            >
-              <article className="bg-navy-light rounded-xl border border-purple-700/20 overflow-hidden h-full flex flex-col transition-all duration-300 hover:border-purple-700/50 hover:shadow-lg hover:shadow-purple-700/10 hover:-translate-y-1">
-                {article.image && (
-                  <div className="w-full h-48 overflow-hidden">
-                    <img
-                      src={article.image}
-                      alt={article.title}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  </div>
-                )}
-
-                <div className="p-6 flex flex-col flex-grow">
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {article.tags.map((tag) => (
-                      <Badge
-                        key={tag}
-                        variant="secondary"
-                        className="bg-purple-700/20 text-purple-300 border-0 font-heebo text-xs"
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-
-                  <h2 className="text-xl font-bold font-heebo text-white mb-3 group-hover:text-purple-400 transition-colors leading-tight">
-                    {article.title}
-                  </h2>
-
-                  <p className="text-gray-400 font-heebo text-sm leading-relaxed mb-6 flex-grow">
-                    {article.excerpt}
-                  </p>
-
-                  <div className="flex items-center gap-4 text-xs text-gray-500 font-heebo mt-auto pt-4 border-t border-purple-700/10">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="h-3.5 w-3.5" />
-                      {formatDate(article.date)}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="h-3.5 w-3.5" />
-                      {article.readingTime} דק' קריאה
-                    </span>
-                  </div>
-                </div>
-              </article>
-            </Link>
-          ))}
-        </div>
+        {renderSection("agents", agentArticles)}
+        {renderSection("business", businessArticles)}
       </div>
     </div>
   );
