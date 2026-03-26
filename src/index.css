@@ -111,28 +111,3 @@
   opacity: 1;
   transform: translateY(0);
 }
-
-/* Juline Studio animations */
-@keyframes juline-step-enter {
-  from {
-    opacity: 0;
-    transform: translateX(-15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.juline-step-enter {
-  animation: juline-step-enter 0.3s ease-out;
-}
-
-@keyframes juline-shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-.animate-shimmer {
-  animation: juline-shimmer 2s ease-in-out infinite;
-}

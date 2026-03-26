@@ -18,7 +18,6 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const Accessibility = lazy(() => import("./pages/Accessibility"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfUse = lazy(() => import("./pages/TermsOfUse"));
-const JulineStudio = lazy(() => import("./pages/JulineStudio"));
 
 const queryClient = new QueryClient();
 
@@ -42,36 +41,6 @@ const PageFallback = () => (
   </div>
 );
 
-// Standalone routes that don't show the main site chrome (navbar/footer)
-const STANDALONE_ROUTES = ['/juline'];
-
-const AppContent = () => {
-  const { pathname } = useLocation();
-  const isStandalone = STANDALONE_ROUTES.some(r => pathname.startsWith(r));
-
-  return (
-    <>
-      <ScrollToHash />
-      {!isStandalone && <Navbar />}
-      <Suspense fallback={<PageFallback />}>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/articles" element={<Articles />} />
-          <Route path="/articles/:slug" element={<ArticlePage />} />
-          <Route path="/profiling-form" element={<ProfilingForm />} />
-          <Route path="/admin/submissions" element={<AdminFormSubmissions />} />
-          <Route path="/accessibility" element={<Accessibility />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-of-use" element={<TermsOfUse />} />
-          <Route path="/juline" element={<JulineStudio />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
-      {!isStandalone && <LegalFooter />}
-    </>
-  );
-};
-
 const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
@@ -79,7 +48,22 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <AppContent />
+          <ScrollToHash />
+          <Navbar />
+          <Suspense fallback={<PageFallback />}>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/articles" element={<Articles />} />
+              <Route path="/articles/:slug" element={<ArticlePage />} />
+              <Route path="/profiling-form" element={<ProfilingForm />} />
+              <Route path="/admin/submissions" element={<AdminFormSubmissions />} />
+              <Route path="/accessibility" element={<Accessibility />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-of-use" element={<TermsOfUse />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+          <LegalFooter />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
