@@ -22,6 +22,7 @@ const Index = () => {
       <Helmet>
         <title>ייעוץ AI לעסקים קטנים ובינוניים | גיא כהן</title>
         <meta name="description" content="ייעוץ בינה מלאכותית לעסקים קטנים ובינוניים. פתרונות AI מותאמים אישית שיגדילו הכנסות, ישפרו שירות ויחסכו זמן." />
+        <link rel="canonical" href="https://guycohen-ai.co.il/" />
       </Helmet>
       <HeroSection />
       <div className="h-16 bg-gradient-to-b from-navy-dark to-navy-light" />

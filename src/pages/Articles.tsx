@@ -102,6 +102,7 @@ const Articles = () => {
       <Helmet>
         <title>מאמרים על AI לעסקים | גיא כהן</title>
         <meta name="description" content="פוסטים ותובנות על בינה מלאכותית לעסקים - כל מה שצריך לדעת על AI לעסקים קטנים ובינוניים, במקום אחד" />
+        <link rel="canonical" href="https://guycohen-ai.co.il/articles" />
       </Helmet>
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-16">

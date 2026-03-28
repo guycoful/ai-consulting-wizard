@@ -8,6 +8,8 @@ import { articles } from "@/data/articles";
 import { formatDate } from "@/lib/utils";
 import { useEffect } from "react";
 
+const SITE_URL = "https://guycohen-ai.co.il";
+
 const ArticlePage = () => {
   const { slug } = useParams<{ slug: string }>();
   const { toast } = useToast();
@@ -21,7 +23,14 @@ const ArticlePage = () => {
     return <Navigate to="/articles" replace />;
   }
 
-  const articleUrl = `https://guycohen-ai.co.il/articles/${article.slug}`;
+  const articleUrl = `${SITE_URL}/articles/${article.slug}`;
+  const articleImageUrl = article.image ? `${SITE_URL}${article.image}` : `${SITE_URL}/og-image.png`;
+
+  // Get related articles from the same category, excluding current article
+  const relatedArticles = articles
+    .filter((a) => a.category === article.category && a.slug !== article.slug)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 3);
 
   const shareWhatsApp = () => {
     const text = `${article.title}\n\n${articleUrl}`;
@@ -44,6 +53,21 @@ const ArticlePage = () => {
       <Helmet>
         <title>{`${article.title} | גיא כהן`}</title>
         <meta name="description" content={article.excerpt} />
+        <link rel="canonical" href={articleUrl} />
+
+        {/* Open Graph meta tags */}
+        <meta property="og:title" content={article.title} />
+        <meta property="og:description" content={article.excerpt} />
+        <meta property="og:image" content={articleImageUrl} />
+        <meta property="og:url" content={articleUrl} />
+        <meta property="og:type" content="article" />
+
+        {/* Twitter Card meta tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={article.title} />
+        <meta name="twitter:description" content={article.excerpt} />
+        <meta name="twitter:image" content={articleImageUrl} />
+
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -51,15 +75,46 @@ const ArticlePage = () => {
             headline: article.title,
             datePublished: article.date,
             description: article.excerpt,
+            image: articleImageUrl,
+            mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": articleUrl,
+            },
             author: {
               "@type": "Person",
               name: "\u05D2\u05D9\u05D0 \u05DB\u05D4\u05DF",
-              url: "https://guycohen-ai.co.il",
+              url: SITE_URL,
             },
             publisher: {
               "@type": "Organization",
               name: "\u05D2\u05D9\u05D0 \u05DB\u05D4\u05DF \u2014 \u05D9\u05D9\u05E2\u05D5\u05E5 AI",
             },
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "\u05D3\u05E3 \u05D4\u05D1\u05D9\u05EA",
+                item: SITE_URL,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "\u05DE\u05D0\u05DE\u05E8\u05D9\u05DD",
+                item: `${SITE_URL}/articles`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: article.title,
+                item: articleUrl,
+              },
+            ],
           })}
         </script>
       </Helmet>
@@ -171,6 +226,49 @@ const ArticlePage = () => {
             </Button>
           </div>
         </div>
+
+        {/* Related Articles */}
+        {relatedArticles.length > 0 && (
+          <div className="mt-16 pt-8 border-t border-purple-700/20">
+            <h2 className="text-2xl font-bold font-heebo text-white mb-8">
+              מאמרים נוספים מהקטגוריה
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {relatedArticles.map((related) => (
+                <Link
+                  key={related.id}
+                  to={`/articles/${related.slug}`}
+                  className="group"
+                >
+                  <div className="bg-navy-light rounded-xl border border-purple-700/20 overflow-hidden h-full flex flex-col transition-all duration-300 hover:border-purple-700/50 hover:shadow-lg hover:shadow-purple-700/10 hover:-translate-y-1">
+                    {related.image && (
+                      <div className="w-full h-40 overflow-hidden">
+                        <img
+                          src={related.image}
+                          alt={related.title}
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                      </div>
+                    )}
+                    <div className="p-4 flex flex-col flex-grow">
+                      <h3 className="text-base font-bold font-heebo text-white mb-2 group-hover:text-purple-400 transition-colors leading-tight line-clamp-2">
+                        {related.title}
+                      </h3>
+                      <p className="text-gray-400 font-heebo text-sm leading-relaxed line-clamp-2 flex-grow">
+                        {related.excerpt}
+                      </p>
+                      <div className="flex items-center gap-2 text-xs text-gray-500 font-heebo mt-3 pt-3 border-t border-purple-700/10">
+                        <Calendar className="h-3 w-3" />
+                        {formatDate(related.date)}
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* CTA */}
         <div className="mt-12 bg-navy-light rounded-xl border border-purple-700/20 p-8 text-center">

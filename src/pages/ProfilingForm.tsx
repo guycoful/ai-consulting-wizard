@@ -14,6 +14,7 @@ const ProfilingForm = () => {
       <Helmet>
         <title>טופס איפיון AI לעסק | גיא כהן</title>
         <meta name="description" content="טופס איפיון מפורט שיעזור לנו להבין בדיוק מה העסק שלך צריך ולהתאים פתרון AI מושלם" />
+        <link rel="canonical" href="https://guycohen-ai.co.il/profiling-form" />
       </Helmet>
       <OrganizationProfilingForm />
     </>
