@@ -53,7 +53,7 @@ export const articles: Article[] = [
     date: "2026-03-22",
     readingTime: 2,
     tags: ["סוכן AI", "צילום מוצרים", "ecommerce"],
-    category: "business",
+    category: "agents",
     image: "/images/articles/studio-photo-agent.jpg",
   },
   {
