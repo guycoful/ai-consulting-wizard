@@ -15,6 +15,48 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    id: "15",
+    slug: "ai-pension-report-checker",
+    title: "בודק דוח שנתי — סוכן AI שמנתח את הפנסיה והביטוח שלכם תוך דקה",
+    excerpt: "מעלים PDF של הדוח השנתי מחברת הביטוח, הסוכן קורא, מנתח, ונותן ציון בריאות לפנסיה שלכם עם המלצות ספציפיות — מה תקין, מה בעייתי, ומה אפשר לשפר.",
+    content: `<p>התזמון לא מקרי.</p>
+
+<p>בדיוק בתקופה הזו חברות הביטוח והפנסיה מפרסמות את הדוח השנתי שלכם.</p>
+
+<p>הדוח הזה מגיע למייל (או לאזור האישי) ורוב האנשים לא פותחים אותו. ואם פותחים — לא מבינים מה כתוב שם.</p>
+
+<hr>
+
+<h3>מה בניתי:</h3>
+
+<p>סוכן שעושה דבר פשוט:</p>
+
+<ul>
+<li>📄 מעלים לו את ה-PDF של הדוח</li>
+<li>📊 הוא קורא, מנתח, ונותן ציון בריאות לפנסיה/ביטוח שלכם</li>
+<li>💡 ומציע המלצות ספציפיות — מה תקין, מה בעייתי, ומה אפשר לשפר</li>
+</ul>
+
+<hr>
+
+<h3>עובד עם כל חברה ועם כל סוג מוצר:</h3>
+
+<p>אפשר להעלות לו דוח מכל חברה — מנורה, מגדל, הראל, כלל, הפניקס, מיטב, אלטשולר...</p>
+
+<p>ועם כל סוג מוצר — קרן פנסיה, ביטוח מנהלים, קרן השתלמות, ביטוח בריאות.</p>
+
+<hr>
+
+<p>⚠️ <strong>חשוב:</strong> מזכיר כי לא מדובר בתחליף לייעוץ פנסיוני ומומלץ להיעזר באיש מקצוע.</p>
+
+<p><a href="https://gemini.google.com/gem/1JMceAOk_WjZqMzYyPtSs7CIYLPNPg6jx?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors text-center">פתח את סוכן בודק הדוח השנתי ב-Gemini</a></p>`,
+    date: "2026-03-28",
+    readingTime: 2,
+    tags: ["סוכן AI", "פנסיה", "ביטוח", "פיננסי"],
+    category: "agents",
+    image: "/images/articles/pension-report-agent.jpg",
+  },
+  {
     id: "14",
     slug: "ai-product-studio-photo-agent",
     title: "תמונת סטודיו — צלמו מוצר בטלפון וקבלו תמונת קטלוג מקצועית ב-30 שניות",
