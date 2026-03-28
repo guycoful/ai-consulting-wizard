@@ -64,7 +64,7 @@ const HeroSection = () => {
 
         <div className="mb-8 md:mb-12 px-4">
           <img 
-            src="/images/guy-cohen-hero.png" 
+            src="/images/guy-cohen-hero.webp" 
             alt="גיא כהן - יועץ בינה מלאכותית לעסקים קטנים ובינוניים"
             className="mx-auto max-w-full w-full sm:max-w-md h-auto"
           />

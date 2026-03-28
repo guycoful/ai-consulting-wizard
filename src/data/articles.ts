@@ -419,7 +419,7 @@ export const articles: Article[] = [
     readingTime: 3,
     tags: ["סוכן AI", "חיסכון כסף"],
     category: "agents",
-    image: "/images/articles/supermarket-agent.png",
+    image: "/images/articles/supermarket-agent.webp",
   },
   {
     id: "5",
@@ -622,7 +622,7 @@ export const articles: Article[] = [
     readingTime: 6,
     tags: ["סוכן AI", "תזונה", "מדריך"],
     category: "agents",
-    image: "/images/articles/calorie-agent.png",
+    image: "/images/articles/calorie-agent.webp",
   },
   {
     id: "8",
@@ -650,7 +650,7 @@ export const articles: Article[] = [
     readingTime: 2,
     tags: ["סוכן AI", "התפתחות אישית", "מנטורינג"],
     category: "agents",
-    image: "/images/articles/why-agent.png",
+    image: "/images/articles/why-agent.webp",
   },
   {
     id: "9",

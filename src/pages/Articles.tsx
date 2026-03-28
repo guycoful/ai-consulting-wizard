@@ -103,6 +103,36 @@ const Articles = () => {
         <title>מאמרים על AI לעסקים | גיא כהן</title>
         <meta name="description" content="פוסטים ותובנות על בינה מלאכותית לעסקים - כל מה שצריך לדעת על AI לעסקים קטנים ובינוניים, במקום אחד" />
         <link rel="canonical" href="https://guycohen-ai.co.il/articles" />
+
+        {/* Open Graph meta tags */}
+        <meta property="og:title" content="מאמרים | גיא כהן - יועץ AI לעסקים" />
+        <meta property="og:description" content="מאמרים על סוכני AI, אוטומציות עסקיות, וכלים חינמיים שיעזרו לעסק שלכם" />
+        <meta property="og:url" content="https://guycohen-ai.co.il/articles" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://guycohen-ai.co.il/og-image.png" />
+        <meta property="og:locale" content="he_IL" />
+        <meta property="og:site_name" content="גיא כהן — ייעוץ AI לעסקים" />
+
+        {/* Twitter Card meta tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="מאמרים | גיא כהן - יועץ AI לעסקים" />
+        <meta name="twitter:description" content="מאמרים על סוכני AI, אוטומציות עסקיות, וכלים חינמיים שיעזרו לעסק שלכם" />
+        <meta name="twitter:image" content="https://guycohen-ai.co.il/og-image.png" />
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": "מאמרים על AI לעסקים",
+            "numberOfItems": articles.length,
+            "itemListElement": articles.map((article, index) => ({
+              "@type": "ListItem",
+              "position": index + 1,
+              "url": `https://guycohen-ai.co.il/articles/${article.slug}`,
+              "name": article.title
+            }))
+          })}
+        </script>
       </Helmet>
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-16">

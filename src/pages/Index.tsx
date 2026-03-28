@@ -23,6 +23,22 @@ const Index = () => {
         <title>ייעוץ AI לעסקים קטנים ובינוניים | גיא כהן</title>
         <meta name="description" content="ייעוץ בינה מלאכותית לעסקים קטנים ובינוניים. פתרונות AI מותאמים אישית שיגדילו הכנסות, ישפרו שירות ויחסכו זמן." />
         <link rel="canonical" href="https://guycohen-ai.co.il/" />
+
+        {/* Open Graph meta tags */}
+        <meta property="og:title" content="ייעוץ AI לעסקים קטנים ובינוניים | גיא כהן" />
+        <meta property="og:description" content="ייעוץ בינה מלאכותית לעסקים קטנים ובינוניים. פתרונות AI מותאמים אישית שיגדילו הכנסות, ישפרו שירות ויחסכו זמן." />
+        <meta property="og:url" content="https://guycohen-ai.co.il/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://guycohen-ai.co.il/og-image.png" />
+        <meta property="og:image:alt" content="גיא כהן - יועץ בינה מלאכותית לעסקים" />
+        <meta property="og:locale" content="he_IL" />
+        <meta property="og:site_name" content="גיא כהן — ייעוץ AI לעסקים" />
+
+        {/* Twitter Card meta tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="ייעוץ AI לעסקים קטנים ובינוניים | גיא כהן" />
+        <meta name="twitter:description" content="ייעוץ בינה מלאכותית לעסקים קטנים ובינוניים. פתרונות AI מותאמים אישית שיגדילו הכנסות, ישפרו שירות ויחסכו זמן." />
+        <meta name="twitter:image" content="https://guycohen-ai.co.il/og-image.png" />
       </Helmet>
       <HeroSection />
       <div className="h-16 bg-gradient-to-b from-navy-dark to-navy-light" />

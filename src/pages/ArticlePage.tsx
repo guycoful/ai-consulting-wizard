@@ -67,6 +67,7 @@ const ArticlePage = () => {
         <meta name="twitter:title" content={article.title} />
         <meta name="twitter:description" content={article.excerpt} />
         <meta name="twitter:image" content={articleImageUrl} />
+        <meta property="og:image:alt" content={article.title} />
 
         <script type="application/ld+json">
           {JSON.stringify({
@@ -74,6 +75,7 @@ const ArticlePage = () => {
             "@type": "Article",
             headline: article.title,
             datePublished: article.date,
+            dateModified: article.date,
             description: article.excerpt,
             image: articleImageUrl,
             mainEntityOfPage: {
@@ -88,6 +90,10 @@ const ArticlePage = () => {
             publisher: {
               "@type": "Organization",
               name: "\u05D2\u05D9\u05D0 \u05DB\u05D4\u05DF \u2014 \u05D9\u05D9\u05E2\u05D5\u05E5 AI",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://guycohen-ai.co.il/images/guy-cohen-ai-logo.png",
+              },
             },
           })}
         </script>

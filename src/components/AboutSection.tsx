@@ -38,7 +38,7 @@ const AboutSection = () => {
           <div className="flex-shrink-0">
             <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-purple-700/40 shadow-lg shadow-purple-700/10">
               <img
-                src="/images/guy-cohen-portrait.png"
+                src="/images/guy-cohen-portrait.webp"
                 alt="גיא כהן — יועץ בינה מלאכותית לעסקים"
                 className="w-full h-full object-cover object-top"
               />
