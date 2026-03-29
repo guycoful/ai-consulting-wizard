@@ -39,6 +39,65 @@ const Index = () => {
         <meta name="twitter:title" content="ייעוץ AI לעסקים קטנים ובינוניים | גיא כהן" />
         <meta name="twitter:description" content="ייעוץ בינה מלאכותית לעסקים קטנים ובינוניים. פתרונות AI מותאמים אישית שיגדילו הכנסות, ישפרו שירות ויחסכו זמן." />
         <meta name="twitter:image" content="https://guycohen-ai.co.il/og-image.png" />
+
+        {/* ProfessionalService Schema — AEO critical */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            name: "גיא כהן — ייעוץ AI לעסקים",
+            url: "https://guycohen-ai.co.il",
+            logo: "https://guycohen-ai.co.il/images/guy-cohen-ai-logo.png",
+            image: "https://guycohen-ai.co.il/images/guy-cohen-portrait.webp",
+            description: "ייעוץ בינה מלאכותית לעסקים קטנים ובינוניים בישראל. פתרונות AI מותאמים אישית — סוכני AI, אוטומציות עסקיות, חיסכון בזמן והגדלת הכנסות.",
+            telephone: "+972-50-123-4567",
+            address: {
+              "@type": "PostalAddress",
+              addressCountry: "IL",
+              addressLocality: "ישראל",
+            },
+            geo: {
+              "@type": "GeoCoordinates",
+              latitude: 32.0853,
+              longitude: 34.7818,
+            },
+            areaServed: {
+              "@type": "Country",
+              name: "Israel",
+            },
+            priceRange: "₪₪",
+            serviceType: ["ייעוץ AI לעסקים", "אוטומציה עסקית", "סוכני AI", "בינה מלאכותית לעסקים קטנים"],
+            knowsAbout: ["Artificial Intelligence", "Business Automation", "AI Agents", "Make.com", "Gemini", "ChatGPT", "WhatsApp Automation"],
+            founder: {
+              "@type": "Person",
+              name: "גיא כהן",
+              url: "https://guycohen-ai.co.il",
+              image: "https://guycohen-ai.co.il/images/guy-cohen-portrait.webp",
+              jobTitle: "יועץ AI לעסקים",
+              description: "יועץ בינה מלאכותית המתמחה בהטמעת פתרונות AI לעסקים קטנים ובינוניים בישראל. מומחה בסוכני AI, אוטומציות עסקיות וכלים מבוססי AI.",
+              knowsAbout: ["AI Consulting", "Business Automation", "AI Agents", "Make.com", "Gemini Gems", "WhatsApp API"],
+              sameAs: [
+                "https://www.linkedin.com/in/guycohen-ai"
+              ],
+            },
+          })}
+        </script>
+
+        {/* WebSite Schema — for sitelinks search */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "גיא כהן — ייעוץ AI לעסקים",
+            url: "https://guycohen-ai.co.il",
+            inLanguage: "he-IL",
+            potentialAction: {
+              "@type": "SearchAction",
+              target: "https://guycohen-ai.co.il/articles?q={search_term_string}",
+              "query-input": "required name=search_term_string",
+            },
+          })}
+        </script>
       </Helmet>
       <HeroSection />
       <div className="h-16 bg-gradient-to-b from-navy-dark to-navy-light" />
