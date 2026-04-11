@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
@@ -7,8 +7,9 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
-import { format, addDays, isBefore, startOfDay, getDay } from "date-fns";
+import { format, addMonths, isBefore, startOfDay, isAfter } from "date-fns";
 import { he } from "date-fns/locale/he";
+import { supabase } from "@/integrations/supabase/client";
 import {
   CalendarDays,
   Clock,
@@ -40,19 +41,62 @@ const BookingPage = () => {
   const [submitting, setSubmitting] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
 
-  const today = startOfDay(new Date());
-  const maxDate = addDays(today, 30);
+  // Dates that have available slots (for enabling in the calendar)
+  const [availableDates, setAvailableDates] = useState<Set<string>>(new Set());
+  const [loadingDates, setLoadingDates] = useState(true);
 
-  // Disable past dates, Fridays (5), Saturdays (6)
+  const today = startOfDay(new Date());
+  const maxDate = addMonths(today, 2);
+
+  // On mount, fetch all dates that have available slots in the next 2 months
+  useEffect(() => {
+    const fetchAvailableDates = async () => {
+      setLoadingDates(true);
+      try {
+        const todayStr = format(today, "yyyy-MM-dd");
+        const maxStr = format(maxDate, "yyyy-MM-dd");
+
+        const { data, error } = await supabase
+          .from("booking_slots" as any)
+          .select("slot_date")
+          .eq("status", "available")
+          .gte("slot_date", todayStr)
+          .lte("slot_date", maxStr);
+
+        if (error) {
+          console.error("Error fetching available dates:", error);
+          return;
+        }
+
+        const dates = new Set<string>();
+        if (data) {
+          (data as unknown as Array<{ slot_date: string }>).forEach((row) => {
+            dates.add(row.slot_date);
+          });
+        }
+        setAvailableDates(dates);
+      } catch (err) {
+        console.error("Error fetching available dates:", err);
+      } finally {
+        setLoadingDates(false);
+      }
+    };
+
+    fetchAvailableDates();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Disable dates that have no available slots, past dates, or dates beyond 2 months
   const disabledDays = useCallback(
     (date: Date) => {
-      const day = getDay(date);
-      return isBefore(date, today) || day === 5 || day === 6;
+      if (isBefore(date, today)) return true;
+      if (isAfter(date, maxDate)) return true;
+      const dateStr = format(date, "yyyy-MM-dd");
+      return !availableDates.has(dateStr);
     },
-    [today]
+    [today, maxDate, availableDates]
   );
 
-  // Fetch slots when date is selected
+  // Fetch slots when date is selected - query Supabase directly
   useEffect(() => {
     if (!selectedDate) return;
 
@@ -61,10 +105,29 @@ const BookingPage = () => {
       setSelectedTime(null);
       try {
         const dateStr = format(selectedDate, "yyyy-MM-dd");
-        const res = await fetch(`/api/slots?date=${dateStr}`);
-        if (!res.ok) throw new Error("Failed to fetch slots");
-        const data = await res.json();
-        setSlots(data.slots || data);
+
+        const { data, error } = await supabase
+          .from("booking_slots" as any)
+          .select("slot_time, status")
+          .eq("slot_date", dateStr)
+          .order("slot_time", { ascending: true });
+
+        if (error) {
+          console.error("Error fetching slots:", error);
+          toast.error("שגיאה בטעינת השעות הפנויות");
+          setSlots([]);
+          return;
+        }
+
+        if (data) {
+          const mapped = (data as unknown as Array<{ slot_time: string; status: string }>).map((row) => ({
+            time: row.slot_time.substring(0, 5), // "18:00:00" -> "18:00"
+            available: row.status === "available",
+          }));
+          setSlots(mapped);
+        } else {
+          setSlots([]);
+        }
       } catch {
         toast.error("שגיאה בטעינת השעות הפנויות");
         setSlots([]);
@@ -106,7 +169,7 @@ const BookingPage = () => {
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data.message || "שגיאה בקביעת הפגישה");
+        throw new Error(data.message || data.error || "שגיאה בקביעת הפגישה");
       }
 
       setConfirmed(true);
@@ -142,10 +205,6 @@ const BookingPage = () => {
             </div>
             <h2 className="text-2xl font-bold text-white">הפגישה נקבעה!</h2>
             <div className="space-y-2 text-gray-100">
-              <p>
-                קיבלת אישור למייל{" "}
-                <span className="text-blue-primary font-medium">{email}</span>
-              </p>
               <p>
                 נדבר בזום ב-{formatHebrewDate(selectedDate)} ב-{selectedTime}
               </p>
@@ -234,44 +293,51 @@ const BookingPage = () => {
         <CardContent className="p-6">
           {/* Step 1: Select Date */}
           {step === 1 && (
-            <div className="flex justify-center animate-[fade-in_0.4s_ease-out]">
-              <Calendar
-                mode="single"
-                selected={selectedDate}
-                onSelect={handleDateSelect}
-                disabled={disabledDays}
-                fromDate={today}
-                toDate={maxDate}
-                locale={he}
-                className="text-white"
-                classNames={{
-                  months:
-                    "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
-                  month: "space-y-4",
-                  caption:
-                    "flex justify-center pt-1 relative items-center text-white",
-                  caption_label: "text-sm font-medium text-white",
-                  nav: "space-x-1 flex items-center",
-                  nav_button:
-                    "h-7 w-7 bg-transparent p-0 text-gray-300 hover:text-white hover:bg-navy-dark rounded-md inline-flex items-center justify-center",
-                  nav_button_previous: "absolute left-1",
-                  nav_button_next: "absolute right-1",
-                  table: "w-full border-collapse space-y-1",
-                  head_row: "flex",
-                  head_cell:
-                    "text-gray-400 rounded-md w-9 font-normal text-[0.8rem]",
-                  row: "flex w-full mt-2",
-                  cell: "h-9 w-9 text-center text-sm p-0 relative focus-within:relative focus-within:z-20",
-                  day: "h-9 w-9 p-0 font-normal text-gray-100 hover:bg-blue-primary/30 rounded-md inline-flex items-center justify-center transition-colors",
-                  day_selected:
-                    "bg-blue-primary text-white hover:bg-blue-primary focus:bg-blue-primary",
-                  day_today:
-                    "border border-purple-500 text-purple-300",
-                  day_outside: "text-gray-600 opacity-50",
-                  day_disabled: "text-gray-600 opacity-30 cursor-not-allowed",
-                  day_hidden: "invisible",
-                }}
-              />
+            <div className="flex flex-col items-center animate-[fade-in_0.4s_ease-out]">
+              {loadingDates ? (
+                <div className="flex flex-col items-center justify-center py-12 gap-3">
+                  <Loader2 className="w-8 h-8 text-blue-primary animate-spin" />
+                  <p className="text-gray-300 text-sm">טוען תאריכים פנויים...</p>
+                </div>
+              ) : (
+                <Calendar
+                  mode="single"
+                  selected={selectedDate}
+                  onSelect={handleDateSelect}
+                  disabled={disabledDays}
+                  fromDate={today}
+                  toDate={maxDate}
+                  locale={he}
+                  className="text-white"
+                  classNames={{
+                    months:
+                      "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
+                    month: "space-y-4",
+                    caption:
+                      "flex justify-center pt-1 relative items-center text-white",
+                    caption_label: "text-sm font-medium text-white",
+                    nav: "space-x-1 flex items-center",
+                    nav_button:
+                      "h-7 w-7 bg-transparent p-0 text-gray-300 hover:text-white hover:bg-navy-dark rounded-md inline-flex items-center justify-center",
+                    nav_button_previous: "absolute left-1",
+                    nav_button_next: "absolute right-1",
+                    table: "w-full border-collapse space-y-1",
+                    head_row: "flex",
+                    head_cell:
+                      "text-gray-400 rounded-md w-9 font-normal text-[0.8rem]",
+                    row: "flex w-full mt-2",
+                    cell: "h-9 w-9 text-center text-sm p-0 relative focus-within:relative focus-within:z-20",
+                    day: "h-9 w-9 p-0 font-normal text-gray-100 hover:bg-blue-primary/30 rounded-md inline-flex items-center justify-center transition-colors",
+                    day_selected:
+                      "bg-blue-primary text-white hover:bg-blue-primary focus:bg-blue-primary",
+                    day_today:
+                      "border border-purple-500 text-purple-300",
+                    day_outside: "text-gray-600 opacity-50",
+                    day_disabled: "text-gray-600 opacity-30 cursor-not-allowed",
+                    day_hidden: "invisible",
+                  }}
+                />
+              )}
             </div>
           )}
 

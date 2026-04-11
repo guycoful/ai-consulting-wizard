@@ -1,6 +1,7 @@
-import { cancelBooking } from './_lib/calendar';
-import { sendCancellationNotice } from './_lib/email';
 import { verifyToken, getTokenFromRequest } from './_lib/auth';
+
+const SUPABASE_URL = "https://vuvavjmbvdqnwtleudqh.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ1dmF2am1idmRxbnd0bGV1ZHFoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE0NDY1MTMsImV4cCI6MjA2NzAyMjUxM30.QgtlrWs_qL7dMzxHkdUQaCBkGWsNNnExDv0phGz7NbI";
 
 interface VercelRequest {
   method?: string;
@@ -40,22 +41,35 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(401).json({ error: 'Unauthorized. Valid admin token required.' });
     }
 
-    const { eventId, email, name, date, time } = req.body || {};
+    const { slotId, id } = req.body || {};
+    const targetId = slotId || id; // Support both field names
 
-    if (!eventId || typeof eventId !== 'string') {
-      return res.status(400).json({ error: 'Missing or invalid field: eventId' });
+    if (!targetId || typeof targetId !== 'string') {
+      return res.status(400).json({ error: 'Missing or invalid field: slotId' });
     }
 
-    // Cancel the calendar event
-    await cancelBooking(eventId);
+    // Reset the slot back to available
+    const updateUrl = `${SUPABASE_URL}/rest/v1/booking_slots?id=eq.${targetId}`;
+    const updateResponse = await fetch(updateUrl, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal',
+      },
+      body: JSON.stringify({
+        status: 'available',
+        booked_name: null,
+        booked_email: null,
+        booked_at: null,
+      }),
+    });
 
-    // Send cancellation email if contact info provided
-    if (email && name && date && time) {
-      try {
-        await sendCancellationNotice(email, name, date, time);
-      } catch (emailError: any) {
-        console.error('Cancellation email failed (event was still deleted):', emailError.message);
-      }
+    if (!updateResponse.ok) {
+      const errorBody = await updateResponse.text();
+      console.error('Supabase update error:', updateResponse.status, errorBody);
+      return res.status(500).json({ error: 'Failed to cancel booking' });
     }
 
     return res.status(200).json({ success: true });
