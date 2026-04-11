@@ -54,7 +54,7 @@ const HeroSection = () => {
         {/* Social Proof Strip */}
         <div className="flex items-center justify-center mb-8 md:mb-12 px-4">
           <div className="flex items-center justify-center gap-6 flex-wrap bg-navy-light/30 rounded-full px-6 py-2">
-            <span className="text-gray-400 text-sm md:text-base font-heebo">600+ חברי קהילה</span>
+            <span className="text-gray-400 text-sm md:text-base font-heebo">1,000+ חברי קהילה</span>
             <span className="text-purple-400 text-sm md:text-base">·</span>
             <span className="text-gray-400 text-sm md:text-base font-heebo">עשרות עסקים מלווים</span>
             <span className="text-purple-400 text-sm md:text-base">·</span>

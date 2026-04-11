@@ -63,7 +63,7 @@ const AboutSection = () => {
                 התהליך פשוט, מדויק, ומביא תוצאות אמיתיות.
               </p>
               <p>
-                מנהל קהילת AI עם מעל 600 חברים פעילים, ויוצר תוכן מקצועי, מדריכים וסוכני AI חינמיים לקהילה.
+                מנהל קהילת AI עם מעל 1,000 חברים פעילים, ויוצר תוכן מקצועי, מדריכים וסוכני AI חינמיים לקהילה.
               </p>
             </div>
           </div>
@@ -92,7 +92,7 @@ const AboutSection = () => {
               <Users className="w-5 h-5 text-purple-400" />
             </div>
             <span className="text-sm md:text-base font-heebo text-gray-200 leading-snug">
-              קהילת AI — 600+ חברים פעילים
+              קהילת AI — 1,000+ חברים פעילים
             </span>
           </div>
           <div className="bg-navy-dark rounded-xl p-5 border border-purple-700/20 flex items-center gap-4 transition-all hover:border-purple-700/40">

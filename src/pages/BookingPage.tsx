@@ -179,6 +179,54 @@ const BookingPage = () => {
 
       if (updateError) throw new Error("שגיאה בקביעת הפגישה");
 
+      // Generate ICS file and trigger download
+      const bookingDate = format(selectedDate, "yyyy-MM-dd");
+      const [hours, minutes] = selectedTime.split(":");
+      const startDt = new Date(selectedDate);
+      startDt.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+      const endDt = new Date(startDt.getTime() + 30 * 60 * 1000);
+
+      const pad = (n: number) => n.toString().padStart(2, "0");
+      const toICS = (d: Date) =>
+        `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
+
+      const icsContent = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//GuyCohenAI//Booking//HE",
+        "BEGIN:VEVENT",
+        `DTSTART;TZID=Asia/Jerusalem:${toICS(startDt)}`,
+        `DTEND;TZID=Asia/Jerusalem:${toICS(endDt)}`,
+        `SUMMARY:שיחת ייעוץ עם Guy Cohen`,
+        `DESCRIPTION:שיחת ייעוץ ראשונית עם ${name.trim()} (${email.trim()})`,
+        `ATTENDEE;CN=${name.trim()}:mailto:${email.trim()}`,
+        `ORGANIZER;CN=Guy Cohen:mailto:info@guycohen-ai.co.il`,
+        `STATUS:CONFIRMED`,
+        "END:VEVENT",
+        "END:VCALENDAR",
+      ].join("\r\n");
+
+      const icsBlob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
+      const icsUrl = URL.createObjectURL(icsBlob);
+      const icsLink = document.createElement("a");
+      icsLink.href = icsUrl;
+      icsLink.download = `meeting-guy-cohen-${bookingDate}.ics`;
+      document.body.appendChild(icsLink);
+      icsLink.click();
+      document.body.removeChild(icsLink);
+      URL.revokeObjectURL(icsUrl);
+
+      // Notify Guy via WhatsApp (Green API)
+      const whatsappMsg = `פגישה חדשה נקבעה!\n\nשם: ${name.trim()}\nמייל: ${email.trim()}\nתאריך: ${bookingDate}\nשעה: ${selectedTime}\n\nמקור: guycohen-ai.co.il/book`;
+      fetch("https://7103.api.greenapi.com/waInstance7103516006/sendMessage/e7be64633c004f498055c58bb1b295d349450f8633f8465e87", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chatId: "972546232063@c.us",
+          message: whatsappMsg,
+        }),
+      }).catch(() => {}); // Fire and forget
+
       setConfirmed(true);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "שגיאה בקביעת הפגישה");
