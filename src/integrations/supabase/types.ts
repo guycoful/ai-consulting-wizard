@@ -233,6 +233,33 @@ export type Database = {
         }
         Relationships: []
       }
+      recruiter_leads: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: number
+          name: string
+          phone: string | null
+          source: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: never
+          name: string
+          phone?: string | null
+          source?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: never
+          name?: string
+          phone?: string | null
+          source?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string | null
