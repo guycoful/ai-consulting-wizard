@@ -1,9 +1,8 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-import crypto from 'crypto';
+const crypto = require('crypto');
 
 const TOKEN_EXPIRY_MS = 24 * 60 * 60 * 1000;
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+module.exports = async function handler(req: any, res: any) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
@@ -22,20 +21,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const secret = process.env.ADMIN_SECRET;
 
     if (!adminPassword || !secret) {
-      return res.status(500).json({ error: 'Server config missing' });
+      return res.status(500).json({ error: 'Server config missing', detail: 'ADMIN_PASSWORD or ADMIN_SECRET not set' });
     }
 
     if (password.trim() !== adminPassword.trim()) {
       return res.status(401).json({ error: 'Invalid password' });
     }
 
-    // Create simple HMAC token
     const payload = { role: 'admin', exp: Date.now() + TOKEN_EXPIRY_MS };
     const data = Buffer.from(JSON.stringify(payload)).toString('base64url');
     const sig = crypto.createHmac('sha256', secret).update(data).digest('base64url');
 
     return res.status(200).json({ token: `${data}.${sig}` });
   } catch (error: any) {
-    return res.status(500).json({ error: 'Auth failed', details: error.message });
+    return res.status(500).json({ error: 'Auth failed', message: error.message, stack: error.stack });
   }
-}
+};
