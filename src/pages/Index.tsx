@@ -109,6 +109,7 @@ const Index = () => {
       <AboutSection />
       <div className="h-16 bg-gradient-to-b from-navy-light to-navy-dark" />
       <LatestArticlesSection />
+      <div id="review" />
       <TestimonialsSection />
       <ContactSection />
       <FaqSection />

@@ -58,6 +58,13 @@ const TestimonialsSection = () => {
   const [loading, setLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
 
+  // Auto-open dialog if URL has #review
+  useEffect(() => {
+    if (window.location.hash === "#review") {
+      setTimeout(() => setDialogOpen(true), 500);
+    }
+  }, []);
+
   // Form state
   const [formName, setFormName] = useState("");
   const [formRole, setFormRole] = useState("");
