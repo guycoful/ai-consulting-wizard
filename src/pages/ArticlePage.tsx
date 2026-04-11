@@ -86,6 +86,10 @@ const ArticlePage = () => {
               "@type": "Person",
               name: "\u05D2\u05D9\u05D0 \u05DB\u05D4\u05DF",
               url: SITE_URL,
+              image: `${SITE_URL}/images/guy-cohen-portrait.webp`,
+              jobTitle: "\u05D9\u05D5\u05E2\u05E5 AI \u05DC\u05E2\u05E1\u05E7\u05D9\u05DD",
+              description: "\u05D9\u05D5\u05E2\u05E5 AI \u05DC\u05E2\u05E1\u05E7\u05D9\u05DD \u05E7\u05D8\u05E0\u05D9\u05DD \u05D5\u05D1\u05D9\u05E0\u05D5\u05E0\u05D9\u05D9\u05DD. \u05DE\u05E0\u05D4\u05DC \u05E7\u05D4\u05D9\u05DC\u05EA AI \u05E2\u05DD 1,000+ \u05D7\u05D1\u05E8\u05D9\u05DD. \u05DE\u05EA\u05DE\u05D7\u05D4 \u05D1\u05E1\u05D5\u05DB\u05E0\u05D9 AI, \u05D0\u05D5\u05D8\u05D5\u05DE\u05E6\u05D9\u05D5\u05EA \u05E2\u05E1\u05E7\u05D9\u05D5\u05EA, \u05D5\u05D1\u05D5\u05D8\u05D9\u05DD \u05DC\u05D5\u05D5\u05D8\u05E1\u05D0\u05E4.",
+              sameAs: ["https://www.linkedin.com/in/guycohenai/"],
             },
             publisher: {
               "@type": "Organization",
@@ -276,8 +280,35 @@ const ArticlePage = () => {
           </div>
         )}
 
+        {/* Author Profile */}
+        <div className="mt-12 bg-navy-light rounded-xl border border-purple-700/20 p-6 flex flex-col sm:flex-row items-center sm:items-start gap-5" dir="rtl">
+          <img
+            src="/images/guy-cohen-portrait.webp"
+            alt="גיא כהן - יועץ AI לעסקים"
+            className="w-20 h-20 rounded-full object-cover border-2 border-purple-700/30 shrink-0"
+          />
+          <div>
+            <h4 className="text-white font-bold font-heebo text-lg mb-1">נכתב על ידי גיא כהן</h4>
+            <p className="text-gray-300 font-heebo text-sm leading-relaxed">
+              יועץ AI לעסקים קטנים ובינוניים בישראל. מנהל קהילת AI עם 1,000+ חברים פעילים.
+              מתמחה בבניית סוכני AI, אוטומציות עסקיות (Make.com), בוטים לווטסאפ ואינסטגרם (ManyChat), ומערכות CRM חכמות.
+              פוסטים שלי בלינקדאין הגיעו למאות אלפי חשיפות.
+              מלווה עשרות עסקים מאיפיון ועד הפעלה בשטח.
+            </p>
+            <a
+              href="https://www.linkedin.com/in/guycohenai/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-purple-400 hover:text-purple-300 text-sm font-heebo mt-2 transition-colors"
+            >
+              <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              עקבו אחרי בלינקדאין
+            </a>
+          </div>
+        </div>
+
         {/* CTA */}
-        <div className="mt-12 bg-navy-light rounded-xl border border-purple-700/20 p-8 text-center">
+        <div className="mt-8 bg-navy-light rounded-xl border border-purple-700/20 p-8 text-center">
           <h3 className="text-2xl font-bold font-heebo text-white mb-3">
             רוצה ליהנות מתכנים כאלה ישירות?
           </h3>
