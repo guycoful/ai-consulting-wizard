@@ -117,27 +117,34 @@ const AdminBookings = () => {
 
   // Fetch bookings from API (uses JWT auth)
   const fetchBookings = useCallback(
-    async (authToken: string) => {
+    async (_authToken: string) => {
       setLoadingBookings(true);
       try {
-        const res = await fetch("/api/bookings", {
-          headers: { Authorization: `Bearer ${authToken}` },
-        });
-        if (res.status === 401) {
-          logout();
-          toast.error("הסשן פג תוקף, התחבר מחדש");
-          return;
-        }
-        if (!res.ok) throw new Error("Failed to fetch bookings");
-        const data = await res.json();
-        setBookings(data.bookings || data);
+        const today = new Date().toISOString().split("T")[0];
+        const { data, error } = await supabase
+          .from("booking_slots")
+          .select("*")
+          .eq("status", "booked")
+          .gte("slot_date", today)
+          .order("slot_date")
+          .order("slot_time");
+        if (error) throw error;
+        setBookings(
+          (data || []).map((s: any) => ({
+            id: s.id,
+            name: s.booked_name || "",
+            email: s.booked_email || "",
+            date: s.slot_date,
+            time: s.slot_time,
+          }))
+        );
       } catch {
         toast.error("שגיאה בטעינת הפגישות");
       } finally {
         setLoadingBookings(false);
       }
     },
-    [logout]
+    []
   );
 
   // Fetch all upcoming slots from Supabase directly
@@ -181,20 +188,15 @@ const AdminBookings = () => {
     setLoginLoading(true);
     setLoginError(false);
     try {
-      const res = await fetch("/api/auth", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password: password.trim() }),
-      });
-
-      if (!res.ok) {
+      // Simple password check - no API needed
+      const ADMIN_PASS = "Guy@1994";
+      if (password.trim() !== ADMIN_PASS) {
         setLoginError(true);
         setPassword("");
         return;
       }
 
-      const data = await res.json();
-      const newToken = data.token;
+      const newToken = btoa(JSON.stringify({ role: "admin", ts: Date.now() }));
       localStorage.setItem(TOKEN_KEY, newToken);
       setToken(newToken);
       setPassword("");
@@ -212,22 +214,17 @@ const AdminBookings = () => {
 
     setCancelling(true);
     try {
-      const res = await fetch("/api/cancel", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ slotId: cancelTarget.id }),
-      });
+      const { error } = await supabase
+        .from("booking_slots")
+        .update({
+          status: "available",
+          booked_name: null,
+          booked_email: null,
+          booked_at: null,
+        })
+        .eq("id", cancelTarget.id);
 
-      if (res.status === 401) {
-        logout();
-        toast.error("הסשן פג תוקף, התחבר מחדש");
-        return;
-      }
-
-      if (!res.ok) throw new Error("Failed to cancel booking");
+      if (error) throw error;
 
       setBookings((prev) => prev.filter((b) => b.id !== cancelTarget.id));
       toast.success(`הפגישה עם ${cancelTarget.name} בוטלה בהצלחה`);

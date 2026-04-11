@@ -156,21 +156,28 @@ const BookingPage = () => {
 
     setSubmitting(true);
     try {
-      const res = await fetch("/api/book", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          date: format(selectedDate, "yyyy-MM-dd"),
-          time: selectedTime,
-          name: name.trim(),
-          email: email.trim(),
-        }),
-      });
+      const dateStr = format(selectedDate, "yyyy-MM-dd");
+      const { data: slot, error: findError } = await supabase
+        .from("booking_slots")
+        .select("id")
+        .eq("slot_date", dateStr)
+        .eq("slot_time", selectedTime)
+        .eq("status", "available")
+        .single();
 
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.message || data.error || "שגיאה בקביעת הפגישה");
-      }
+      if (findError || !slot) throw new Error("החלון כבר תפוס, תבחר שעה אחרת");
+
+      const { error: updateError } = await supabase
+        .from("booking_slots")
+        .update({
+          status: "booked",
+          booked_name: name.trim(),
+          booked_email: email.trim(),
+          booked_at: new Date().toISOString(),
+        })
+        .eq("id", slot.id);
+
+      if (updateError) throw new Error("שגיאה בקביעת הפגישה");
 
       setConfirmed(true);
     } catch (err) {
