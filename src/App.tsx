@@ -9,6 +9,7 @@ import { HelmetProvider } from "react-helmet-async";
 import Navbar from "./components/Navbar";
 import Index from "./pages/Index";
 import LegalFooter from "./components/LegalFooter";
+import ChatWidget from "./components/ChatWidget";
 
 const Articles = lazy(() => import("./pages/Articles"));
 const ArticlePage = lazy(() => import("./pages/ArticlePage"));
@@ -17,6 +18,7 @@ const AdminFormSubmissions = lazy(() => import("./pages/AdminFormSubmissions"));
 const BookingPage = lazy(() => import("./pages/BookingPage"));
 const AdminBookings = lazy(() => import("./pages/AdminBookings"));
 const AdminTestimonials = lazy(() => import("./pages/AdminTestimonials"));
+const AdminChat = lazy(() => import("./pages/AdminChat"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Accessibility = lazy(() => import("./pages/Accessibility"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
@@ -36,6 +38,13 @@ const ScrollToHash = () => {
     }
   }, [hash, pathname]);
   return null;
+};
+
+// Only show ChatWidget on non-admin pages
+const ChatWidgetWrapper = () => {
+  const { pathname } = useLocation();
+  if (pathname.startsWith("/admin")) return null;
+  return <ChatWidget />;
 };
 
 const PageFallback = () => (
@@ -62,6 +71,7 @@ const App = () => (
               <Route path="/admin/submissions" element={<AdminFormSubmissions />} />
               <Route path="/book" element={<BookingPage />} />
               <Route path="/admin/bookings" element={<AdminBookings />} />
+              <Route path="/admin/chat" element={<AdminChat />} />
               <Route path="/admin/testimonials" element={<AdminTestimonials />} />
               <Route path="/accessibility" element={<Accessibility />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
@@ -69,6 +79,7 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
+          <ChatWidgetWrapper />
           <LegalFooter />
         </BrowserRouter>
       </TooltipProvider>
