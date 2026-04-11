@@ -228,25 +228,45 @@ const ChatWidget = () => {
     }
   };
 
-  // Closed state - bubble button
+  const [teaserDismissed, setTeaserDismissed] = useState(false);
+
+  // Closed state - bubble + teaser
   if (!open) {
     return (
-      <button
-        onClick={() => setOpen(true)}
-        className={cn(
-          "fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full bg-blue-primary text-white",
-          "flex items-center justify-center shadow-lg hover:bg-blue-primary/90 transition-all duration-200",
-          !conversationId && "animate-pulse"
+      <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-2">
+        {/* Teaser bubble */}
+        {!teaserDismissed && (
+          <div className="relative bg-white rounded-2xl rounded-br-sm shadow-lg px-4 py-3 max-w-[220px] text-right animate-fade-in">
+            <button
+              onClick={(e) => { e.stopPropagation(); setTeaserDismissed(true); }}
+              className="absolute top-1 left-1 w-5 h-5 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors"
+              aria-label="סגור"
+            >
+              <X className="w-3 h-3 text-gray-500" />
+            </button>
+            <p className="text-gray-800 text-sm font-heebo leading-relaxed">
+              היי! יש לך שאלה על שירותי AI לעסקים ?
+            </p>
+          </div>
         )}
-        aria-label="פתח צ'אט"
-      >
-        <MessageCircle className="w-6 h-6" />
-        {unreadCount > 0 && (
-          <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center font-bold">
-            {unreadCount}
-          </span>
-        )}
-      </button>
+
+        {/* Chat button */}
+        <button
+          onClick={() => setOpen(true)}
+          className="flex items-center gap-2 bg-blue-primary text-white rounded-full pl-4 pr-3 py-3 shadow-lg hover:bg-blue-primary/90 transition-all duration-200"
+          aria-label="פתח צ'אט"
+        >
+          {unreadCount > 0 && (
+            <span className="w-5 h-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center font-bold">
+              {unreadCount}
+            </span>
+          )}
+          <span className="text-sm font-heebo font-medium">שוחחו עם גיא</span>
+          <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
+            <MessageCircle className="w-5 h-5 text-white" />
+          </div>
+        </button>
+      </div>
     );
   }
 
