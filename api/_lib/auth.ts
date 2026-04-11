@@ -1,6 +1,6 @@
-import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
 
-const TOKEN_EXPIRY = '24h';
+const TOKEN_EXPIRY_MS = 24 * 60 * 60 * 1000; // 24 hours
 
 function getSecret(): string {
   const secret = process.env.ADMIN_SECRET;
@@ -12,15 +12,27 @@ function getSecret(): string {
 
 function createToken(): string {
   const secret = getSecret();
-  return jwt.sign({ role: 'admin', iat: Math.floor(Date.now() / 1000) }, secret, {
-    expiresIn: TOKEN_EXPIRY,
-  });
+  const payload = {
+    role: 'admin',
+    exp: Date.now() + TOKEN_EXPIRY_MS,
+  };
+  const data = Buffer.from(JSON.stringify(payload)).toString('base64url');
+  const sig = crypto.createHmac('sha256', secret).update(data).digest('base64url');
+  return `${data}.${sig}`;
 }
 
 function verifyToken(token: string): boolean {
   try {
     const secret = getSecret();
-    jwt.verify(token, secret);
+    const [data, sig] = token.split('.');
+    if (!data || !sig) return false;
+
+    const expectedSig = crypto.createHmac('sha256', secret).update(data).digest('base64url');
+    if (sig !== expectedSig) return false;
+
+    const payload = JSON.parse(Buffer.from(data, 'base64url').toString());
+    if (payload.exp < Date.now()) return false;
+
     return true;
   } catch {
     return false;
