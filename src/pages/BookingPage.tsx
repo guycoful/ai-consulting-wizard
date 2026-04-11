@@ -216,14 +216,15 @@ const BookingPage = () => {
       document.body.removeChild(icsLink);
       URL.revokeObjectURL(icsUrl);
 
-      // Notify Guy via WhatsApp (Green API)
-      const whatsappMsg = `פגישה חדשה נקבעה!\n\nשם: ${name.trim()}\nמייל: ${email.trim()}\nתאריך: ${bookingDate}\nשעה: ${selectedTime}\n\nמקור: guycohen-ai.co.il/book`;
-      fetch("https://7103.api.greenapi.com/waInstance7103516006/sendMessage/e7be64633c004f498055c58bb1b295d349450f8633f8465e87", {
+      // Notify Guy via Supabase Edge Function (WhatsApp + future email)
+      fetch("https://vuvavjmbvdqnwtleudqh.supabase.co/functions/v1/booking-notify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          chatId: "972546232063@c.us",
-          message: whatsappMsg,
+          name: name.trim(),
+          email: email.trim(),
+          date: bookingDate,
+          time: selectedTime,
         }),
       }).catch(() => {}); // Fire and forget
 
