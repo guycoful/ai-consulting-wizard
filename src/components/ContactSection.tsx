@@ -1,11 +1,13 @@
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { CalendarDays, Send } from "lucide-react";
 
 const ContactSection = () => {
   const { ref, isVisible } = useScrollAnimation();
@@ -81,7 +83,36 @@ const ContactSection = () => {
           </p>
         </div>
         
-        <form onSubmit={handleSubmit} className="bg-navy-light p-12 rounded-xl shadow-lg space-y-8 border border-gold/20">
+        {/* Two options: Book meeting OR fill form */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          <Link
+            to="/book"
+            className="group bg-blue-primary hover:bg-blue-primary/90 p-8 rounded-xl border border-blue-primary/30 transition-all duration-300 transform hover:scale-[1.02] shadow-lg flex flex-col items-center text-center gap-4"
+          >
+            <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors">
+              <CalendarDays className="w-8 h-8 text-white" />
+            </div>
+            <h3 className="text-xl font-bold text-white font-heebo">קבע פגישה ביומן</h3>
+            <p className="text-blue-100 font-heebo text-sm">
+              תבחר תאריך ושעה שנוחים לך ותקבל אישור מיידי למייל
+            </p>
+          </Link>
+
+          <a
+            href="#contact-form"
+            className="group bg-navy-light hover:bg-navy-light/80 p-8 rounded-xl border border-gold/20 hover:border-gold/40 transition-all duration-300 transform hover:scale-[1.02] shadow-lg flex flex-col items-center text-center gap-4"
+          >
+            <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center group-hover:bg-gold/20 transition-colors">
+              <Send className="w-8 h-8 text-purple-400" />
+            </div>
+            <h3 className="text-xl font-bold text-white font-heebo">השאר פרטים</h3>
+            <p className="text-gray-300 font-heebo text-sm">
+              מלא את הטופס ונחזור אליך בהקדם
+            </p>
+          </a>
+        </div>
+
+        <form id="contact-form" onSubmit={handleSubmit} className="bg-navy-light p-12 rounded-xl shadow-lg space-y-8 border border-gold/20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
               <label htmlFor="name" className="block text-lg font-medium font-heebo text-white mb-3">
