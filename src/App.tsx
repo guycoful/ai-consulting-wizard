@@ -16,6 +16,7 @@ const ProfilingForm = lazy(() => import("./pages/ProfilingForm"));
 const AdminFormSubmissions = lazy(() => import("./pages/AdminFormSubmissions"));
 const BookingPage = lazy(() => import("./pages/BookingPage"));
 const AdminBookings = lazy(() => import("./pages/AdminBookings"));
+const AdminTestimonials = lazy(() => import("./pages/AdminTestimonials"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Accessibility = lazy(() => import("./pages/Accessibility"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
@@ -61,6 +62,7 @@ const App = () => (
               <Route path="/admin/submissions" element={<AdminFormSubmissions />} />
               <Route path="/book" element={<BookingPage />} />
               <Route path="/admin/bookings" element={<AdminBookings />} />
+              <Route path="/admin/testimonials" element={<AdminTestimonials />} />
               <Route path="/accessibility" element={<Accessibility />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-use" element={<TermsOfUse />} />
