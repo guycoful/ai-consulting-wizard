@@ -1,57 +1,41 @@
-import { createToken } from './_lib/auth';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
+import crypto from 'crypto';
 
-interface VercelRequest {
-  method?: string;
-  headers: Record<string, string | string[] | undefined>;
-  body?: any;
-  query: Record<string, string | string[]>;
-}
+const TOKEN_EXPIRY_MS = 24 * 60 * 60 * 1000;
 
-interface VercelResponse {
-  setHeader(k: string, v: string): VercelResponse;
-  status(c: number): VercelResponse;
-  json(b: any): VercelResponse;
-  end(): VercelResponse;
-}
-
-function setCors(res: VercelResponse): void {
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-}
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  setCors(res);
-
-  if (req.method === 'OPTIONS') {
-    return res.status(204).end();
-  }
-
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+  if (req.method === 'OPTIONS') return res.status(204).end();
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
     const { password } = req.body || {};
 
     if (!password || typeof password !== 'string') {
-      return res.status(400).json({ error: 'Missing password field' });
+      return res.status(400).json({ error: 'Missing password' });
     }
 
     const adminPassword = process.env.ADMIN_PASSWORD;
-    if (!adminPassword) {
-      console.error('ADMIN_PASSWORD environment variable is not set');
-      return res.status(500).json({ error: 'Server configuration error' });
+    const secret = process.env.ADMIN_SECRET;
+
+    if (!adminPassword || !secret) {
+      return res.status(500).json({ error: 'Server config missing' });
     }
 
-    if (password !== adminPassword) {
+    if (password.trim() !== adminPassword.trim()) {
       return res.status(401).json({ error: 'Invalid password' });
     }
 
-    const token = createToken();
-    return res.status(200).json({ token });
+    // Create simple HMAC token
+    const payload = { role: 'admin', exp: Date.now() + TOKEN_EXPIRY_MS };
+    const data = Buffer.from(JSON.stringify(payload)).toString('base64url');
+    const sig = crypto.createHmac('sha256', secret).update(data).digest('base64url');
+
+    return res.status(200).json({ token: `${data}.${sig}` });
   } catch (error: any) {
-    console.error('Error in auth handler:', error);
-    return res.status(500).json({ error: 'Authentication failed', details: error.message });
+    return res.status(500).json({ error: 'Auth failed', details: error.message });
   }
 }
