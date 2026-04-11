@@ -7,6 +7,7 @@ import AboutSection from "@/components/AboutSection";
 import LatestArticlesSection from "@/components/LatestArticlesSection";
 import ContactSection from "@/components/ContactSection";
 import FaqSection from "@/components/FaqSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 
@@ -108,6 +109,7 @@ const Index = () => {
       <AboutSection />
       <div className="h-16 bg-gradient-to-b from-navy-light to-navy-dark" />
       <LatestArticlesSection />
+      <TestimonialsSection />
       <ContactSection />
       <FaqSection />
 
