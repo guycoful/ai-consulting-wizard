@@ -40,7 +40,7 @@ const ProfilingForm = () => {
 
         <div className="max-w-2xl mx-auto bg-[#102B5B] border border-[#7C3AED]/20 rounded-2xl overflow-hidden">
           <iframe
-            src="https://forms.fillout.com/t/wxa1J8DvUjus"
+            src="https://forms.fillout.com/t/2cz4gfocnsus"
             title="שאלון סינון"
             className="w-full border-0"
             style={{ minHeight: "700px" }}
