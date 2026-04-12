@@ -89,7 +89,7 @@ const ArticlePage = () => {
               image: `${SITE_URL}/images/guy-cohen-portrait.webp`,
               jobTitle: "\u05D9\u05D5\u05E2\u05E5 AI \u05DC\u05E2\u05E1\u05E7\u05D9\u05DD",
               description: "\u05D9\u05D5\u05E2\u05E5 AI \u05DC\u05E2\u05E1\u05E7\u05D9\u05DD \u05E7\u05D8\u05E0\u05D9\u05DD \u05D5\u05D1\u05D9\u05E0\u05D5\u05E0\u05D9\u05D9\u05DD. \u05DE\u05E0\u05D4\u05DC \u05E7\u05D4\u05D9\u05DC\u05EA AI \u05E2\u05DD 1,000+ \u05D7\u05D1\u05E8\u05D9\u05DD. \u05DE\u05EA\u05DE\u05D7\u05D4 \u05D1\u05E1\u05D5\u05DB\u05E0\u05D9 AI, \u05D0\u05D5\u05D8\u05D5\u05DE\u05E6\u05D9\u05D5\u05EA \u05E2\u05E1\u05E7\u05D9\u05D5\u05EA, \u05D5\u05D1\u05D5\u05D8\u05D9\u05DD \u05DC\u05D5\u05D5\u05D8\u05E1\u05D0\u05E4.",
-              sameAs: ["https://www.linkedin.com/in/guycohenai/"],
+              sameAs: ["https://www.linkedin.com/in/guycohen-ai/"],
             },
             publisher: {
               "@type": "Organization",
@@ -296,7 +296,7 @@ const ArticlePage = () => {
               מלווה עשרות עסקים מאיפיון ועד הפעלה בשטח.
             </p>
             <a
-              href="https://www.linkedin.com/in/guycohenai/"
+              href="https://www.linkedin.com/in/guycohen-ai/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 text-purple-400 hover:text-purple-300 text-sm font-heebo mt-2 transition-colors"

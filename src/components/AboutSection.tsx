@@ -35,7 +35,7 @@ const AboutSection = () => {
         }
       ],
       "knowsAbout": ["בינה מלאכותית", "אוטומציה לעסקים", "סוכני AI", "Make.com", "ManyChat", "CRM", "Google Workspace AI", "WhatsApp Automation"],
-      "sameAs": ["https://www.linkedin.com/in/guycohenai/"]
+      "sameAs": ["https://www.linkedin.com/in/guycohen-ai/"]
     });
     document.head.appendChild(script);
     return () => {
@@ -83,7 +83,7 @@ const AboutSection = () => {
             </div>
 
             <a
-              href="https://www.linkedin.com/in/guycohenai/"
+              href="https://www.linkedin.com/in/guycohen-ai/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 mt-4 text-purple-400 hover:text-purple-300 font-heebo transition-colors"
