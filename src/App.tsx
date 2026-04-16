@@ -19,6 +19,7 @@ const BookingPage = lazy(() => import("./pages/BookingPage"));
 const AdminBookings = lazy(() => import("./pages/AdminBookings"));
 const AdminTestimonials = lazy(() => import("./pages/AdminTestimonials"));
 const AdminChat = lazy(() => import("./pages/AdminChat"));
+const Lectures = lazy(() => import("./pages/Lectures"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Accessibility = lazy(() => import("./pages/Accessibility"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
@@ -67,6 +68,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/articles" element={<Articles />} />
               <Route path="/articles/:slug" element={<ArticlePage />} />
+              <Route path="/lectures" element={<Lectures />} />
               <Route path="/profiling-form" element={<ProfilingForm />} />
               <Route path="/admin/submissions" element={<AdminFormSubmissions />} />
               <Route path="/book" element={<BookingPage />} />

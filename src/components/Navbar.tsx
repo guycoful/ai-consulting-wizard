@@ -12,6 +12,7 @@ import {
 const navLinks = [
   { label: "דף הבית", href: "/" },
   { label: "מאמרים", href: "/articles" },
+  { label: "הרצאות", href: "/lectures" },
   { label: "טופס איפיון", href: "/profiling-form" },
   { label: "צור קשר", href: "/#contact" },
 ];
