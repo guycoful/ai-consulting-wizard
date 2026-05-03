@@ -15,6 +15,58 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    id: "19",
+    slug: "build-you-an-agent",
+    title: "בונה לך סוכן — 4 סוכני AI מותאמים אישית שבניתי בשעות בודדות",
+    excerpt: "ניתוח דוח פנסיה, עיצוב חדר מתמונה, סינון 50 קורות חיים תוך דקה, ופענוח מסמכים רשמיים בעברית של בני אדם — כל סוכן כזה לוקח שעות לבנות, אחר כך עובד לבד בלי הגבלה. מה החיכוך היומיומי שלך?",
+    content: `<p>בחודשים האחרונים בניתי סוכני AI בהתאמה אישית.</p>
+
+<p>לא מוצרים מהמדף. כל סוכן נבנה כתשובה לבעיה ספציפית של אדם ספציפי.</p>
+
+<hr>
+
+<h3>4 דוגמאות לסוכנים שכבר עובדים בשטח:</h3>
+
+<p>💰 <strong>מנתח דוח פנסיה</strong></p>
+
+<p>מישהו שאל אותי למה הוא משלם כל כך הרבה על פנסיה. בניתי סוכן שמנתח את הדוח ומראה איפה הוא מפסיד כסף בכל מסלול. (הסוכן הזה כבר פורסם לקהילה.)</p>
+
+<p>🏠 <strong>מעצב חדר מתמונה</strong></p>
+
+<p>מישהי רצתה לראות איך הסלון שלה ייראה עם עיצוב אחר. בניתי סוכן שמקבל תמונה ומחזיר הדמיה של החדר אחרי שינוי. (גם הוא פורסם.)</p>
+
+<p>📄 <strong>מסנן קורות חיים</strong></p>
+
+<p>בעל עסק קטן קיבל 50 קורות חיים על משרה אחת. בניתי סוכן שסורק את כולם ומחזיר 5 מועמדים מתאימים תוך דקה.</p>
+
+<p>📧 <strong>מתרגם מסמכים רשמיים</strong></p>
+
+<p>מישהו קיבל מכתב מביטוח לאומי ולא הבין מה רוצים ממנו. בניתי סוכן שמתרגם מסמכים רשמיים לעברית של בני אדם.</p>
+
+<hr>
+
+<h3>הצד הטכני בקצרה:</h3>
+
+<ul>
+<li>⚙️ כל סוכן לוקח לי שעות בודדות לבנות, לא ימים</li>
+<li>🤖 אחרי הבנייה הוא עובד לבד, בלי הגבלה</li>
+<li>🎯 כל סוכן ממוקד בבעיה אחת ספציפית, לא ניסיון להיות הכל</li>
+</ul>
+
+<hr>
+
+<p>יש לך דבר כזה שחוזר לך ביומיום ומבזבז לך זמן? 🤔</p>
+
+<p>כתוב לי בפרטי מה זה ואני אגיד אם אפשר לבנות לזה סוכן.</p>
+
+<p><a href="https://wa.me/972546232063" target="_blank" rel="noopener noreferrer" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors text-center">דבר איתי בוואטסאפ</a></p>`,
+    date: "2026-03-31",
+    readingTime: 2,
+    tags: ["סוכן AI", "התאמה אישית", "אוטומציה", "פתרונות מותאמים"],
+    category: "agents",
+    image: "/images/articles/build-agent-uncle-sam.jpg",
+  },
+  {
     id: "15",
     slug: "ai-pension-report-checker",
     title: "בודק דוח שנתי — סוכן AI שמנתח את הפנסיה והביטוח שלכם תוך דקה",
@@ -91,7 +143,26 @@ export const articles: Article[] = [
 
 <hr>
 
-<p>מי שרוצה את הפרומפט — תכתבו לי בפרטי ואשלח לכם 👇</p>`,
+<details class="bg-purple-50 border border-purple-200 rounded-lg p-4 my-4">
+<summary class="cursor-pointer font-bold text-purple-700 text-lg">📋 לקבלת הפרומפט — לחצו כאן</summary>
+<div class="mt-4">
+<pre class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm leading-relaxed overflow-x-auto whitespace-pre-wrap" dir="rtl">הפוך את תמונת המוצר הזו לתמונת קטלוג מקצועית בסגנון Amazon.
+
+דרישות:
+- רקע לבן נקי (#FFFFFF)
+- תאורת סטודיו מקצועית: אור רך ומפוזר משני הצדדים עם צל עדין וטבעי מתחת למוצר
+- המוצר ממורכז ותופס 85% מהפריים
+- זווית צילום 3/4 שמראה עומק ומימד
+- חדות מלאה על כל המוצר, בלי טשטוש
+- איכות קטלוג מסחרי פוטוריאליסטי
+- מראה נקי ומינימליסטי
+- פלטת צבעים טבעית — שמור על הצבעים המקוריים של המוצר
+- סגנון צילום מאקרו של מוצרים
+- מראה פרימיום ומלוטש — מוכן לחנות אונליין
+- איכות 32k UHD
+- שמור על אותו מוצר בדיוק, אותם צבעים, אותם פרטים — רק שדרג את הרקע, התאורה והקומפוזיציה</pre>
+</div>
+</details>`,
     date: "2026-03-22",
     readingTime: 2,
     tags: ["סוכן AI", "צילום מוצרים", "ecommerce"],
@@ -617,7 +688,7 @@ export const articles: Article[] = [
 
 <p>אם אתה יודע להסביר למישהו מה לעשות - אתה יודע לבנות סוכן. 🤖</p>
 
-<p><strong>רוצים לקבל את ההנחיה המלאה שכתבתי לבוט התזונה — מוכנה להעתקה?</strong> שלחו לי הודעה פרטית.</p>`,
+<p><a href="https://wa.me/972546232063?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%9E%D7%90%D7%9E%D7%A8%20%D7%A2%D7%9C%20%D7%A1%D7%95%D7%9B%D7%9F%20%D7%94%D7%AA%D7%96%D7%95%D7%A0%D7%94%20%D7%91%D7%90%D7%AA%D7%A8%20%D7%A9%D7%9C%D7%9A.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%90%D7%AA%20%D7%94%D7%94%D7%A0%D7%97%D7%99%D7%94%20%D7%94%D7%9E%D7%9C%D7%90%D7%94%20%D7%9C%D7%91%D7%95%D7%98%20%F0%9F%99%8F" target="_blank" rel="noopener noreferrer" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-colors text-center">📲 שלחו לי בוואטסאפ וקבלו את הסוכן</a></p>`,
     date: "2026-02-24",
     readingTime: 6,
     tags: ["סוכן AI", "תזונה", "מדריך"],
@@ -689,7 +760,7 @@ export const articles: Article[] = [
 
 <p>מכיוון שאתם כאלה אלופים והראשונים להיכנס לקהילה, אני מצרף לכם את ה-Gem המותאם שכל אחד יכול להתחיל לעבוד איתו במיידי:</p>
 
-<p><a href="https://gemini.google.com/gem/1CWc3aTGxJVEcBOQHD9DoYovxxiTIKJyt?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors text-center">פתח את סוכן החסמים ב-Gemini</a></p>`,
+<p><a href="https://gemini.google.com/gem/1koyq2elRUye_VSXMiS4bknE0DHftXwpI?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors text-center">פתח את סוכן החסמים ב-Gemini</a></p>`,
     date: "2026-02-26",
     readingTime: 4,
     tags: ["סוכן AI", "פרודוקטיביות", "התפתחות אישית"],
