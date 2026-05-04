@@ -15,6 +15,76 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    id: "21",
+    slug: "make-morning-dashboard",
+    title: "דשבורד בוקר — אוטומציית Make ששולחת לך כל בוקר את הפגישות של היום במייל",
+    excerpt: "5 דקות התקנה, אפס רקע טכני. אוטומציית Make.com ששולחת לך כל בוקר מייל מעוצב עם כל הפגישות של היום (או 'יום חופשי' אם אין). תבנית מוכנה להורדה — בחינם.",
+    content: `<h3>מה זה? 📅</h3>
+
+<p>אוטומציה שרצה פעם ביום ושולחת לכם מייל מעוצב בבוקר עם כל הפגישות של אותו היום.</p>
+
+<ul>
+<li>📅 <strong>יש פגישות?</strong> המייל מראה את הרשימה עם שעות, מיקומים וקישורים לשיחות אם יש.</li>
+<li>🎉 <strong>אין פגישות?</strong> מקבלים הודעת "יום חופשי".</li>
+</ul>
+
+<p>זה הכל. פשוט וקליל.</p>
+
+<hr>
+
+<h3>איך זה עובד? 🛠️</h3>
+
+<ol>
+<li>מורידים קובץ תבנית מהקישור למטה.</li>
+<li>נכנסים ל-Make.com (בחינם, בלי כרטיס אשראי).</li>
+<li>מייבאים את הקובץ — לוחצים 3 לחיצות.</li>
+<li>מחברים את חשבון Google שלכם למודולי היומן ולמייל.</li>
+<li>לוחצים על מודול ה-Tools ולאחר מכן Save.</li>
+<li>לוחצים Run — ותוך שניות מגיע מייל.</li>
+</ol>
+
+<p><strong>5 דקות. אפס רקע טכני.</strong></p>
+
+<p>💡 למשתמשים מהסמארטפון — רצוי לעבוד עם פריסה לרוחב.</p>
+
+<hr>
+
+<h3>סרטון הדרכה — 2 דקות, שלב אחרי שלב 🎥</h3>
+
+<p>הקלטתי <strong>סרטון הדרכה של 2 דקות</strong> שמראה שלב אחרי שלב בדיוק מה לעשות:</p>
+
+<div style="position: relative; width: 100%; max-width: 360px; margin: 1.5em auto; aspect-ratio: 9/16;">
+  <iframe src="https://www.youtube.com/embed/vebq5ySyuXQ" title="דשבורד בוקר — סרטון הדרכה" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; border-radius: 12px;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+</div>
+
+<p style="text-align: center;"><a href="https://youtube.com/shorts/vebq5ySyuXQ" target="_blank" rel="noopener noreferrer">👉 פתיחה ב-YouTube</a></p>
+
+<hr>
+
+<h3>על Make.com</h3>
+
+<p>זו הפלטפורמה שדרכה בנויה האוטומציה.</p>
+
+<p>התוכנית החינמית מאפשרת <strong>2 תרחישים פעילים</strong> ו-<strong>1,000 פעולות בחודש</strong>. יותר ממספיק להתחיל.</p>
+
+<hr>
+
+<p>🔗 <strong>להורדת התבנית + מדריך עם צילומי מסך:</strong></p>
+
+<p><a href="https://guycoful.github.io/make-morning-dashboard" target="_blank" rel="noopener noreferrer" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors text-center">הורדת תבנית + מדריך מלא</a></p>
+
+<p>🔗 הרשמה ל-Make בחינם: <a href="https://www.make.com" target="_blank" rel="noopener noreferrer">www.make.com</a></p>
+
+<hr>
+
+<p>שתפו עם מי שזה יכול לעזור לו 🙏</p>`,
+    date: "2026-04-08",
+    readingTime: 2,
+    tags: ["Make.com", "אוטומציה", "Google Calendar", "פרודקטיביות", "Blueprint"],
+    category: "agents",
+    image: "/images/articles/morning-dashboard.jpg",
+  },
+  {
     id: "20",
     slug: "ai-mechanic-engine-diagnosis",
     title: "סוכן המכונאי — צלמו את מנוע הרכב וקבלו אבחון מלא תוך שניות",
