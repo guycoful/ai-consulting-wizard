@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar";
 import Index from "./pages/Index";
 import LegalFooter from "./components/LegalFooter";
 import ChatWidget from "./components/ChatWidget";
+import AccessibilityWidget from "./components/AccessibilityWidget";
 
 const Articles = lazy(() => import("./pages/Articles"));
 const ArticlePage = lazy(() => import("./pages/ArticlePage"));
@@ -24,6 +25,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const Accessibility = lazy(() => import("./pages/Accessibility"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfUse = lazy(() => import("./pages/TermsOfUse"));
+const RoomGlow = lazy(() => import("./pages/RoomGlow"));
 
 const queryClient = new QueryClient();
 
@@ -78,10 +80,12 @@ const App = () => (
               <Route path="/accessibility" element={<Accessibility />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-use" element={<TermsOfUse />} />
+              <Route path="/roomglow" element={<RoomGlow />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
           <ChatWidgetWrapper />
+          <AccessibilityWidget />
           <LegalFooter />
         </BrowserRouter>
       </TooltipProvider>

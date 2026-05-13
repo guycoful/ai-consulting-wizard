@@ -111,3 +111,87 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ===========================================================
+   Accessibility widget modes (toggled by AccessibilityWidget)
+   =========================================================== */
+
+html.a11y-high-contrast body,
+html.a11y-high-contrast body * {
+  background-color: #000 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+html.a11y-high-contrast a,
+html.a11y-high-contrast a * {
+  color: #ffff00 !important;
+  text-decoration: underline !important;
+}
+html.a11y-high-contrast button,
+html.a11y-high-contrast [role="button"] {
+  outline: 2px solid #ffff00 !important;
+}
+html.a11y-high-contrast img,
+html.a11y-high-contrast video,
+html.a11y-high-contrast svg {
+  filter: contrast(1.2) brightness(1.1);
+}
+
+html.a11y-grayscale {
+  filter: grayscale(100%);
+}
+
+html.a11y-highlight-links a {
+  background-color: #fff200 !important;
+  color: #000 !important;
+  text-decoration: underline !important;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+html.a11y-big-cursor,
+html.a11y-big-cursor * {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='black' stroke='white' stroke-width='1.5'><path d='M3 2l7 18 2-7 7-2z'/></svg>") 4 4, auto !important;
+}
+
+html.a11y-no-motion *,
+html.a11y-no-motion *::before,
+html.a11y-no-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-delay: 0ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  transition-delay: 0ms !important;
+  scroll-behavior: auto !important;
+}
+
+html.a11y-spacing body {
+  line-height: 2 !important;
+  letter-spacing: 0.05em;
+  word-spacing: 0.1em;
+}
+html.a11y-spacing p,
+html.a11y-spacing li,
+html.a11y-spacing h1,
+html.a11y-spacing h2,
+html.a11y-spacing h3,
+html.a11y-spacing h4 {
+  line-height: 2 !important;
+  margin-bottom: 0.75em !important;
+}
+
+/* Respect user preference for reduced motion automatically */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Focus ring baseline (for keyboard accessibility) */
+:focus-visible {
+  outline: 2px solid #a78bfa;
+  outline-offset: 2px;
+}
