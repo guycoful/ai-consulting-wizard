@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { MessageCircle, X, Send, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { supabase } from "@/integrations/supabase/client";
 
 const EDGE_FN_URL =
   "https://vuvavjmbvdqnwtleudqh.supabase.co/functions/v1/chat-respond";
@@ -14,6 +13,31 @@ type Message = {
   role: "visitor" | "ai" | "admin";
   content: string;
   created_at: string;
+};
+
+type EdgeMessage = {
+  id: string;
+  role: string;
+  content: string;
+  created_at: string;
+};
+
+const fetchConversationMessages = async (
+  conversationId: string
+): Promise<Message[]> => {
+  const res = await fetch(
+    `${EDGE_FN_URL}?conversationId=${encodeURIComponent(conversationId)}`
+  );
+
+  if (!res.ok) throw new Error("Edge function error");
+
+  const json = (await res.json()) as { messages?: EdgeMessage[] };
+  return (json.messages || []).map((m) => ({
+    id: m.id,
+    role: m.role as Message["role"],
+    content: m.content,
+    created_at: m.created_at,
+  }));
 };
 
 const ChatWidget = () => {
@@ -69,22 +93,15 @@ const ChatWidget = () => {
     if (!conversationId) return;
 
     const loadMessages = async () => {
-      const { data, error } = await supabase
-        .from("chat_messages" as any)
-        .select("id, role, content, created_at")
-        .eq("conversation_id", conversationId)
-        .order("created_at", { ascending: true });
+      try {
+        const loaded = await fetchConversationMessages(conversationId);
+        if (loaded.length === 0) return;
 
-      if (!error && data && (data as any[]).length > 0) {
-        const loaded = (data as any[]).map((m: any) => ({
-          id: m.id,
-          role: m.role as Message["role"],
-          content: m.content,
-          created_at: m.created_at,
-        }));
         setMessages(loaded);
         setGreeted(true);
         lastSeenCountRef.current = loaded.length;
+      } catch {
+        // Keep the local greeting if history cannot be loaded.
       }
     };
 
@@ -96,19 +113,8 @@ const ChatWidget = () => {
     if (!conversationId) return;
 
     const poll = setInterval(async () => {
-      const { data, error } = await supabase
-        .from("chat_messages" as any)
-        .select("id, role, content, created_at")
-        .eq("conversation_id", conversationId)
-        .order("created_at", { ascending: true });
-
-      if (!error && data) {
-        const fetched = (data as any[]).map((m: any) => ({
-          id: m.id,
-          role: m.role as Message["role"],
-          content: m.content,
-          created_at: m.created_at,
-        }));
+      try {
+        const fetched = await fetchConversationMessages(conversationId);
 
         if (fetched.length > lastSeenCountRef.current) {
           setMessages(fetched);
@@ -125,6 +131,8 @@ const ChatWidget = () => {
 
           lastSeenCountRef.current = fetched.length;
         }
+      } catch {
+        // Skip this poll tick; the next one will retry.
       }
     }, 10000);
 
