@@ -1,4 +1,4 @@
-export type ArticleCategory = "agents" | "business";
+export type ArticleCategory = "agents" | "business" | "skills";
 
 export interface Article {
   id: string;
@@ -14,6 +14,497 @@ export interface Article {
 }
 
 export const articles: Article[] = [
+  {
+    id: "36",
+    slug: "skill-meeting-scheduler",
+    title: "סקיל MEETING SCHEDULER — מערכת תיאום פגישות באתר, בלי Calendly",
+    excerpt: "מערכת מלאה לתיאום פגישות שנשמרת ב-Supabase, בלי Google Calendar API ובלי OAuth מסובך. באתר React מקבלים עמוד הזמנה ופאנל ניהול, וב-WordPress או Wix מספיקה תגית script אחת.",
+    content: `<p>רוצים להוסיף לאתר אפשרות לקבוע פגישה, בלי להשתמש במערכת כמו Calendly ובלי להסתבך עם חיבור ליומן Google ?</p>
+
+<p>🎯 הסקיל השבוע: <strong>MEETING SCHEDULER</strong></p>
+
+<p>בניתי סקיל ל Claude Code שמוסיף לאתר שלכם מערכת מלאה לתיאום פגישות.</p>
+
+<p>המערכת שומרת ב Supabase את חלונות הזמן הפנויים, התפוסים והחסומים. אין צורך ב Google Calendar API או בתהליך התחברות מורכב עם OAuth.</p>
+
+<p><strong>איך זה עובד ?</strong></p>
+
+<ul>
+<li>באתר React קיים, הסקיל מוסיף עמוד הזמנה מלא ופאנל לניהול הזמינות</li>
+<li>באתר WordPress, Wix או HTML, אפשר להוסיף את המערכת באמצעות תגית script אחת</li>
+<li>שתי האפשרויות משתמשות באותה טבלת נתונים ויכולות לפעול במקביל</li>
+</ul>
+
+<p>מתאים למי שכבר משתמש ב Supabase ורוצה להוסיף לאתר מערכת תיאום פגישות שנמצאת בשליטתו.</p>
+
+<p><strong>קישור לסקיל:</strong></p>
+
+<p><a href="https://github.com/guycoful/meeting-scheduler-skill" target="_blank" rel="noopener noreferrer" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors text-center">לריפו המלא בגיטהאב</a></p>`,
+    date: "2026-07-28",
+    readingTime: 3,
+    tags: ["Claude Code", "סקילים", "פגישות", "Supabase"],
+    category: "skills",
+    image: "/images/articles/skill-meeting-scheduler.jpg",
+  },
+  {
+    id: "35",
+    slug: "first-agent-in-15-minutes",
+    title: "תפסיקו לשמור פוסטים על AI — ככה בונים סוכן ראשון ברבע שעה",
+    excerpt: "עוד סרטון, עוד וואו, עוד פוסט ששמרתם ולא חזרתם אליו. הדרך החוצה מהלופ היא לא רעיון גדול אלא משימה אחת חוזרת שאתם שונאים לעשות. הנה בדיוק איך.",
+    content: `<p><strong>תפסיקו לשמור פוסטים על AI !!</strong> 🛑</p>
+
+<p>כולנו מכירים את זה: עוד סרטון, עוד "וואו", עוד פוסט ששמרתם ולא חזרתם אליו. ובסוף לא בניתם כלום.</p>
+
+<p>אז הנה הדבר שיוציא אתכם מהלופ הזה, ותוכלו לעשות אותו כבר היום, ברבע שעה:</p>
+
+<p>אל תתחילו מקוד ואל תתחילו מרעיון גדול. תבחרו משימה אחת חוזרת שאתם שונאים לעשות. משהו שגוזל לכם זמן כל שבוע.<br>
+תגדירו אותה לChatGPT Work או לClaude Cowork במילים פשוטות ("כל בוקר תסכם לי את שלושת המיילים הכי חשובים ותשלח לי אותם"), תריצו, ותתקנו תוך כדי מה שלא מדויק.<br>
+תוך רבע שעה יש לכם סוכן ראשון שעובד. הסוד הוא לא לבנות משהו מרשים אלא לפתור כאב אחד קטן ואמיתי - ומשם זה מתגלגל לבד.</p>
+
+<p>ככה בשבועיים האחרונים בניתי לעצמי סוכן שמוכר יד שנייה, בוט שמסנן לי עדכונים מהוואטסאפ, וסרטון שיווקי שלם. הכל בשיחה, בלי לכתוב שורת קוד.</p>
+
+<p>וזה בדיוק מה שמפריד בין מי שמשחק עם AI למי שבונה איתו סיסטם שעובד בשבילו.</p>`,
+    date: "2026-07-25",
+    readingTime: 3,
+    tags: ["AI", "סוכנים", "ChatGPT", "Claude"],
+    category: "skills",
+    image: "/images/articles/first-agent-15-min.jpg",
+  },
+  {
+    id: "34",
+    slug: "hyperframes-video-by-conversation",
+    title: "בניתי סרטון שיווקי בלי מצלמה, בלי עורך ובלי תוכנת עריכה",
+    excerpt: "רק דיברתי, וזה קרה. HyperFrames של HeyGen רץ כסקיל בתוך Claude Code — מתארים סרטון במילים, וכל שינוי מופיע מיד. אני כבר לא עורך סרטון, אני מתאר אותו.",
+    content: `<p>את הסרטון הזה בניתי אתמול בלילה בכמה דקות.<br>
+בלי מצלמה, בלי עורך, בלי תוכנת עריכה.<br>
+רק דיברתי, וזה קרה.</p>
+
+<p>ואני חייב לשתף אתכם כי זה שינה לי משהו בראש.</p>
+
+<p>בניתי סוכן שמוכר יד שנייה,<br>
+ורציתי ליצור לו סרטון שיווקי קצר.<br>
+בעבר הייתי מזמין את זה, משלם, ומחכה ימים. במקום זה פשוט ישבתי מול קלוד קוד, תיארתי לו את המוצר במילים - מה הוא עושה, למי, ובאיזה טון - וביקשתי סרטון אנכי קצר בעברית.</p>
+
+<p>ומכאן זה נהיה ממכר: כל שינוי שביקשתי הופיע מיד מול העיניים.<br>
+"תקצר פה".<br>
+"תחליף צבע".<br>
+"האץ את הקצב".<br>
+בלי לגעת בשום ציר עריכה. זה פשוט לנהל שיחה עם הסרטון עד שהוא בדיוק כמו שרוצים.</p>
+
+<p>הנקודה שהכי הכתה בי: אני כבר לא עורך סרטון. אני מתאר אותו.<br>
+כל המחסום של "אני לא יודע תוכנות עריכה" פשוט התאדה.</p>
+
+<p>הכלי נקרא <strong>HyperFrames</strong> (של HeyGen), והוא רץ כסקיל בתוך קלוד קוד. הנה הקישורים הרשמיים של הסקיל:</p>
+
+<p>⚙️ התקנה: npx skills add heygen-com/hyperframes</p>
+
+<ul>
+<li>הקוד: <a href="https://github.com/heygen-com/hyperframes" target="_blank" rel="noopener noreferrer">https://github.com/heygen-com/hyperframes</a></li>
+<li>תיעוד: <a href="https://hyperframes.heygen.com/introduction" target="_blank" rel="noopener noreferrer">https://hyperframes.heygen.com/introduction</a></li>
+</ul>`,
+    date: "2026-07-23",
+    readingTime: 3,
+    tags: ["Claude Code", "וידאו", "HyperFrames", "HeyGen"],
+    category: "skills",
+    image: "/images/articles/hyperframes-video.jpg",
+  },
+  {
+    id: "33",
+    slug: "skill-secondhand-listing",
+    title: "סקיל SECONDHAND — הסוכן שמוכר את היד 2 שלכם, מהצילום ועד הפוסט",
+    excerpt: "יש לכם בבית ערימה של דברים ששווים כסף אמיתי ותופסים אבק. הסקיל אוסף פרטים, מנסח מודעה שנשמעת אנושית, מנקה את התמונה לרקע לבן, ממליץ על מחיר, ומכין את הפוסט — ועוצר לפני \"פרסם\".",
+    content: `<p>🏷️ <strong>סקיל חדש: הסוכן שמוכר לכם את היד 2 - מהצילום ועד הפוסט</strong></p>
+
+<p>תודו: יש לכם בבית ערימה של דברים ששווים כסף אמיתי ופשוט תופסים אבק. חליפה, עגלה, מכשיר, רהיט. למה הם עדיין שם? כי לשבת, לצלם, לכתוב מודעה שלא נשמעת רובוטית, לתמחר, למצוא קבוצות ולפרסם - זה מעצבן וגוזל זמן. אז זה נדחה, והכסף נשאר על הרצפה 💸</p>
+
+<p>בניתי סקיל שעושה את כל זה במקומכם 👇</p>
+
+<p>מה הסקיל עושה - מאפס ועד פוסט מוכן:</p>
+
+<ul>
+<li>אוסף פרטים בשאלות קצרות (מותג, מידה, מצב, מחיר, איסוף)</li>
+<li>מנסח מודעה אנושית - 2 גרסאות שנשמעות כמו בן אדם, לא כמו AI</li>
+<li>מנקה את התמונה לתמונת קטלוג על רקע לבן</li>
+<li>ממליץ על מחיר ריאלי שמוכר מהר</li>
+<li>מוצא קבוצות שאתם כבר חברים בהן</li>
+<li>ממלא פוסט + תמונה, ועוצר לפני "פרסם" - שתבדקו ותלחצו בעצמכם</li>
+</ul>
+
+<p>מ"יש לי משהו למכור" ל"המודעה מפורסמת" תוך דקות.</p>
+
+<ul>
+<li>בטוח: לא לוחץ פרסם, לא נוגע בסיסמאות. מתחבר ל-Chrome הפתוח שלכם.</li>
+</ul>
+
+<p>⚠️ עובד רק מאפליקציית ChatGPT במחשב ומאפליקציית Claude במחשב תחת Work/Cowork.</p>
+
+<ul>
+<li>מדריך: <a href="https://guycoful.github.io/sell-agent-guide/" target="_blank" rel="noopener noreferrer">https://guycoful.github.io/sell-agent-guide/</a></li>
+<li>קישור לסקיל:</li>
+</ul>
+
+<p>(במדריך יש גם קישור לgem למי שמעוניין לקבל רק את התשתית כולל הפוסט והתמונות ולפרסם בעצמו)</p>
+
+<p>עונת המעברים כאן וזה הזמן להפוך את מה שלא צריך לכסף. נסו ותכתבו לי איך הלך 🙌</p>
+
+<p><a href="https://github.com/guycoful/secondhand-listing" target="_blank" rel="noopener noreferrer" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors text-center">לריפו המלא בגיטהאב</a></p>`,
+    date: "2026-07-21",
+    readingTime: 4,
+    tags: ["Claude Code", "סקילים", "יד שנייה", "אוטומציה"],
+    category: "skills",
+    image: "/images/articles/skill-secondhand.jpg",
+  },
+  {
+    id: "32",
+    slug: "skill-public-speaking",
+    title: "סקיל PUBLIC SPEAKING — הכנה לדיבור מול קהל",
+    excerpt: "יש לכם ידע ואתם יודעים מה לומר, אבל החומר מפוזר וקשה להפוך אותו להרצאה ברורה. מכניסים נושא, קהל ומשך — ומקבלים מבנה, פתיחה שתופסת, סיום חד והכנה לשאלות.",
+    content: `<p>🎤 <strong>סקיל חדש ל-Claude Code: הכנה לדיבור מול קהל</strong></p>
+
+<p>בניתי סקיל שעוזר להתכונן להרצאה, מצגת, וובינר או הצגה מול קהל.</p>
+
+<p><strong>מה מקבלים:</strong></p>
+
+<ul>
+<li>מבנה ברור להרצאה לפי הנושא, הקהל והזמן</li>
+<li>פתיחה שתופסת את תשומת הלב</li>
+<li>חלוקה מסודרת למסרים מרכזיים</li>
+<li>שילוב דוגמאות וסיפורים במקום טקסט יבש</li>
+<li>סיום חד עם מסר וקריאה לפעולה</li>
+<li>הכנה לשאלות מהקהל ותרגול לפני ההרצאה</li>
+</ul>
+
+<p><strong>הבעיה שזה פותר:</strong></p>
+
+<p>יש לכם ידע ואתם יודעים מה אתם רוצים לומר, אבל החומר מפוזר וקשה להפוך אותו להרצאה ברורה.</p>
+
+<p>עם הסקיל מכניסים את הנושא, הקהל ומשך ההרצאה ומקבלים תהליך הכנה מסודר.<br>
+<em>/public-speaking</em></p>
+
+<ul>
+<li>הסקיל כאן:</li>
+</ul>
+
+<p><a href="https://github.com/guycoful/public-speaking-skill" target="_blank" rel="noopener noreferrer" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors text-center">לריפו המלא בגיטהאב</a></p>`,
+    date: "2026-07-11",
+    readingTime: 4,
+    tags: ["Claude Code", "סקילים", "דיבור מול קהל", "מצגות"],
+    category: "skills",
+    image: "/images/articles/skill-public-speaking.jpg",
+  },
+  {
+    id: "31",
+    slug: "skill-ai-chat-widget",
+    title: "סקיל AI CHAT WIDGET — להטמיע צ'אטבוט AI באתר קיים",
+    excerpt: "למי שיש אתר ורוצה להוסיף בוט בעצמו, בלי להסביר למפתח חיצוני מה הוא צריך. סקריפט להטמעה בשתי שורות, קומפוננטת React, Edge Function ל-Supabase, סכמת DB ופאנל אדמין.",
+    content: `<p>סקיל חדש ל-Claude Code: <strong>מטמיע צ'אטבוט AI באתר קיים</strong>.</p>
+
+<p>מיועד למי שיש לו אתר או אפליקציית ווב ורוצה להוסיף בוט בעצמו, בלי להסביר למפתח חיצוני מה הוא צריך.</p>
+
+<p><strong>מה הסקיל מספק :</strong></p>
+
+<ul>
+<li>סקריפט JS להטמעה (2 שורות, עובד על WordPress / Wix / כל HTML)</li>
+<li>קומפוננטה ל-React+Vite</li>
+<li>Edge Function ל-Supabase שמתחבר ל-Claude Haiku</li>
+<li>סכמת DB מוכנה</li>
+<li>פאנל אדמין לניהול שיחות</li>
+</ul>
+
+<p>❌בלי הסקיל: מחפשים דוקומנטציה, מרכיבים את הפאזל לבד.<br>
+✅עם הסקיל: checklist ברור, קוד מוכן, מתאים את ה-prompt לעסק שלך.</p>
+
+<p>`/ai-chat-widget`</p>
+
+<p>קוד פתוח:</p>
+
+<p>בדיוק כך הטמעתי את הצ׳אטבוט באתר שלי:<br>
+<a href="https://guycohen-ai.co.il/" target="_blank" rel="noopener noreferrer">https://guycohen-ai.co.il/</a></p>
+
+<p><a href="https://github.com/guycoful/ai-chat-widget-skill" target="_blank" rel="noopener noreferrer" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors text-center">לריפו המלא בגיטהאב</a></p>`,
+    date: "2026-07-04",
+    readingTime: 3,
+    tags: ["Claude Code", "סקילים", "צ'אטבוט", "Supabase", "React"],
+    category: "skills",
+    image: "/images/articles/skill-ai-chat-widget.jpg",
+  },
+  {
+    id: "30",
+    slug: "skill-project-workspace",
+    title: "סקיל PROJECT WORKSPACE — לבודד פרויקטים מפוזרים ולחסוך אלפי טוקנים",
+    excerpt: "במקום להילחם בבלגן ולשרוף טוקנים על קבצים לא קשורים, הסקיל סורק את התיקייה, מאתר מה שייך לאיזה פרויקט, ומייצר שלד ניהול מלא. שום קובץ לא זז בלי אישור מפורש.",
+    content: `<p><strong>הסקיל הזה עזר לי לבודד 4 פרויקטים מפוזרים, ולחסוך אלפי טוקנים מבוזבזים.</strong> 📁</p>
+
+<p>במקום להמשיך להילחם בבלגן ולשרוף טוקנים על קבצים לא קשורים, בניתי סקיל ב-Claude Code שעושה סדר.</p>
+
+<p>הוא סורק את התיקייה הראשית (באישורי כמובן), מאתר את כל הקבצים ששייכים לפרויקט, מייצר שלד ניהול מלא, ומסדר אותו בתיקייה ייעודית:</p>
+
+<ul>
+<li>לאיזה פרויקט שייך הקובץ ?</li>
+<li>מה סוג ההתקשרות (שותפות, שכיר או לקוח) ?</li>
+<li>אילו טריגרים יטענו את ה-Workspace אוטומטית ?</li>
+</ul>
+
+<hr>
+
+<p><strong>איך זה עובד אחרת</strong> ⚙️</p>
+
+<p>יש סקריפטים שמניידים קבצים בצורה עיוורת ויכולים לדרוס מידע. כאן זה אחרת.</p>
+
+<p>הסוכן מציג טבלה מפורטת של כל הקבצים המיועדים לניוד, וההעברה מבוצעת רק לאחר אישור מפורש.</p>
+
+<p>כל פעולה שמייצרת שינוי נעצרת ומחכה לאישור שלי.</p>
+
+<hr>
+
+<p><strong>קישור לריפו המלא בגיטהאב</strong> 🔗<br>
+&lt;&gt;</p>
+
+<p><a href="https://github.com/guycoful/project-workspace" target="_blank" rel="noopener noreferrer" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors text-center">לריפו המלא בגיטהאב</a></p>`,
+    date: "2026-06-27",
+    readingTime: 3,
+    tags: ["Claude Code", "סקילים", "ניהול פרויקטים", "טוקנים"],
+    category: "skills",
+    image: "/images/articles/skill-project-workspace.jpg",
+  },
+  {
+    id: "29",
+    slug: "skill-expense-audit",
+    title: "סקיל EXPENSE AUDIT — ביטלתי 4 מנויים מיותרים ואחד שרדף אותי שנתיים",
+    excerpt: "עשרות כלים שאני משלם עליהם, דולרים ושקלים, פזורים על כמה כרטיסי אשראי. הסקיל שולף את העסקאות, מזהה חיובים חוזרים ועובר איתי מנוי-מנוי. הסיסמאות נשארות אצלי, ה-AI לא רואה אותן.",
+    content: `<p><strong>הסקיל הזה עזר לי לבטל 4 מנויים שאני לא צריך, ועוד אחד שרדף אותי שנתיים.</strong></p>
+
+<p>שילמתי עליו כל חודש, פשוט כי לא ידעתי מי הספק או איפה מבטלים.<br>
+ואז קלטתי שיש לי עשרות כלים שאני משלם עליהם - דולרים, שקלים, פזורים על כמה כרטיסי אשראי וחשבונות בנק.<br>
+אפס שליטה על ההוצאות.<br>
+במקום להמשיך לדמם כסף, בניתי סקיל ב - Claude Code שעושה סדר.</p>
+
+<p>הוא נכנס לאתרי האשראי (בנוכחותי כמובן), שולף את העסקאות של השנה האחרונה,<br>
+מזהה חיובים חוזרים ועובר איתי על כל מנוי:</p>
+
+<ul>
+<li>מתי השתמשת בזה לאחרונה?</li>
+<li>מה הכלי הזה נותן שאחרים לא?</li>
+<li>כדאי לבטל?</li>
+</ul>
+
+<p>יש אפליקציות פיננסיות שמבקשות את סיסמת הבנק שלכם ומתחברות במקומכם. כאן זה אחרת.<br>
+אני מקליד את הסיסמאות בעצמי, ה-AI לא רואה אותן ולא שומר אותן.<br>
+כל פעולה שמייצרת שינוי נעצרת ומחכה לאישור שלי.</p>
+
+<p>קישור לריפו:</p>
+
+<p><a href="https://github.com/guycoful/expense-audit-skill" target="_blank" rel="noopener noreferrer" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors text-center">לריפו המלא בגיטהאב</a></p>`,
+    date: "2026-06-14",
+    readingTime: 3,
+    tags: ["Claude Code", "סקילים", "כספים", "מנויים"],
+    category: "skills",
+    image: "/images/articles/skill-expense-audit.jpg",
+  },
+  {
+    id: "28",
+    slug: "skill-objection",
+    title: "סקיל OBJECTION — מה לעשות כשלקוח אומר \"אני צריך לחשוב על זה\"",
+    excerpt: "הסקיל לוקח את ההתנגדות שהלקוח אמר, מזהה מה הוא באמת מתכוון, מסביר את הטעות שרובנו עושים שם, ונותן כיוון תגובה. מכסה את חמש ההתנגדויות הנפוצות ביותר.",
+    content: `<p>לאלו שרק הצטרפו <strong>הנה מה שהולך לקרות פה:</strong></p>
+
+<ul>
+<li>סקיל אחד לפחות בשבוע, עם הסיפור מאחוריו והריפו להטמעה</li>
+<li>סדנה משותפת עם @⁨אסף חבר של גיא⁩ (מומחה הטמעות AI) שבתהליכי גיבוש מאוד מתקדמים. פרטים בקרוב.</li>
+</ul>
+
+<hr>
+
+<p>🎯 הסקיל השבוע: <strong>OBJECTION</strong></p>
+
+<p>מכירים את הרגע שלקוח אומר "אני צריך לחשוב על זה" ואז נעלם לתמיד ?</p>
+
+<p>בניתי סקיל לקלוד קוד שעוזר לטפל בדיוק ברגעים האלה.</p>
+
+<p>הסקיל לא מנחש ולא ממציא. הוא לוקח את ההתנגדות שהלקוח אמר לך, ועושה שלושה דברים:</p>
+
+<ul>
+<li>מזהה מה הלקוח באמת מתכוון. כי "יקר לי" זה כמעט אף פעם לא באמת על הכסף.</li>
+<li>מסביר את הטעות שרובנו עושים שם, ולמה היא דוחפת את הלקוח החוצה.</li>
+<li>נותן כיוון תגובה לפי מודל סדור: מכילים, מבודדים את החשש האמיתי, מטפלים בו, ואז מחזירים את השיחה לתנועה.</li>
+</ul>
+
+<p>הוא מכסה את חמש ההתנגדויות הכי נפוצות:</p>
+
+<ul>
+<li>"יקר לי"</li>
+<li>"צריך לחשוב על זה"</li>
+<li>"צריך להתייעץ"</li>
+<li>בקשת הנחה</li>
+<li>"מי מבטיח לי תוצאות"</li>
+</ul>
+
+<hr>
+
+<p>הדבר שהכי אהבתי בבנייה: סקיל הוא לא קוד. הוא ידע ממוקד שאתה נותן לקלוד, והוא הופך לכלי עבודה אמיתי. כל אחד בקבוצה יכול לבנות סקיל מהמומחיות שלו.</p>
+
+<p><a href="https://github.com/guycoful/objection-skill" target="_blank" rel="noopener noreferrer" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors text-center">לריפו המלא בגיטהאב</a></p>`,
+    date: "2026-06-06",
+    readingTime: 3,
+    tags: ["Claude Code", "סקילים", "מכירות", "התנגדויות"],
+    category: "skills",
+    image: "/images/articles/skill-objection.jpg",
+  },
+  {
+    id: "27",
+    slug: "skill-aeo",
+    title: "סקיל AEO — איך גרמתי ל-ChatGPT ול-Perplexity לצטט אותי",
+    excerpt: "האתר שלי קיבל 52 מתוך 100. אחרי שבועיים עבודה על מה שהסקיל הצביע עליו — 84. AEO זה Answer Engine Optimization: איך לגרום למנועי התשובות לצטט אתכם כתשובה.",
+    content: `<p>לפני שמתחילים - תזכורת: הסדנה על Claude Code לעסקים - הפרטים הסופיים יוצאים ממש בקרוב.</p>
+
+<hr>
+
+<p>🎯 <strong>הסקיל להיום: AEO</strong></p>
+
+<p>לפני חודש בדקתי את האתר שלי, guycohen-ai.co.il, בסקיל שבניתי לעצמי.<br>
+🔴 ציון התחלתי: 52 מתוך 100.</p>
+
+<ul>
+<li>טכני: 22/30 (סביר)</li>
+<li>תוכן: 14/40 (גרוע, אין שאלות ותשובות, אין פרופיל מחבר)</li>
+<li>סמכותיות: 16/30 (חלש)</li>
+</ul>
+
+<p>עבדתי שבועיים בלבד על מה שהסקיל הצביע עליו:</p>
+
+<ul>
+<li>הוספתי 9 שאלות ותשובות מובנות (Q&amp;A Schema)</li>
+<li>הוספתי פרופיל מחבר בכל עמוד</li>
+<li>הפכתי כל פסקה ראשונה לתשובה ישירה (היפוך פירמידה)</li>
+</ul>
+
+<p>🟢 <strong>ציון חדש: 84 מתוך 100.</strong></p>
+
+<p>הטוויסט: שבועיים אחרי, חיפשתי ב-Perplexity "מי מספק ייעוץ AI לעסקים קטנים בישראל" - וקיבלתי תוצאה. אבל לא דרך האתר שלי, אלא דרך פרופיל הלינקדאין.</p>
+
+<p>הסקיל גם תפס את זה: לפעמים פלטפורמה חיצונית עם סמכותיות גבוהה תופסת אותך לפני שהאתר שלך מספיק חזק.</p>
+
+<hr>
+
+<p>AEO זה Answer Engine Optimization - איך לגרום ל-ChatGPT, Perplexity ו-Gemini לצטט אותך כתשובה.</p>
+
+<hr>
+
+<p>🔗 קישור לריפו להטמעת הסקיל:</p>
+
+<p><a href="https://github.com/guycoful/aeo-skill" target="_blank" rel="noopener noreferrer" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors text-center">לריפו המלא בגיטהאב</a></p>`,
+    date: "2026-05-26",
+    readingTime: 3,
+    tags: ["Claude Code", "סקילים", "AEO", "SEO", "Perplexity"],
+    category: "skills",
+    image: "/images/articles/skill-aeo.jpg",
+  },
+  {
+    id: "26",
+    slug: "skill-validate",
+    title: "סקיל VALIDATE — תפס 84 טעויות שלי לפני שיצאו החוצה",
+    excerpt: "כל פעם שעמדתי לשלוח משהו — מכתב לשותף, הצעת מחיר, הודעה לקליינט — הרצתי /validate. הסקיל מחזיר PASS, CALIBRATE או REJECT, ובנוי כדי לתפוס את ה-Optimism Bias שמודלים נוטים אליו.",
+    content: `<p>לפני שאני קופץ לסקיל השבוע - למי שרק התחיל עם Claude Code ועוד לא מרגיש בבית בטרמינל, יש קורס חינמי טוב לאלה שבתחילת דרכם: zero2claude.dev.<br>
+לא רשמי של Anthropic אבל מסביר את הבסיס בצורה ברורה.</p>
+
+<hr>
+
+<p>🎯 הסקיל השבוע: VALIDATE/</p>
+
+<p>בחודשיים האחרונים הסקיל הזה <strong>תפס 84 טעויות שלי</strong> לפני שיצאו החוצה.<br>
+מכתב לשותף, הצעת מחיר ללקוח, הודעה לקליינט - כל פעם שעמדתי לשלוח משהו, הרצתי /validate ועצרתי שגיאות שלא הייתי תופס בעין.</p>
+
+<p><strong>הדוגמה הכי טרייה:</strong> לפני שבוע ערכתי טיוטה לשותף עסקי. נראתה לי בסדר. הרצתי /validate והחזיר REJECT עם 4 BLOCKERs - פתחתי מחדש שלושה סעיפים שכבר סגרנו, והמצאתי בעיה שלא הייתה. אם הייתי שולח כמו שזה, הייתי פותח מלחמה.</p>
+
+<p><strong>איך זה עובד:</strong></p>
+
+<ul>
+<li>הסקיל רץ אוטומטית אחרי כל ניתוח אסטרטגי או המלצה (Advisor, plan, הצעה).</li>
+<li>ניתן להפעיל ידנית: /validate [טקסט]</li>
+<li>מחזיר אחד משלושה verdicts:</li>
+<li>PASS - תקין, אפשר להמשיך</li>
+</ul>
+
+<p>⚠️ CALIBRATE - הכיוון נכון, מספרים צריכים תיקון</p>
+
+<ul>
+<li>REJECT - יש BLOCKER, אסור לשלוח</li>
+</ul>
+
+<p>הסקיל בנוי כדי לתפוס Optimism Bias של מודלים. ברירת המחדל של AI היא להחזיר best case. VALIDATE עוצר את זה.</p>
+
+<p>הריפו פומבי, יש בו שני פורמטים:</p>
+
+<ul>
+<li>SKILL.md ל-Claude Code</li>
+<li>AGENTS.md ל-Codex</li>
+</ul>
+
+<p>+ הוראות התקנה מלאות בעברית.</p>
+
+<p>👉</p>
+
+<p>מי שמתקין ומריץ - מוזמנים לשתף אותי מה תפסתם.</p>
+
+<hr>
+
+<p>בקרוב נחשוף את הפרטים של הסדנה שמתבשלת 🪄🪄</p>
+
+<p><a href="https://github.com/guycoful/validate-skill" target="_blank" rel="noopener noreferrer" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors text-center">לריפו המלא בגיטהאב</a></p>`,
+    date: "2026-05-23",
+    readingTime: 3,
+    tags: ["Claude Code", "סקילים", "ולידציה", "Codex"],
+    category: "skills",
+    image: "/images/articles/skill-validate.jpg",
+  },
+  {
+    id: "25",
+    slug: "skill-negotiate",
+    title: "סקיל NEGOTIATE — יועץ משא ומתן אישי שמלווה כל שיחת תמחור",
+    excerpt: "סגרתי עסקה על ₪13,200 במקום ₪9,000 רגע לפני חתימות, בזכות סקיל שבניתי לעצמי. לא קורס משא ומתן ולא ספר — יועץ שעובד בשלושה מצבים: הכנה לשיחה, ניסוח תגובה, וניתוח ההטיות שהשפיעו על כל החלטה.",
+    content: `<p>איזה כיף לראות קרוב ל300 איש שנרשמו לקהילה הזאת. עם רובכם דיברתי לפני וזה מה שראיתי:</p>
+
+<ul>
+<li>80% מכם כבר נגעתם ב-AI</li>
+<li>38% כבר בניתם סקילים או סוכנים</li>
+<li>רובכם מבזבזים 5-10 שעות בשבוע על משימות שהיו צריכות להתנהל באוטומציה</li>
+</ul>
+
+<p>זה לא קהל מתחילים. זה קהל שכבר בפנים, ועדיין לא מוציא ערך אמיתי.</p>
+
+<hr>
+
+<p><strong>מה הולך לקרות פה:</strong></p>
+
+<ul>
+<li>סקיל אחד לפחות בשבוע, עם הסיפור מאחוריו והריפו להטמעה</li>
+<li>סדנה משותפת עם אסף (מומחה הטמעות AI) שבתליכי גיבוש מתקדמים. פרטים בקרוב.</li>
+</ul>
+
+<hr>
+
+<p><strong>המתנה הראשונה לקהילה</strong><br>
+לפני שבועיים פרסמתי בלינקדאין שסגרתי עסקה על ₪13,200 במקום ₪9,000 רגע לפני חתימות, בזכות סקיל שבניתי לעצמי.</p>
+
+<p><strong>סקיל NEGOTIATE/</strong>- לא קורס משא ומתן, לא ספר. <em>יועץ משא ומתן אישי שמלווה אותי בכל שיחת תמחור.</em></p>
+
+<p>הוא עובד ב-3 מצבים:</p>
+
+<ul>
+<li><strong>prep</strong> - מסמך הכנה מלא לפני שיחה</li>
+<li><strong>response</strong> - ניסוח תגובה מהירה</li>
+<li><strong>analyze</strong> - איזו הטיה השפיעה על כל החלטה</li>
+</ul>
+
+<p>מי שכתב "סקיל" בתגובות בלינקדאין קיבל את הקישור לריפו. אני שולח אותו פה לכולכם עם הקישור לריפו הכולל גם את קובץ הסקיל וגם מדריך מלא:</p>
+
+<p><a href="https://github.com/guycoful/negotiate-skill" target="_blank" rel="noopener noreferrer" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors text-center">לריפו המלא בגיטהאב</a></p>`,
+    date: "2026-05-16",
+    readingTime: 3,
+    tags: ["Claude Code", "סקילים", "משא ומתן", "מכירות"],
+    category: "skills",
+    image: "/images/articles/skill-negotiate.jpg",
+  },
   {
     id: "21",
     slug: "make-morning-dashboard",
@@ -1299,7 +1790,7 @@ export const articles: Article[] = [
     image: "/images/articles/fillout-lead-qualification.jpg",
   },
   {
-    id: "16",
+    id: "22",
     slug: "ai-personalized-whatsapp-fillout-make",
     title: "לקחת סינון לידים צעד קדימה — הודעה אישית, אוטומטית, בוואטסאפ",
     excerpt: "ליד ממלא שאלון ב-Fillout ותוך 30 שניות מקבל הודעת וואטסאפ שנכתבה בשבילו על ידי AI — מותאמת לתחום, לגודל העסק ולבעיה שציין. הכל אוטומטי עם Make + ChatGPT.",
@@ -1374,7 +1865,7 @@ export const articles: Article[] = [
     image: "/images/articles/ai-personalized-whatsapp.jpg",
   },
   {
-    id: "17",
+    id: "23",
     slug: "auto-followup-sequence-make-whatsapp",
     title: "80% מהעסקאות נסגרות אחרי המגע ה-5 — אוטומציה שלא שוכחת",
     excerpt: "80% מהעסקאות נסגרות אחרי המגע ה-5, אבל 90% מבעלי העסקים מוותרים אחרי ה-2. רצף אוטומטי ב-Make שולח הודעות מותאמות בוואטסאפ — בלי שתזכרו, תכתבו, או תיגעו בטלפון.",
@@ -1444,7 +1935,7 @@ export const articles: Article[] = [
     image: "/images/articles/auto-followup-sequence.jpg",
   },
   {
-    id: "18",
+    id: "24",
     slug: "airtable-lead-management-crm",
     title: "מבלאגן לניהול לידים מסודר — פתרון Airtable + Make",
     excerpt: "כל הלידים מפוזרים בין וואטסאפ, אקסל ופתקים? Airtable עם Make מסדר הכל בטבלה אחת — לידים נכנסים לבד, סטטוסים מתעדכנים, ותזכורות יוצאות אוטומטית.",

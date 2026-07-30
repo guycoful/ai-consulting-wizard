@@ -12,9 +12,14 @@ const categoryConfig: Record<ArticleCategory, { emoji: string; title: string; co
     color: "purple",
   },
   business: {
-    emoji: "💼",
-    title: "פוסטים מקהילת העסקים",
+    emoji: "📊",
+    title: "מפת ההתייעלות לעסק",
     color: "blue",
+  },
+  skills: {
+    emoji: "🛠️",
+    title: "סקילים לקלוד קוד",
+    color: "purple",
   },
 };
 
@@ -25,6 +30,10 @@ const Articles = () => {
 
   const businessArticles = [...articles]
     .filter((a) => a.category === "business")
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  const skillArticles = [...articles]
+    .filter((a) => a.category === "skills")
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   const renderArticleCard = (article: (typeof articles)[number]) => (
@@ -145,6 +154,7 @@ const Articles = () => {
           </p>
         </div>
 
+        {renderSection("skills", skillArticles)}
         {renderSection("agents", agentArticles)}
         {renderSection("business", businessArticles)}
       </div>
