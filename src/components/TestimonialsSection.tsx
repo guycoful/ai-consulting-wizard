@@ -26,6 +26,28 @@ type Testimonial = {
   allow_publish_name: boolean;
 };
 
+// חוות דעת שאושרו לפרסום בכתב ומוצגות תמיד, מעל אלה שנשמרות בבסיס הנתונים.
+const featuredTestimonials: Testimonial[] = [
+  {
+    id: "featured-moran",
+    name: "מורן עוז רפאל",
+    role: "מטפלת",
+    rating: 5,
+    photo_url: null,
+    allow_publish_name: true,
+    text: "התחלתי את התהליך עם גיא לבניית אתר, ואני חייבת להגיד שאני מאוד מרוצה, גם מהתוצר הסופי, גם מהשירות וגם מהזמינות שלו. אמנם הגעתי מעולמות הטכנולוגיה, אבל בגלל ה-AI הרבה השתנה, והופתעתי לטובה מרמת המקצועיות וההובלה שלו ומכמה מהר דברים קרו. זה הדבר הכי טוב שיכולתי לרכוש לעצמי. אני צריכה מישהו מאחורי הקלעים שיעזור לי להוביל את האתר לתוצאות מרשימות, וזה בדיוק מה שאני מקבלת.",
+  },
+  {
+    id: "featured-chen",
+    name: "חן קרן קידר",
+    role: "מורה",
+    rating: 5,
+    photo_url: null,
+    allow_publish_name: true,
+    text: "הייתי צריכה לבנות רעיון בית ספרי גדול לכבוד יום ההליכה הבינלאומי, ומיד פניתי לגיא, כי ידעתי שהוא מטורף בכל מה שקשור ל-AI ולבנייה של כל דבר אפשרי. הוא ענה לי תוך שנייה, ותוך שעה בערך כבר בנה לי יום שלם, כולל פירוט מדויק של כל מה שהולך לקרות. חשבתי שזה ייקח כמה ימים. נתתי לו רק את מספר התלמידים, את מספר אנשי הצוות ואת המיקום, והוא פילח הכול בצורה מקצועית ומטורפת. היום הסתכם בהצלחה מסחררת, ואני קיבלתי את כל הקרדיט שמגיע בעצם לגיא. תודה גיא על הכול.",
+  },
+];
+
 const StarRating = ({
   value,
   onChange,
@@ -54,7 +76,8 @@ const StarRating = ({
 
 const TestimonialsSection = () => {
   const { ref, isVisible } = useScrollAnimation();
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [dbTestimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const testimonials = [...featuredTestimonials, ...dbTestimonials];
   const [loading, setLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -150,7 +173,7 @@ const TestimonialsSection = () => {
         </div>
 
         {/* Testimonials grid */}
-        {loading ? (
+        {loading && featuredTestimonials.length === 0 ? (
           <div className="flex justify-center py-12">
             <Loader2 className="w-8 h-8 text-purple-400 animate-spin" />
           </div>
