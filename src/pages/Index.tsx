@@ -5,6 +5,7 @@ import TargetAudienceSection from "@/components/TargetAudienceSection";
 import ProcessSection from "@/components/ProcessSection";
 import AboutSection from "@/components/AboutSection";
 import LatestArticlesSection from "@/components/LatestArticlesSection";
+import FreeToolsSection from "@/components/FreeToolsSection";
 import ContactSection from "@/components/ContactSection";
 import FaqSection from "@/components/FaqSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
@@ -51,7 +52,8 @@ const Index = () => {
             logo: "https://guycohen-ai.co.il/images/guy-cohen-ai-logo.png",
             image: "https://guycohen-ai.co.il/images/guy-cohen-portrait.webp",
             description: "ייעוץ בינה מלאכותית לעסקים קטנים ובינוניים בישראל. פתרונות AI מותאמים אישית — סוכני AI, אוטומציות עסקיות, חיסכון בזמן והגדלת הכנסות.",
-            telephone: "+972-50-123-4567",
+            telephone: "+972546232063",
+            email: "info@guycohen-ai.co.il",
             address: {
               "@type": "PostalAddress",
               addressCountry: "IL",
@@ -67,8 +69,8 @@ const Index = () => {
               name: "Israel",
             },
             priceRange: "₪₪",
-            serviceType: ["ייעוץ AI לעסקים", "אוטומציה עסקית", "סוכני AI", "בינה מלאכותית לעסקים קטנים"],
-            knowsAbout: ["Artificial Intelligence", "Business Automation", "AI Agents", "Make.com", "Gemini", "ChatGPT", "WhatsApp Automation"],
+            serviceType: ["ייעוץ AI לעסקים", "אוטומציה עסקית", "סוכני AI", "בינה מלאכותית לעסקים קטנים", "סקילים ל-Claude Code"],
+            knowsAbout: ["Artificial Intelligence", "Business Automation", "AI Agents", "Claude Code", "Make.com", "Gemini", "ChatGPT", "WhatsApp Automation"],
             founder: {
               "@type": "Person",
               name: "גיא כהן",
@@ -78,7 +80,8 @@ const Index = () => {
               description: "יועץ בינה מלאכותית המתמחה בהטמעת פתרונות AI לעסקים קטנים ובינוניים בישראל. מומחה בסוכני AI, אוטומציות עסקיות וכלים מבוססי AI.",
               knowsAbout: ["AI Consulting", "Business Automation", "AI Agents", "Make.com", "Gemini Gems", "WhatsApp API"],
               sameAs: [
-                "https://www.linkedin.com/in/guycohen-ai"
+                "https://www.linkedin.com/in/guycohen-ai",
+                "https://github.com/guycoful"
               ],
             },
           })}
@@ -109,6 +112,7 @@ const Index = () => {
       <AboutSection />
       <div className="h-16 bg-gradient-to-b from-navy-light to-navy-dark" />
       <LatestArticlesSection />
+      <FreeToolsSection />
       <div id="review" />
       <TestimonialsSection />
       <ContactSection />

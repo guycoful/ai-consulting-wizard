@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { GraduationCap, Award, Users, FileText, TrendingUp, Linkedin } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { articles } from "@/data/articles";
+import { tools } from "@/data/tools";
 
 const AboutSection = () => {
   const { ref, isVisible } = useScrollAnimation();
@@ -34,8 +36,8 @@ const AboutSection = () => {
           "url": "https://bennyfarber-ai.co.il"
         }
       ],
-      "knowsAbout": ["בינה מלאכותית", "אוטומציה לעסקים", "סוכני AI", "Make.com", "ManyChat", "CRM", "Google Workspace AI", "WhatsApp Automation"],
-      "sameAs": ["https://www.linkedin.com/in/guycohen-ai/"]
+      "knowsAbout": ["בינה מלאכותית", "אוטומציה לעסקים", "סוכני AI", "Claude Code", "Make.com", "ManyChat", "CRM", "Google Workspace AI", "WhatsApp Automation"],
+      "sameAs": ["https://www.linkedin.com/in/guycohen-ai/", "https://github.com/guycoful"]
     });
     document.head.appendChild(script);
     return () => {
@@ -78,6 +80,7 @@ const AboutSection = () => {
               </p>
               <p>
                 מנהל קהילת AI עם מעל 1,000 חברים פעילים, ויוצר תוכן מקצועי, מדריכים וסוכני AI חינמיים לקהילה.
+                את הסקילים והכלים שאני בונה אני מפרסם בקוד פתוח, כך שכל אחד יכול להשתמש בהם בחינם.
                 פוסטים שלי בלינקדאין הגיעו למעל 100,000 חשיפות ולמעל 1,000 מגיבים שהתעניינו בסוכנים שבניתי.
               </p>
             </div>
@@ -149,11 +152,11 @@ const AboutSection = () => {
         {/* Content Stats */}
         <div className="max-w-4xl mx-auto">
           <h3 className="text-2xl font-bold font-heebo text-white mb-8 text-center">
-            20+ מדריכים וסוכני AI חינמיים לקהילה
+            {articles.length} מאמרים ו-{tools.length} כלים חינמיים לקהילה
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             <div className="bg-navy-dark rounded-xl p-6 border border-purple-700/20">
-              <div className="text-3xl font-bold text-blue-primary font-heebo">20+</div>
+              <div className="text-3xl font-bold text-blue-primary font-heebo">{articles.length}</div>
               <div className="text-sm text-gray-400 font-heebo mt-1">מאמרים ומדריכים</div>
             </div>
             <div className="bg-navy-dark rounded-xl p-6 border border-purple-700/20">
@@ -165,8 +168,8 @@ const AboutSection = () => {
               <div className="text-sm text-gray-400 font-heebo mt-1">חשיפות בלינקדאין</div>
             </div>
             <div className="bg-navy-dark rounded-xl p-6 border border-purple-700/20">
-              <div className="text-3xl font-bold text-blue-primary font-heebo">10+</div>
-              <div className="text-sm text-gray-400 font-heebo mt-1">סוכני AI חינמיים</div>
+              <div className="text-3xl font-bold text-blue-primary font-heebo">{tools.length}</div>
+              <div className="text-sm text-gray-400 font-heebo mt-1">כלים וסקילים בקוד פתוח</div>
             </div>
           </div>
         </div>

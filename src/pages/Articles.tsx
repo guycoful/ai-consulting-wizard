@@ -1,9 +1,23 @@
+import { useMemo } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
-import { Calendar, Clock } from "lucide-react";
+import { Link, useSearchParams } from "react-router-dom";
+import { Calendar, Clock, Search, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { articles, type ArticleCategory } from "@/data/articles";
+import { Input } from "@/components/ui/input";
+import { articles, type Article, type ArticleCategory } from "@/data/articles";
 import { formatDate } from "@/lib/utils";
+
+const categoryOrder: ArticleCategory[] = ["skills", "agents", "business"];
+
+const stripHtml = (html: string) => html.replace(/<[^>]+>/g, " ");
+
+// Every word of the query must appear in the title, excerpt, tags or body.
+const matchesQuery = (article: Article, q: string) => {
+  const words = q.toLowerCase().split(/\s+/).filter(Boolean);
+  if (words.length === 0) return true;
+  const hay = `${article.title} ${article.excerpt} ${article.tags.join(" ")} ${stripHtml(article.content)}`.toLowerCase();
+  return words.every((w) => hay.includes(w));
+};
 
 const categoryConfig: Record<ArticleCategory, { emoji: string; title: string; color: string }> = {
   agents: {
@@ -23,18 +37,36 @@ const categoryConfig: Record<ArticleCategory, { emoji: string; title: string; co
   },
 };
 
+const byDateDesc = (a: Article, b: Article) => new Date(b.date).getTime() - new Date(a.date).getTime();
+
 const Articles = () => {
-  const agentArticles = [...articles]
-    .filter((a) => a.category === "agents")
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get("q") ?? "";
+  const catParam = searchParams.get("cat");
+  const activeCat: ArticleCategory | "all" =
+    catParam && (categoryOrder as string[]).includes(catParam) ? (catParam as ArticleCategory) : "all";
 
-  const businessArticles = [...articles]
-    .filter((a) => a.category === "business")
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const updateParams = (next: { q?: string; cat?: ArticleCategory | "all" }) => {
+    const params = new URLSearchParams(searchParams);
+    if (next.q !== undefined) {
+      if (next.q) params.set("q", next.q);
+      else params.delete("q");
+    }
+    if (next.cat !== undefined) {
+      if (next.cat === "all") params.delete("cat");
+      else params.set("cat", next.cat);
+    }
+    setSearchParams(params, { replace: true });
+  };
 
-  const skillArticles = [...articles]
-    .filter((a) => a.category === "skills")
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const results = useMemo(
+    () =>
+      articles
+        .filter((a) => (activeCat === "all" || a.category === activeCat) && matchesQuery(a, query.trim()))
+        .sort(byDateDesc),
+    [query, activeCat],
+  );
+  const isFiltering = query.trim() !== "" || activeCat !== "all";
 
   const renderArticleCard = (article: (typeof articles)[number]) => (
     <Link key={article.id} to={`/articles/${article.slug}`} className="group">
@@ -88,8 +120,9 @@ const Articles = () => {
 
   const renderSection = (category: ArticleCategory, items: typeof articles) => {
     const config = categoryConfig[category];
+    if (items.length === 0) return null;
     return (
-      <section className="mb-16">
+      <section key={category} className="mb-16">
         <div className="flex items-center gap-3 mb-8">
           <div className="w-12 h-12 rounded-full bg-purple-700/20 flex items-center justify-center text-2xl shrink-0">
             {config.emoji}
@@ -150,13 +183,82 @@ const Articles = () => {
           </h1>
           <div className="w-24 h-1 bg-purple-700 mx-auto mb-6"></div>
           <p className="text-lg text-gray-300 font-heebo max-w-2xl mx-auto">
-            פוסטים ותובנות מהקהילות שלי — כל מה שצריך לדעת על AI לעסקים, במקום אחד
+            {articles.length} פוסטים ותובנות מהקהילות שלי. כל מה שצריך לדעת על AI לעסקים, במקום אחד
           </p>
         </div>
 
-        {renderSection("skills", skillArticles)}
-        {renderSection("agents", agentArticles)}
-        {renderSection("business", businessArticles)}
+        {/* Search + category filter */}
+        <div className="mb-12 space-y-5">
+          <form
+            role="search"
+            onSubmit={(e) => e.preventDefault()}
+            className="relative max-w-xl mx-auto"
+          >
+            <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500 pointer-events-none" />
+            <Input
+              type="search"
+              value={query}
+              onChange={(e) => updateParams({ q: e.target.value })}
+              placeholder="חיפוש במאמרים, למשל: וואטסאפ, סרטון, חוזה"
+              aria-label="חיפוש במאמרים"
+              className="bg-navy-light border-purple-700/30 text-white placeholder:text-gray-500 font-heebo pr-10 h-12 text-base focus-visible:ring-purple-400"
+            />
+            {query && (
+              <button
+                type="button"
+                onClick={() => updateParams({ q: "" })}
+                aria-label="ניקוי החיפוש"
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            )}
+          </form>
+          <div className="flex flex-wrap justify-center gap-2" role="group" aria-label="סינון לפי קטגוריה">
+            {(["all", ...categoryOrder] as const).map((cat) => {
+              const isActive = activeCat === cat;
+              const label = cat === "all" ? "הכל" : `${categoryConfig[cat].emoji} ${categoryConfig[cat].title}`;
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => updateParams({ cat })}
+                  aria-pressed={isActive}
+                  className={`px-4 py-2 rounded-full text-sm font-heebo font-medium border transition-colors ${
+                    isActive
+                      ? "bg-purple-700 border-purple-700 text-white"
+                      : "border-purple-700/30 text-gray-300 hover:text-white hover:border-purple-700/60"
+                  }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+          {isFiltering && (
+            <p className="text-center text-sm text-gray-400 font-heebo" aria-live="polite">
+              {results.length > 0 ? `נמצאו ${results.length} מאמרים` : ""}
+            </p>
+          )}
+        </div>
+
+        {isFiltering ? (
+          results.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+              {results.map(renderArticleCard)}
+            </div>
+          ) : (
+            <p className="text-center text-gray-400 font-heebo text-lg py-12">
+              לא מצאתי מאמר שמתאים לחיפוש. נסו מילה אחרת, או{" "}
+              <Link to="/tools" className="text-purple-400 hover:text-purple-300 underline">
+                הציצו בארגז הכלים החינמי
+              </Link>
+              .
+            </p>
+          )
+        ) : (
+          categoryOrder.map((cat) => renderSection(cat, results.filter((a) => a.category === cat)))
+        )}
       </div>
     </div>
   );
